@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAINLEAU au salon Solicare 2026</title>
+<meta name="description" content="Présentation interne : infos du salon Solicare 2026, message et créas SAINLEAU.">
+<link rel="icon" href="assets/logo-sainleau-degrade.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Montserrat";src:url("assets/fonts/Montserrat-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:"Montserrat";src:url("assets/fonts/Montserrat-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:block}
+@font-face{font-family:"Montserrat";src:url("assets/fonts/Montserrat-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:block}
+
+/* Charte SAINLEAU : les seules couleurs autorisées */
+:root{
+  --teal:#25ACB0;        /* teal */
+  --teal-deep:#0D6E72;   /* teal profond */
+  --gray:#6C6666;        /* gris */
+  --white:#FFFFFF;
+  --ink:#1B1B1B;         /* encre */
+  --teal-100:#CDF3F4;
+  --grad-end:#0A4849;    /* fin de dégradé */
+  --logo-light:#D0F3FD;  /* logo clair */
+  --hover:#0A5A5D;       /* survol des boutons */
+  --line:#D6D6D6;        /* bordure des cartes */
+  --watermark:#E5E5E5;   /* numéro en filigrane */
+  --font:"Montserrat",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--ink)}
+body{font-family:var(--font);font-weight:400;font-style:normal;color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+em,i,cite,q,address{font-style:normal}
+img{display:block;max-width:none}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+[hidden]{display:none!important}
+.i{width:1em;height:1em;fill:currentColor;flex:none;display:inline-block;vertical-align:middle}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
+
+/* ---------- Scène 1920 × 1080 mise à l'échelle ---------- */
+#viewport{position:fixed;inset:0;overflow:hidden;outline:none}
+#deck{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.slide{position:absolute;left:0;top:0;width:1920px;height:1080px;background:var(--white);overflow:hidden;visibility:hidden;opacity:0;text-align:left}
+.slide.is-current{visibility:visible;opacity:1}
+.notes{display:none}
+
+/* ---------- Gabarit des slides de contenu ---------- */
+.frame{position:absolute;top:96px;left:120px;right:120px;bottom:120px;display:flex;flex-direction:column;z-index:1}
+.head{flex:none}
+.title{font-size:60px;line-height:66px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.rule{display:block;width:96px;height:3px;background:var(--teal);margin-top:28px}
+.body{flex:1;min-height:0;margin-top:56px;position:relative}
+.wm{position:absolute;right:64px;bottom:-170px;font-size:420px;line-height:1;font-weight:600;letter-spacing:-.04em;color:var(--watermark);pointer-events:none;z-index:0;user-select:none}
+.foot{position:absolute;left:120px;bottom:44px;z-index:2}
+.foot img{width:132px;height:auto}
+.label{font-size:22px;line-height:30px;font-weight:500;color:var(--gray)}
+.h3{font-size:30px;line-height:38px;font-weight:600;color:var(--ink)}
+.lead{font-size:30px;line-height:42px;font-weight:500;color:var(--ink)}
+.txt{font-size:24px;line-height:36px;color:var(--ink)}
+.muted{color:var(--gray)}
+.deep{color:var(--teal-deep)}
+.card{border:1px solid var(--line);border-radius:8px;background:var(--white)}
+.dots li{position:relative;padding-left:28px}
+.dots li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;background:var(--teal)}
+.dots li+li{margin-top:10px}
+
+/* Bouton de marque */
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--teal-deep);color:var(--white);border:0;border-radius:4px;padding:18px 28px;font-size:24px;line-height:30px;font-weight:500;text-decoration:none;transition:background-color .15s}
+.btn:hover{background:var(--hover)}
+.btn .i{font-size:28px}
+
+/* Créa cliquable (zoom) */
+.zoomable{position:relative;display:block;padding:0;border:0;background:none;cursor:zoom-in}
+.zoomable img{width:100%;height:100%;object-fit:contain}
+.zoom-hint{position:absolute;right:14px;bottom:14px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:var(--white);color:var(--teal-deep);border:1px solid var(--line);font-size:28px;transition:background-color .15s,color .15s}
+.zoomable:hover .zoom-hint{background:var(--teal-deep);color:var(--white);border-color:var(--teal-deep)}
+
+/* ---------- Couverture et fin : dégradé réservé ---------- */
+.grad{background:linear-gradient(to bottom right,var(--teal),var(--grad-end));color:var(--white)}
+.grad .logo-c{position:absolute;left:120px;top:104px;width:280px;height:auto}
+.cover-title{position:absolute;left:120px;top:300px;width:1240px}
+.cover-title h1{font-size:120px;line-height:128px;font-weight:600;letter-spacing:-.02em;color:var(--white)}
+.cover-title .rule{background:var(--white);width:120px;margin-top:40px}
+.cover-sub{margin-top:36px;font-size:44px;line-height:56px;font-weight:500;color:var(--white)}
+.cover-info{position:absolute;left:1000px;right:120px;bottom:120px}
+.cover .logo-solicare{position:absolute;right:120px;top:88px;width:300px;height:auto}
+.cover-info li{display:flex;align-items:center;gap:20px;font-size:30px;line-height:42px;font-weight:500;color:var(--white)}
+.cover-info li+li{margin-top:14px}
+.cover-info .i{font-size:36px}
+
+/* ---------- 01 Le salon ---------- */
+.salon .body{display:grid;grid-template-columns:minmax(0,1fr) 560px;gap:80px}
+.salon .tagline{font-size:34px;line-height:46px;font-weight:500}
+.facts{margin-top:36px}
+.facts li{display:flex;gap:24px;align-items:flex-start;padding:20px 0;border-top:1px solid var(--line);font-size:28px;line-height:40px}
+.facts li:last-child{border-bottom:1px solid var(--line)}
+.facts .i{font-size:40px;color:var(--teal-deep);margin-top:0}
+.stand{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;background:var(--teal-deep);color:var(--white)}
+.stand div{padding:28px 40px 32px}
+.stand div+div{border-left:1px solid var(--teal-100)}
+.stand .k{font-size:24px;line-height:32px;font-weight:500;color:var(--teal-100)}
+.stand .v{font-size:88px;line-height:96px;font-weight:600;letter-spacing:-.01em}
+.badge{background:var(--teal-100);padding:48px;display:flex;flex-direction:column;align-items:flex-start}
+.badge .logo-solicare{width:260px;height:auto}
+.badge .h3{margin-top:36px;font-size:38px;line-height:46px}
+.badge .qr{margin-top:28px;width:260px;height:260px;background:var(--white);padding:14px}
+.badge .qr svg{width:100%;height:100%;display:block}
+.badge .btn{margin-top:32px}
+
+/* ---------- 02 Notre message ---------- */
+.message .body{display:grid;grid-template-columns:minmax(0,1fr) 470px;gap:96px;align-content:start}
+.message .big{margin-top:8px;font-size:76px;line-height:84px;font-weight:600;letter-spacing:-.015em}
+.message .sub{margin-top:8px;font-size:30px;line-height:44px;max-width:900px}
+.message .gap{margin-top:40px}
+.message .sig{margin-top:8px;font-size:48px;line-height:58px;font-weight:600;color:var(--teal-deep)}
+.band{position:absolute;left:0;right:0;bottom:120px;height:168px;background:var(--teal-100);padding:30px 120px 0;z-index:1}
+.band p:last-child{margin-top:6px;font-size:40px;line-height:52px;font-weight:500;color:var(--teal-deep)}
+
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:24px}
+.services li{padding:36px 32px 34px}
+.services .i{font-size:60px;color:var(--teal-deep)}
+.services p{margin-top:26px;font-size:28px;line-height:36px;font-weight:600}
+.figures{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:24px}
+.figures li{border-top:3px solid var(--teal);padding-top:22px}
+.figures .pre{display:block;height:32px;font-size:24px;line-height:32px;font-weight:500;color:var(--gray)}
+.figures .n{display:block;font-size:72px;line-height:88px;font-weight:600;letter-spacing:-.02em;color:var(--teal-deep)}
+.figures .post{display:block;font-size:24px;line-height:32px;color:var(--gray)}
+.block+.block{margin-top:60px}
+
+.charte-h{display:flex;align-items:center;gap:18px}
+.charte-h .i{font-size:44px;color:var(--teal-deep)}
+.five{margin-top:28px;display:grid;grid-template-columns:repeat(5,1fr);background:var(--teal-100)}
+.five li{padding:36px 32px 40px}
+.five li+li{border-left:1px solid var(--white)}
+.five .e{display:block;font-size:150px;line-height:150px;font-weight:600;color:var(--teal-deep);letter-spacing:-.02em}
+.five .w{display:block;margin-top:18px;font-size:28px;line-height:36px;font-weight:500}
+.commit{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.commit li{display:flex;align-items:center;gap:24px;padding:30px 36px}
+.commit .i{font-size:56px;color:var(--teal-deep)}
+.commit p{font-size:30px;line-height:38px;font-weight:600}
+
+/* ---------- 03 Les 4 univers ---------- */
+.uni-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.uni-card{display:block;text-align:left;padding:0;border:0;background:none;cursor:pointer;color:var(--ink)}
+.uni-card .thumb{display:block;height:420px;width:316px;border:1px solid var(--line)}
+.uni-card .thumb img{width:100%;height:100%;object-fit:cover}
+.uni-card .h3{display:block;margin-top:22px;font-size:28px;line-height:36px}
+.uni-card .acc{display:block;margin-top:10px;font-size:22px;line-height:30px;color:var(--gray)}
+.uni-card:hover .h3{color:var(--teal-deep)}
+.uni-note{position:absolute;left:0;bottom:0;max-width:1180px;font-size:22px;line-height:30px;color:var(--gray)}
+
+.univers .panel{position:absolute;left:0;top:0;bottom:0;width:760px;background:var(--teal)}
+.univers .poster{position:absolute;left:55px;top:108px;width:651px;height:864px}
+.univers .frame{left:860px}
+.univers .acc{margin-top:40px;font-size:32px;line-height:44px;font-weight:500}
+.univers .cols{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.univers .cols.one{grid-template-columns:1fr}
+.univers .label{color:var(--teal-deep)}
+.univers ul.txt{margin-top:16px}
+.checks li{display:flex;gap:14px;align-items:flex-start}
+.checks li+li{margin-top:10px}
+.checks .i{font-size:30px;color:var(--teal-deep);margin-top:3px}
+.chips{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px}
+.chips li{border:1px solid var(--line);border-radius:8px;padding:10px 18px;font-size:22px;line-height:30px;font-weight:500}
+.univers .logos{margin-top:44px}
+
+/* ---------- 04 Les créas ---------- */
+.lineup{position:absolute;left:0;right:0;top:0;bottom:0}
+.floor{position:absolute;left:0;right:0;top:632px;height:1px;background:var(--line)}
+.lineup .row{position:absolute;left:0;top:0;height:632px;display:flex;align-items:flex-end}
+.lineup .it{position:relative;flex:none}
+.lineup .it .zoomable{width:100%;height:100%;border:1px solid var(--line)}
+.lineup .it .zoom-hint{display:none}
+.lineup .it:hover{outline:3px solid var(--teal-deep);outline-offset:4px}
+.lineup .cap{position:absolute;left:0;top:calc(100% + 18px);white-space:nowrap;font-size:22px;line-height:30px}
+.lineup .cap b{display:block;font-weight:600}
+.lineup .cap span{display:block}
+.lineup .cap.end{left:auto;right:0;text-align:right}
+
+.stand-plan{position:absolute;inset:0;border:1px solid var(--line);background:var(--white);overflow:hidden}
+.stand-plan img,.stand-plan iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.stand-plan img{object-fit:cover}
+.head-actions{position:absolute;right:0;top:4px;display:flex;gap:16px}
+
+.kakes{display:grid;grid-template-columns:1fr 1fr;gap:80px;height:100%}
+.kake{display:flex;gap:40px;align-items:flex-start}
+.kake .zoomable{width:298px;height:700px;flex:none;border:1px solid var(--line)}
+.kake .h3{font-size:34px;line-height:42px}
+.kake .fmt{margin-top:8px;font-size:24px;line-height:32px;color:var(--gray);font-weight:500}
+.kake ul{margin-top:28px;font-size:22px;line-height:32px}
+.kake .sub-list{margin-top:6px}
+.kake .sub-list li{padding-left:0}
+.kake .sub-list li::before{display:none}
+
+.flyers{display:flex;gap:80px;height:100%}
+.pair{display:flex;gap:32px;flex:none}
+.pair figure{width:460px}
+.pair .zoomable{width:460px;height:650px;border:1px solid var(--line)}
+.pair figcaption{margin-top:14px;font-size:22px;line-height:30px;font-weight:500;color:var(--gray)}
+.fl-text{flex:1;min-width:0}
+.fl-text .fmt{font-size:26px;line-height:36px;font-weight:500}
+.fl-text .label{color:var(--teal-deep);margin-top:30px}
+.fl-text ul{margin-top:10px;font-size:22px;line-height:32px}
+.fl-text .dots li+li{margin-top:6px}
+.fl-text .print{margin-top:36px;display:flex;align-items:center;gap:16px;font-size:24px;line-height:32px;font-weight:500}
+.fl-text .print .i{font-size:36px;color:var(--teal-deep)}
+
+.video-wrap{display:flex;gap:48px;height:100%}
+.video-box{position:relative;width:1216px;height:684px;flex:none;background:var(--ink)}
+.video-box video{width:100%;height:100%;display:block}
+.specs li{display:flex;align-items:center;gap:20px;font-size:26px;line-height:36px;padding:20px 0;border-top:1px solid var(--line)}
+.specs li:last-child{border-bottom:1px solid var(--line)}
+.specs .i{font-size:40px;color:var(--teal-deep)}
+.vid-actions{margin-top:32px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.btn.line{background:var(--white);color:var(--teal-deep);border:1px solid var(--teal-deep)}
+.btn.line:hover{background:var(--hover);color:var(--white);border-color:var(--hover)}
+
+/* ---------- 05 Communication ---------- */
+.comm{display:grid;grid-template-columns:1080px minmax(0,1fr);grid-template-rows:360px minmax(0,1fr);column-gap:56px;row-gap:44px;height:100%}
+.comm .banner{width:1080px;height:360px;border:1px solid var(--line)}
+.comm .h3{font-size:28px;line-height:36px}
+.comm .fmt{margin-top:6px;font-size:22px;line-height:30px;font-weight:500;color:var(--gray)}
+.comm ul{margin-top:18px;font-size:22px;line-height:32px}
+.comm .dots li+li{margin-top:6px}
+.comm .lower{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.comm .item{display:flex;gap:36px;align-items:flex-start}
+.ph{flex:none;border:1px solid var(--line);background:var(--white);display:flex;flex-direction:column;justify-content:flex-end;padding:18px 20px}
+.ph b{font-size:20px;line-height:26px;font-weight:600;color:var(--gray)}
+.ph span{font-size:18px;line-height:24px;color:var(--gray)}
+.ph.sig{width:400px;height:100px}
+.ph.post{width:260px;height:195px}
+
+/* ---------- Fin ---------- */
+.end .sig-big{position:absolute;left:120px;top:300px;width:1100px;font-size:112px;line-height:120px;font-weight:600;letter-spacing:-.02em}
+.end .sig-big+.rule{position:absolute;left:120px;top:564px;background:var(--white);width:120px;margin:0}
+.end-info{position:absolute;left:880px;right:120px;bottom:120px;display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:48px;align-items:end}
+.end-info .rdv{font-size:40px;line-height:50px;font-weight:600}
+.end-info .when{margin-top:14px;font-size:26px;line-height:38px;font-weight:500}
+.end-info .contact{margin-top:36px}
+.end-info .contact li{display:flex;align-items:center;gap:16px;font-size:30px;line-height:42px;font-weight:500}
+.end-info .contact li+li{margin-top:8px}
+.end-info .contact .i{font-size:34px}
+.end-qr{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;color:var(--white)}
+.end-qr .qr{width:232px;height:232px;background:var(--white);padding:14px}
+.end-qr .qr svg{width:100%;height:100%;display:block}
+.end-qr span{margin-top:16px;font-size:24px;line-height:32px;font-weight:500}
+
+/* ---------- Vue d'ensemble (O) ---------- */
+body.is-overview #deck{cursor:default}
+body.is-overview .slide{cursor:pointer}
+body.is-overview .slide *{pointer-events:none!important}
+body.is-overview .slide::after{content:"";position:absolute;inset:0;border:0 solid var(--teal);z-index:20;pointer-events:none}
+body.is-overview .slide.is-selected::after{border-width:28px}
+body.is-overview .slide::before{content:attr(data-num);position:absolute;left:0;top:0;z-index:21;background:var(--teal-deep);color:var(--white);font-size:88px;line-height:1;font-weight:600;padding:28px 40px}
+
+/* ---------- Interface ---------- */
+#ui{position:fixed;right:24px;bottom:24px;z-index:40;display:flex;align-items:center;gap:2px;background:var(--teal-deep);color:var(--white);padding:6px;border-radius:4px;transition:opacity .3s}
+#ui.idle{opacity:0;pointer-events:none}
+#ui button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:none;color:var(--white);border-radius:2px;font-size:24px}
+#ui button:hover,#ui button[aria-pressed="true"]{background:var(--hover)}
+#ui button:disabled{opacity:.5;cursor:default;background:none}
+#ui .count{min-width:84px;text-align:center;font-size:16px;line-height:20px;font-weight:500;font-variant-numeric:tabular-nums}
+#ui :focus-visible,#zoom :focus-visible,#help :focus-visible{outline-color:var(--teal-100)}
+body.hide-cursor,body.hide-cursor *{cursor:none!important}
+
+#notes-panel{position:fixed;top:0;right:0;bottom:0;width:440px;z-index:30;background:var(--white);border-left:1px solid var(--line);display:flex;flex-direction:column;padding:28px 32px 96px;overflow:auto}
+#notes-panel .np-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#notes-panel .np-count{font-size:15px;line-height:20px;font-weight:500;color:var(--gray);font-variant-numeric:tabular-nums}
+#notes-panel .np-close{border:0;background:none;color:var(--gray);width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:22px;border-radius:2px}
+#notes-panel .np-close:hover{background:var(--teal-100);color:var(--ink)}
+#notes-panel h2{margin-top:14px;font-size:22px;line-height:30px;font-weight:600}
+#notes-panel .np-rule{display:block;width:48px;height:3px;background:var(--teal);margin-top:14px}
+#notes-panel ul{margin-top:22px}
+#notes-panel li{position:relative;padding-left:22px;font-size:18px;line-height:28px}
+#notes-panel li+li{margin-top:14px}
+#notes-panel li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;background:var(--teal)}
+#notes-panel .np-next{margin-top:auto;padding-top:28px;font-size:15px;line-height:22px;color:var(--gray)}
+#notes-panel .np-next b{display:block;font-weight:500;color:var(--ink);font-size:16px}
+
+#help{position:fixed;right:24px;bottom:88px;z-index:41;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:22px 26px;width:360px}
+#help h2{font-size:17px;line-height:24px;font-weight:600}
+#help dl{margin:12px 0 0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:15px;line-height:22px}
+#help dt{font-weight:600;color:var(--teal-deep)}
+#help dd{margin:0}
+
+#zoom{position:fixed;inset:0;z-index:50;background:var(--ink);color:var(--white);display:flex;flex-direction:column}
+#zoom .z-bar{flex:none;display:flex;align-items:center;gap:16px;padding:12px 16px 12px 24px;background:var(--grad-end)}
+#zoom .z-title{font-size:17px;line-height:24px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#zoom .z-state{font-size:15px;line-height:20px;color:var(--teal-100);white-space:nowrap}
+#zoom .z-pct{font-size:15px;line-height:20px;font-variant-numeric:tabular-nums;min-width:56px;text-align:right}
+#zoom .z-bar button{display:flex;align-items:center;justify-content:center;gap:8px;height:44px;min-width:44px;padding:0 10px;border:0;border-radius:2px;background:none;color:var(--white);font-size:22px}
+#zoom .z-bar button span{font-size:15px;font-weight:500}
+#zoom .z-bar button:hover{background:var(--hover)}
+#zoom .z-stage{position:relative;flex:1;min-height:0;overflow:hidden;cursor:grab;touch-action:none}
+#zoom .z-stage.dragging{cursor:grabbing}
+#zoom .z-stage img{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none;-webkit-user-drag:none;background:var(--white)}
+#zoom .z-help{position:absolute;left:24px;bottom:20px;font-size:15px;line-height:20px;color:var(--white);background:var(--grad-end);padding:8px 12px;border-radius:2px;pointer-events:none}
+</style>
+</head>
+<body>
+<!-- Icônes Phosphor (regular), intégrées en SVG -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrows-clockwise" viewBox="0 0 256 256"><path d="M224,48V96a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h28.69L182.06,73.37a79.56,79.56,0,0,0-56.13-23.43h-.45A79.52,79.52,0,0,0,69.59,72.71,8,8,0,0,1,58.41,61.27a96,96,0,0,1,135,.79L208,76.69V48a8,8,0,0,1,16,0ZM186.41,183.29a80,80,0,0,1-112.47-.66L59.31,168H88a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V179.31l14.63,14.63A95.43,95.43,0,0,0,130,222.06h.53a95.36,95.36,0,0,0,67.07-27.33,8,8,0,0,0-11.18-11.44Z"/></symbol><symbol id="i-arrows-left-right" viewBox="0 0 256 256"><path d="M213.66,181.66l-32,32a8,8,0,0,1-11.32-11.32L188.69,184H48a8,8,0,0,1,0-16H188.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,213.66,181.66Zm-139.32-64a8,8,0,0,0,11.32-11.32L67.31,88H208a8,8,0,0,0,0-16H67.31L85.66,53.66A8,8,0,0,0,74.34,42.34l-32,32a8,8,0,0,0,0,11.32Z"/></symbol><symbol id="i-arrows-out" viewBox="0 0 256 256"><path d="M216,48V96a8,8,0,0,1-16,0V67.31l-42.34,42.35a8,8,0,0,1-11.32-11.32L188.69,56H160a8,8,0,0,1,0-16h48A8,8,0,0,1,216,48ZM98.34,146.34,56,188.69V160a8,8,0,0,0-16,0v48a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16H67.31l42.35-42.34a8,8,0,0,0-11.32-11.32ZM208,152a8,8,0,0,0-8,8v28.69l-42.34-42.35a8,8,0,0,0-11.32,11.32L188.69,200H160a8,8,0,0,0,0,16h48a8,8,0,0,0,8-8V160A8,8,0,0,0,208,152ZM67.31,56H96a8,8,0,0,0,0-16H48a8,8,0,0,0-8,8V96a8,8,0,0,0,16,0V67.31l42.34,42.35a8,8,0,0,0,11.32-11.32Z"/></symbol><symbol id="i-calendar-blank" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"/></symbol><symbol id="i-caret-left" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></symbol><symbol id="i-caret-right" viewBox="0 0 256 256"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></symbol><symbol id="i-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol><symbol id="i-clipboard-text" viewBox="0 0 256 256"><path d="M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z"/></symbol><symbol id="i-film-strip" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,88h80v80H40Zm96-16V56h32V72Zm-16,0H88V56h32Zm0,112v16H88V184Zm16,0h32v16H136Zm0-16V88h80v80Zm80-96H184V56h32ZM72,56V72H40V56ZM40,184H72v16H40Zm176,16H184V184h32v16Z"/></symbol><symbol id="i-frame-corners" viewBox="0 0 256 256"><path d="M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/></symbol><symbol id="i-gas-pump" viewBox="0 0 256 256"><path d="M241,69.66,221.66,50.34a8,8,0,0,0-11.32,11.32L229.66,81A8,8,0,0,1,232,86.63V168a8,8,0,0,1-16,0V128a24,24,0,0,0-24-24H176V56a24,24,0,0,0-24-24H72A24,24,0,0,0,48,56V208H32a8,8,0,0,0,0,16H192a8,8,0,0,0,0-16H176V120h16a8,8,0,0,1,8,8v40a24,24,0,0,0,48,0V86.63A23.85,23.85,0,0,0,241,69.66ZM64,208V56a8,8,0,0,1,8-8h80a8,8,0,0,1,8,8V208Zm80-96a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h48A8,8,0,0,1,144,112Z"/></symbol><symbol id="i-globe" viewBox="0 0 256 256"><path d="M128,24h0A104,104,0,1,0,232,128,104.12,104.12,0,0,0,128,24Zm88,104a87.61,87.61,0,0,1-3.33,24H174.16a157.44,157.44,0,0,0,0-48h38.51A87.61,87.61,0,0,1,216,128ZM102,168H154a115.11,115.11,0,0,1-26,45A115.27,115.27,0,0,1,102,168Zm-3.9-16a140.84,140.84,0,0,1,0-48h59.88a140.84,140.84,0,0,1,0,48ZM40,128a87.61,87.61,0,0,1,3.33-24H81.84a157.44,157.44,0,0,0,0,48H43.33A87.61,87.61,0,0,1,40,128ZM154,88H102a115.11,115.11,0,0,1,26-45A115.27,115.27,0,0,1,154,88Zm52.33,0H170.71a135.28,135.28,0,0,0-22.3-45.6A88.29,88.29,0,0,1,206.37,88ZM107.59,42.4A135.28,135.28,0,0,0,85.29,88H49.63A88.29,88.29,0,0,1,107.59,42.4ZM49.63,168H85.29a135.28,135.28,0,0,0,22.3,45.6A88.29,88.29,0,0,1,49.63,168Zm98.78,45.6a135.28,135.28,0,0,0,22.3-45.6h35.66A88.29,88.29,0,0,1,148.41,213.6Z"/></symbol><symbol id="i-handshake" viewBox="0 0 256 256"><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></symbol><symbol id="i-keyboard" viewBox="0 0 256 256"><path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,144H32V64H224V192Zm-16-64a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16H200A8,8,0,0,1,208,128Zm0-32a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16H200A8,8,0,0,1,208,96ZM72,160a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16h8A8,8,0,0,1,72,160Zm96,0a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,160Zm40,0a8,8,0,0,1-8,8h-8a8,8,0,0,1,0-16h8A8,8,0,0,1,208,160Z"/></symbol><symbol id="i-magnifying-glass-minus" viewBox="0 0 256 256"><path d="M152,112a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h64A8,8,0,0,1,152,112Zm77.66,117.66a8,8,0,0,1-11.32,0l-50.06-50.07a88.11,88.11,0,1,1,11.31-11.31l50.07,50.06A8,8,0,0,1,229.66,229.66ZM112,184a72,72,0,1,0-72-72A72.08,72.08,0,0,0,112,184Z"/></symbol><symbol id="i-magnifying-glass-plus" viewBox="0 0 256 256"><path d="M152,112a8,8,0,0,1-8,8H120v24a8,8,0,0,1-16,0V120H80a8,8,0,0,1,0-16h24V80a8,8,0,0,1,16,0v24h24A8,8,0,0,1,152,112Zm77.66,117.66a8,8,0,0,1-11.32,0l-50.06-50.07a88.11,88.11,0,1,1,11.31-11.31l50.07,50.06A8,8,0,0,1,229.66,229.66ZM112,184a72,72,0,1,0-72-72A72.08,72.08,0,0,0,112,184Z"/></symbol><symbol id="i-map-pin" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></symbol><symbol id="i-note" viewBox="0 0 256 256"><path d="M88,96a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,96Zm8,40h64a8,8,0,0,0,0-16H96a8,8,0,0,0,0,16Zm32,16H96a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16ZM224,48V156.69A15.86,15.86,0,0,1,219.31,168L168,219.31A15.86,15.86,0,0,1,156.69,224H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32H208A16,16,0,0,1,224,48ZM48,208H152V160a8,8,0,0,1,8-8h48V48H48Zm120-40v28.7L196.69,168Z"/></symbol><symbol id="i-pause" viewBox="0 0 256 256"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></symbol><symbol id="i-phone" viewBox="0 0 256 256"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/></symbol><symbol id="i-play" viewBox="0 0 256 256"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></symbol><symbol id="i-printer" viewBox="0 0 256 256"><path d="M214.67,72H200V40a8,8,0,0,0-8-8H64a8,8,0,0,0-8,8V72H41.33C27.36,72,16,82.77,16,96v80a8,8,0,0,0,8,8H56v32a8,8,0,0,0,8,8H192a8,8,0,0,0,8-8V184h32a8,8,0,0,0,8-8V96C240,82.77,228.64,72,214.67,72ZM72,48H184V72H72ZM184,208H72V160H184Zm40-40H200V152a8,8,0,0,0-8-8H64a8,8,0,0,0-8,8v16H32V96c0-4.41,4.19-8,9.33-8H214.67c5.14,0,9.33,3.59,9.33,8Zm-24-52a12,12,0,1,1-12-12A12,12,0,0,1,200,116Z"/></symbol><symbol id="i-screwdriver" viewBox="0 0 256 256"><path d="M205.66,50.32a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32-11.31l56-56A8,8,0,0,1,205.66,50.32ZM248,58.41a50.13,50.13,0,0,1-14.77,35.66L180,147.3A15.86,15.86,0,0,1,168.69,152H152v16.83a16,16,0,0,1-3.25,9.66,8.08,8.08,0,0,1-.72.83l-8,8a16,16,0,0,1-22.62,0L98.7,168.6l-77,77.06a8,8,0,0,1-11.32-11.32l77.05-77.05-18.7-18.71a16,16,0,0,1,0-22.63l8-8a8,8,0,0,1,.82-.72A16.14,16.14,0,0,1,87.17,104H104V87.3A15.92,15.92,0,0,1,108.68,76l53.24-53.23A50.43,50.43,0,0,1,248,58.41Zm-16,0a34.43,34.43,0,0,0-58.77-24.35L120,87.3V104a16,16,0,0,1-16,16H87.28L80,127.27,128.72,176l7.28-7.28V152a16,16,0,0,1,16-16h16.69l53.23-53.24A34.21,34.21,0,0,0,232,58.41Z"/></symbol><symbol id="i-seal-check" viewBox="0 0 256 256"><path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-11.55,39.29c-4.79,5-9.75,10.17-12.38,16.52-2.52,6.1-2.63,13.07-2.73,19.82-.1,7-.21,14.33-3.32,17.43s-10.39,3.22-17.43,3.32c-6.75.1-13.72.21-19.82,2.73-6.35,2.63-11.52,7.59-16.52,12.38S132,224,128,224s-9.15-4.92-14.11-9.69-10.17-9.75-16.52-12.38c-6.1-2.52-13.07-2.63-19.82-2.73-7-.1-14.33-.21-17.43-3.32s-3.22-10.39-3.32-17.43c-.1-6.75-.21-13.72-2.73-19.82-2.63-6.35-7.59-11.52-12.38-16.52S32,132,32,128s4.92-9.15,9.69-14.11,9.75-10.17,12.38-16.52c2.52-6.1,2.63-13.07,2.73-19.82.1-7,.21-14.33,3.32-17.43S70.51,56.9,77.55,56.8c6.75-.1,13.72-.21,19.82-2.73,6.35-2.63,11.52-7.59,16.52-12.38S124,32,128,32s9.15,4.92,14.11,9.69,10.17,9.75,16.52,12.38c6.1,2.52,13.07,2.63,19.82,2.73,7,.1,14.33.21,17.43,3.32s3.22,10.39,3.32,17.43c.1,6.75.21,13.72,2.73,19.82,2.63,6.35,7.59,11.52,12.38,16.52S224,124,224,128,219.08,137.15,214.31,142.11ZM173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34Z"/></symbol><symbol id="i-speaker-slash" viewBox="0 0 256 256"><path d="M53.92,34.62A8,8,0,1,0,42.08,45.38L73.55,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V175.09l42.08,46.29a8,8,0,1,0,11.84-10.76ZM32,96H72v64H32ZM144,207.64,88,164.09V95.89l56,61.6Zm42-63.77a24,24,0,0,0,0-31.72,8,8,0,1,1,12-10.57,40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.59Zm-80.16-76a8,8,0,0,1,1.4-11.23l39.85-31A8,8,0,0,1,160,32v74.83a8,8,0,0,1-16,0V48.36l-26.94,21A8,8,0,0,1,105.84,67.91ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></symbol><symbol id="i-squares-four" viewBox="0 0 256 256"><path d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48Z"/></symbol><symbol id="i-storefront" viewBox="0 0 256 256"><path d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96h0v16a40,40,0,0,0,16,32v72a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V144a40,40,0,0,0,16-32V96ZM54,48H202l11.42,40H42.61Zm50,56h48v8a24,24,0,0,1-48,0Zm-16,0v8a24,24,0,0,1-35.12,21.26,7.88,7.88,0,0,0-1.82-1.06A24,24,0,0,1,40,112v-8ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm4.93-75.8a8.08,8.08,0,0,0-1.8,1.05A24,24,0,0,1,168,112v-8h48v8A24,24,0,0,1,204.93,132.2Z"/></symbol><symbol id="i-ticket" viewBox="0 0 256 256"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Zm192,0V192H104V64H224V88.8a40,40,0,0,0,0,78.4Z"/></symbol><symbol id="i-truck" viewBox="0 0 256 256"><path d="M255.42,117l-14-35A15.93,15.93,0,0,0,226.58,72H192V64a8,8,0,0,0-8-8H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H49a32,32,0,0,0,62,0h50a32,32,0,0,0,62,0h17a16,16,0,0,0,16-16V120A7.94,7.94,0,0,0,255.42,117ZM192,88h34.58l9.6,24H192ZM32,72H176v64H32ZM80,208a16,16,0,1,1,16-16A16,16,0,0,1,80,208Zm81-24H111a32,32,0,0,0-62,0H32V152H176v12.31A32.11,32.11,0,0,0,161,184Zm31,24a16,16,0,1,1,16-16A16,16,0,0,1,192,208Zm48-24H223a32.06,32.06,0,0,0-31-24V128h48Z"/></symbol><symbol id="i-users-three" viewBox="0 0 256 256"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></symbol><symbol id="i-wrench" viewBox="0 0 256 256"><path d="M226.76,69a8,8,0,0,0-12.84-2.88l-40.3,37.19-17.23-3.7-3.7-17.23,37.19-40.3A8,8,0,0,0,187,29.24,72,72,0,0,0,88,96,72.34,72.34,0,0,0,94,124.94L33.79,177c-.15.12-.29.26-.43.39a32,32,0,0,0,45.26,45.26c.13-.13.27-.28.39-.42L131.06,162A72,72,0,0,0,232,96,71.56,71.56,0,0,0,226.76,69ZM160,152a56.14,56.14,0,0,1-27.07-7,8,8,0,0,0-9.92,1.77L67.11,211.51a16,16,0,0,1-22.62-22.62L109.18,133a8,8,0,0,0,1.77-9.93,56,56,0,0,1,58.36-82.31l-31.2,33.81a8,8,0,0,0-1.94,7.1L141.83,108a8,8,0,0,0,6.14,6.14l26.35,5.66a8,8,0,0,0,7.1-1.94l33.81-31.2A56.06,56.06,0,0,1,160,152Z"/></symbol><symbol id="i-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol></svg>
+
+<div id="viewport" tabindex="-1">
+<main id="deck" aria-live="polite">
+
+<!-- ======================= 1. Couverture ======================= -->
+<section class="slide grad cover" data-title="SAINLEAU au salon Solicare 2026">
+  <img class="logo-c" src="assets/logo-sainleau-clair.svg" alt="SAINLEAU">
+  <div class="cover-title">
+    <h1>SAINLEAU au salon<br>Solicare 2026</h1>
+    <span class="rule"></span>
+    <p class="cover-sub">Infos du salon, message et créas</p>
+  </div>
+  <img class="logo-solicare" src="assets/logo-solicare.png" alt="Solicare, Salon engagé Santé &amp; Solidarité, Privé non lucratif">
+  <div class="cover-info">
+    <ul>
+      <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-calendar-blank"/></svg>Mercredi 9 et jeudi 10 décembre 2026</li>
+      <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Palais des Congrès de Paris, Porte Maillot</li>
+      <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-storefront"/></svg>Stand M07, hall FEHAP</li>
+    </ul>
+  </div>
+  <aside class="notes"><ul>
+    <li>Nous présentons ce que SAINLEAU prépare pour Solicare 2026 : les infos du salon, notre message et toutes nos créas.</li>
+    <li>Rendez-vous le mercredi 9 et le jeudi 10 décembre 2026 au Palais des Congrès de Paris, Porte Maillot.</li>
+    <li>SAINLEAU sera sur le stand M07, dans le hall FEHAP.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 2. Le salon ======================= -->
+<section class="slide salon" data-title="Le salon Solicare 2026" data-section="01">
+  <div class="wm" aria-hidden="true">01</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Le salon Solicare 2026</h2><span class="rule"></span></header>
+    <div class="body">
+      <div>
+        <p class="tagline">« Salon engagé Santé &amp; Solidarité, Privé non lucratif »</p>
+        <ul class="facts">
+          <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-calendar-blank"/></svg><span>Mercredi 9 et jeudi 10 décembre 2026</span></li>
+          <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg><span>Palais des Congrès de Paris, Porte Maillot</span></li>
+          <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-users-three"/></svg><span>Nos cibles : associations, établissements médico-sociaux, collectivités</span></li>
+        </ul>
+        <div class="stand" aria-label="SAINLEAU : stand M07, hall FEHAP">
+          <div><p class="k">Stand SAINLEAU</p><p class="v">M07</p></div>
+          <div><p class="k">Hall</p><p class="v">FEHAP</p></div>
+        </div>
+      </div>
+      <aside class="badge">
+        <img class="logo-solicare" src="assets/logo-solicare.png" alt="Solicare">
+        <h3 class="h3">Badge visiteur gratuit</h3>
+        <div class="qr" role="img" aria-label="QR code vers la demande de badge visiteur"><svg viewBox="0 0 53 53" shape-rendering="crispEdges" aria-hidden="true"><rect width="53" height="53" fill="#FFFFFF"/><path d="M4 4h7v1h-7zM12 4h5v1h-5zM18 4h1v1h-1zM20 4h1v1h-1zM24 4h4v1h-4zM30 4h1v1h-1zM32 4h1v1h-1zM34 4h1v1h-1zM37 4h1v1h-1zM40 4h1v1h-1zM42 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h3v1h-3zM17 5h2v1h-2zM21 5h2v1h-2zM24 5h2v1h-2zM27 5h3v1h-3zM32 5h1v1h-1zM37 5h1v1h-1zM39 5h1v1h-1zM42 5h1v1h-1zM48 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h6v1h-6zM19 6h1v1h-1zM21 6h2v1h-2zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h2v1h-2zM33 6h5v1h-5zM39 6h1v1h-1zM42 6h1v1h-1zM44 6h3v1h-3zM48 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h1v1h-1zM17 7h1v1h-1zM22 7h1v1h-1zM28 7h2v1h-2zM31 7h4v1h-4zM36 7h1v1h-1zM39 7h2v1h-2zM42 7h1v1h-1zM44 7h3v1h-3zM48 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM12 8h1v1h-1zM15 8h1v1h-1zM17 8h2v1h-2zM23 8h9v1h-9zM34 8h1v1h-1zM38 8h3v1h-3zM42 8h1v1h-1zM44 8h3v1h-3zM48 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM13 9h4v1h-4zM18 9h1v1h-1zM20 9h3v1h-3zM24 9h1v1h-1zM28 9h1v1h-1zM30 9h3v1h-3zM42 9h1v1h-1zM48 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM36 10h1v1h-1zM38 10h1v1h-1zM40 10h1v1h-1zM42 10h7v1h-7zM13 11h5v1h-5zM19 11h4v1h-4zM24 11h1v1h-1zM28 11h1v1h-1zM30 11h1v1h-1zM32 11h1v1h-1zM34 11h2v1h-2zM37 11h1v1h-1zM40 11h1v1h-1zM4 12h1v1h-1zM7 12h6v1h-6zM14 12h3v1h-3zM18 12h1v1h-1zM22 12h1v1h-1zM24 12h5v1h-5zM32 12h1v1h-1zM39 12h3v1h-3zM44 12h1v1h-1zM46 12h3v1h-3zM4 13h3v1h-3zM8 13h2v1h-2zM11 13h1v1h-1zM13 13h4v1h-4zM20 13h4v1h-4zM26 13h2v1h-2zM30 13h1v1h-1zM33 13h8v1h-8zM42 13h2v1h-2zM45 13h1v1h-1zM47 13h1v1h-1zM5 14h1v1h-1zM7 14h2v1h-2zM10 14h1v1h-1zM12 14h1v1h-1zM14 14h1v1h-1zM16 14h2v1h-2zM19 14h2v1h-2zM24 14h1v1h-1zM26 14h3v1h-3zM31 14h1v1h-1zM33 14h1v1h-1zM38 14h1v1h-1zM41 14h1v1h-1zM43 14h1v1h-1zM47 14h2v1h-2zM4 15h1v1h-1zM6 15h2v1h-2zM12 15h1v1h-1zM16 15h1v1h-1zM18 15h1v1h-1zM20 15h1v1h-1zM22 15h7v1h-7zM31 15h1v1h-1zM36 15h3v1h-3zM40 15h3v1h-3zM46 15h1v1h-1zM4 16h3v1h-3zM10 16h3v1h-3zM14 16h3v1h-3zM18 16h2v1h-2zM21 16h3v1h-3zM25 16h1v1h-1zM27 16h1v1h-1zM29 16h1v1h-1zM31 16h2v1h-2zM34 16h1v1h-1zM36 16h1v1h-1zM38 16h2v1h-2zM41 16h1v1h-1zM44 16h2v1h-2zM47 16h1v1h-1zM6 17h2v1h-2zM14 17h2v1h-2zM17 17h1v1h-1zM20 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h1v1h-1zM34 17h4v1h-4zM39 17h2v1h-2zM42 17h2v1h-2zM47 17h1v1h-1zM4 18h2v1h-2zM7 18h4v1h-4zM12 18h3v1h-3zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h3v1h-3zM24 18h1v1h-1zM28 18h3v1h-3zM32 18h2v1h-2zM37 18h1v1h-1zM40 18h1v1h-1zM42 18h1v1h-1zM45 18h2v1h-2zM5 19h2v1h-2zM8 19h2v1h-2zM12 19h3v1h-3zM24 19h3v1h-3zM29 19h2v1h-2zM33 19h1v1h-1zM37 19h1v1h-1zM39 19h2v1h-2zM42 19h2v1h-2zM45 19h2v1h-2zM5 20h1v1h-1zM7 20h2v1h-2zM10 20h1v1h-1zM13 20h7v1h-7zM22 20h1v1h-1zM25 20h2v1h-2zM28 20h1v1h-1zM30 20h1v1h-1zM33 20h4v1h-4zM38 20h1v1h-1zM47 20h2v1h-2zM4 21h2v1h-2zM8 21h2v1h-2zM11 21h1v1h-1zM15 21h1v1h-1zM20 21h2v1h-2zM23 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM34 21h5v1h-5zM40 21h1v1h-1zM43 21h2v1h-2zM46 21h1v1h-1zM48 21h1v1h-1zM4 22h1v1h-1zM9 22h4v1h-4zM17 22h2v1h-2zM21 22h1v1h-1zM23 22h1v1h-1zM28 22h1v1h-1zM31 22h3v1h-3zM35 22h3v1h-3zM44 22h3v1h-3zM48 22h1v1h-1zM4 23h1v1h-1zM6 23h2v1h-2zM9 23h1v1h-1zM15 23h2v1h-2zM22 23h3v1h-3zM29 23h4v1h-4zM35 23h1v1h-1zM37 23h3v1h-3zM42 23h1v1h-1zM44 23h3v1h-3zM4 24h1v1h-1zM6 24h1v1h-1zM8 24h5v1h-5zM14 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM24 24h5v1h-5zM32 24h1v1h-1zM38 24h7v1h-7zM47 24h1v1h-1zM5 25h1v1h-1zM8 25h1v1h-1zM12 25h1v1h-1zM15 25h6v1h-6zM24 25h1v1h-1zM28 25h1v1h-1zM30 25h2v1h-2zM34 25h7v1h-7zM44 25h3v1h-3zM8 26h1v1h-1zM10 26h1v1h-1zM12 26h4v1h-4zM18 26h3v1h-3zM23 26h2v1h-2zM26 26h1v1h-1zM28 26h2v1h-2zM32 26h2v1h-2zM35 26h6v1h-6zM42 26h1v1h-1zM44 26h5v1h-5zM7 27h2v1h-2zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM28 27h4v1h-4zM33 27h1v1h-1zM36 27h5v1h-5zM44 27h1v1h-1zM46 27h3v1h-3zM4 28h1v1h-1zM8 28h7v1h-7zM16 28h4v1h-4zM23 28h6v1h-6zM30 28h1v1h-1zM32 28h1v1h-1zM34 28h1v1h-1zM36 28h1v1h-1zM40 28h5v1h-5zM47 28h2v1h-2zM4 29h3v1h-3zM8 29h2v1h-2zM11 29h2v1h-2zM16 29h2v1h-2zM19 29h2v1h-2zM22 29h1v1h-1zM26 29h1v1h-1zM28 29h1v1h-1zM30 29h2v1h-2zM33 29h5v1h-5zM40 29h2v1h-2zM43 29h1v1h-1zM45 29h1v1h-1zM47 29h1v1h-1zM8 30h3v1h-3zM16 30h3v1h-3zM22 30h3v1h-3zM26 30h2v1h-2zM29 30h5v1h-5zM35 30h2v1h-2zM41 30h1v1h-1zM44 30h1v1h-1zM5 31h1v1h-1zM7 31h2v1h-2zM11 31h2v1h-2zM14 31h2v1h-2zM17 31h1v1h-1zM23 31h2v1h-2zM26 31h5v1h-5zM34 31h1v1h-1zM37 31h1v1h-1zM39 31h1v1h-1zM41 31h1v1h-1zM43 31h5v1h-5zM4 32h1v1h-1zM9 32h4v1h-4zM14 32h9v1h-9zM24 32h1v1h-1zM27 32h4v1h-4zM33 32h4v1h-4zM39 32h1v1h-1zM44 32h1v1h-1zM47 32h2v1h-2zM4 33h1v1h-1zM9 33h1v1h-1zM13 33h1v1h-1zM20 33h2v1h-2zM27 33h1v1h-1zM32 33h3v1h-3zM36 33h5v1h-5zM42 33h3v1h-3zM46 33h3v1h-3zM4 34h2v1h-2zM7 34h1v1h-1zM9 34h3v1h-3zM17 34h1v1h-1zM19 34h3v1h-3zM23 34h1v1h-1zM25 34h2v1h-2zM29 34h1v1h-1zM31 34h2v1h-2zM37 34h1v1h-1zM40 34h9v1h-9zM5 35h5v1h-5zM11 35h1v1h-1zM13 35h3v1h-3zM21 35h1v1h-1zM23 35h1v1h-1zM26 35h1v1h-1zM28 35h1v1h-1zM31 35h2v1h-2zM37 35h1v1h-1zM39 35h1v1h-1zM41 35h1v1h-1zM45 35h2v1h-2zM48 35h1v1h-1zM4 36h1v1h-1zM6 36h1v1h-1zM9 36h2v1h-2zM12 36h3v1h-3zM16 36h3v1h-3zM21 36h4v1h-4zM26 36h1v1h-1zM28 36h1v1h-1zM32 36h3v1h-3zM38 36h1v1h-1zM43 36h1v1h-1zM48 36h1v1h-1zM8 37h1v1h-1zM11 37h4v1h-4zM18 37h1v1h-1zM20 37h2v1h-2zM23 37h2v1h-2zM28 37h1v1h-1zM30 37h2v1h-2zM33 37h2v1h-2zM37 37h3v1h-3zM42 37h1v1h-1zM44 37h4v1h-4zM8 38h1v1h-1zM10 38h2v1h-2zM13 38h1v1h-1zM18 38h1v1h-1zM20 38h1v1h-1zM25 38h1v1h-1zM27 38h1v1h-1zM29 38h1v1h-1zM32 38h2v1h-2zM35 38h1v1h-1zM38 38h1v1h-1zM40 38h1v1h-1zM42 38h1v1h-1zM45 38h4v1h-4zM5 39h4v1h-4zM11 39h2v1h-2zM18 39h1v1h-1zM20 39h1v1h-1zM22 39h1v1h-1zM25 39h2v1h-2zM28 39h1v1h-1zM35 39h2v1h-2zM38 39h1v1h-1zM40 39h1v1h-1zM42 39h1v1h-1zM44 39h1v1h-1zM46 39h2v1h-2zM4 40h1v1h-1zM7 40h2v1h-2zM10 40h2v1h-2zM15 40h2v1h-2zM19 40h3v1h-3zM23 40h7v1h-7zM32 40h1v1h-1zM34 40h4v1h-4zM39 40h7v1h-7zM47 40h1v1h-1zM12 41h2v1h-2zM15 41h1v1h-1zM17 41h1v1h-1zM21 41h1v1h-1zM23 41h2v1h-2zM28 41h3v1h-3zM32 41h4v1h-4zM37 41h1v1h-1zM39 41h2v1h-2zM44 41h4v1h-4zM4 42h7v1h-7zM12 42h3v1h-3zM17 42h3v1h-3zM24 42h1v1h-1zM26 42h1v1h-1zM28 42h1v1h-1zM30 42h1v1h-1zM32 42h2v1h-2zM37 42h1v1h-1zM39 42h2v1h-2zM42 42h1v1h-1zM44 42h1v1h-1zM46 42h1v1h-1zM4 43h1v1h-1zM10 43h1v1h-1zM12 43h1v1h-1zM15 43h4v1h-4zM22 43h3v1h-3zM28 43h3v1h-3zM33 43h2v1h-2zM37 43h4v1h-4zM44 43h4v1h-4zM4 44h1v1h-1zM6 44h3v1h-3zM10 44h1v1h-1zM12 44h4v1h-4zM19 44h1v1h-1zM24 44h7v1h-7zM33 44h4v1h-4zM38 44h1v1h-1zM40 44h5v1h-5zM47 44h1v1h-1zM4 45h1v1h-1zM6 45h3v1h-3zM10 45h1v1h-1zM12 45h4v1h-4zM18 45h4v1h-4zM23 45h4v1h-4zM28 45h2v1h-2zM31 45h1v1h-1zM34 45h1v1h-1zM38 45h1v1h-1zM41 45h3v1h-3zM46 45h3v1h-3zM4 46h1v1h-1zM6 46h3v1h-3zM10 46h1v1h-1zM13 46h2v1h-2zM20 46h3v1h-3zM24 46h2v1h-2zM28 46h1v1h-1zM31 46h3v1h-3zM35 46h1v1h-1zM37 46h1v1h-1zM39 46h2v1h-2zM44 46h3v1h-3zM48 46h1v1h-1zM4 47h1v1h-1zM10 47h1v1h-1zM13 47h2v1h-2zM16 47h3v1h-3zM20 47h4v1h-4zM25 47h2v1h-2zM31 47h2v1h-2zM34 47h2v1h-2zM39 47h2v1h-2zM42 47h2v1h-2zM45 47h4v1h-4zM4 48h7v1h-7zM12 48h6v1h-6zM25 48h1v1h-1zM27 48h2v1h-2zM31 48h2v1h-2zM34 48h1v1h-1zM38 48h1v1h-1zM40 48h3v1h-3zM44 48h1v1h-1z" fill="#1B1B1B"/></svg></div>
+        <a class="btn" href="https://www.solicare-expo.com/content/demandez-votre-badge-visiteur?iw_exhibitorid=5f3ba658-6dda-f111-bf5b-000d3a2087ae" target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-ticket"/></svg>Demandez votre badge</a>
+      </aside>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Solicare 2026, « Salon engagé Santé &amp; Solidarité, Privé non lucratif », se tient le mercredi 9 et le jeudi 10 décembre 2026 au Palais des Congrès de Paris, Porte Maillot.</li>
+    <li>SAINLEAU est sur le stand M07, dans le hall FEHAP. Nos cibles : associations, établissements médico-sociaux, collectivités.</li>
+    <li>Le badge visiteur est gratuit : le QR code et le bouton ouvrent la demande de badge.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 3. Notre message ======================= -->
+<section class="slide message" data-title="Notre message" data-section="02">
+  <div class="wm" aria-hidden="true">02</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Notre message</h2><span class="rule"></span></header>
+    <div class="body">
+      <div>
+        <p class="label">Titre</p>
+        <p class="big">Équipement à 360° de vos lieux d’accueil</p>
+        <p class="label gap">Sous-titre</p>
+        <p class="sub">Pour les associations, les établissements médico-sociaux et les collectivités. Un seul interlocuteur. Une seule facture.</p>
+      </div>
+      <div>
+        <p class="label">Signature</p>
+        <p class="sig">Un partenaire.<br>Tous vos univers.</p>
+      </div>
+    </div>
+  </div>
+  <div class="band">
+    <p class="label">Bandeau</p>
+    <p>Un seul interlocuteur. Une seule facture. Du conseil au suivi.</p>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Titre : « Équipement à 360° de vos lieux d’accueil ».</li>
+    <li>Sous-titre : « Pour les associations, les établissements médico-sociaux et les collectivités. Un seul interlocuteur. Une seule facture. »</li>
+    <li>Signature : « Un partenaire. Tous vos univers. » Bandeau : « Un seul interlocuteur. Une seule facture. Du conseil au suivi. »</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 4. Services et chiffres ======================= -->
+<section class="slide" data-title="Nos services et nos chiffres" data-section="02">
+  <div class="wm" aria-hidden="true">02</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Nos services et nos chiffres</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="block">
+        <h3 class="h3">Services</h3>
+        <ul class="services">
+          <li class="card"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-clipboard-text"/></svg><p>Audit</p></li>
+          <li class="card"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-truck"/></svg><p>Livraison partout en France</p></li>
+          <li class="card"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg><p>Installation</p></li>
+          <li class="card"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrows-left-right"/></svg><p>Déploiement clé en main</p></li>
+        </ul>
+      </div>
+      <div class="block">
+        <h3 class="h3">Chiffres</h3>
+        <ul class="figures">
+          <li><span class="pre">Plus de</span><span class="n">30 ans</span><span class="post">&nbsp;</span></li>
+          <li><span class="pre"></span><span class="n">6&nbsp;000&nbsp;m²</span><span class="post">&nbsp;</span></li>
+          <li><span class="pre"></span><span class="n">2&nbsp;000</span><span class="post">références en stock</span></li>
+          <li><span class="pre"></span><span class="n">4</span><span class="post">quais</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Quatre services : audit, livraison partout en France, installation et déploiement clé en main.</li>
+    <li>Nos chiffres : plus de 30 ans, 6 000 m², 2 000 références en stock et 4 quais.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 5. Engagements ======================= -->
+<section class="slide" data-title="Nos engagements" data-section="02">
+  <div class="wm" aria-hidden="true">02</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Nos engagements</h2><span class="rule"></span></header>
+    <div class="body">
+      <h3 class="h3 charte-h"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-seal-check"/></svg>Charte Produits &amp; Services – les 5E</h3>
+      <ol class="five">
+        <li><span class="e" aria-hidden="true">E</span><span class="w">Efficacité</span></li>
+        <li><span class="e" aria-hidden="true">É</span><span class="w">Écologie &amp; RSE</span></li>
+        <li><span class="e" aria-hidden="true">E</span><span class="w">Ergonomie &amp; TMS</span></li>
+        <li><span class="e" aria-hidden="true">E</span><span class="w">Entreposage</span></li>
+        <li><span class="e" aria-hidden="true">É</span><span class="w">Économique</span></li>
+      </ol>
+      <ul class="commit">
+        <li class="card"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-gas-pump"/></svg><p>Flotte au gaz naturel</p></li>
+        <li class="card"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-handshake"/></svg><p>Accompagnement à 360°</p></li>
+      </ul>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Notre charte Produits &amp; Services repose sur les 5E : Efficacité, Écologie &amp; RSE, Ergonomie &amp; TMS, Entreposage et Économique.</li>
+    <li>Nos autres engagements : une flotte au gaz naturel et un accompagnement à 360°.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 6. Les 4 univers ======================= -->
+<section class="slide" data-title="Les 4 univers" data-section="03">
+  <div class="wm" aria-hidden="true">03</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Les 4 univers</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="uni-grid">
+        <button type="button" class="uni-card" data-goto="7"><span class="thumb"><img src="assets/apercus/affiche-hebergement-collectivite.webp" alt="Affiche Hébergement collectivité"></span><span class="h3">Hébergement collectivité</span><span class="acc">Chambres, espaces d’accueil et lieux de vie collective</span></button>
+        <button type="button" class="uni-card" data-goto="8"><span class="thumb"><img src="assets/apercus/affiche-logement-diffus.webp" alt="Affiche Logement diffus"></span><span class="h3">Logement diffus</span><span class="acc">Du kit appartement à l’installation complète</span></button>
+        <button type="button" class="uni-card" data-goto="9"><span class="thumb"><img src="assets/apercus/affiche-urgence.webp" alt="Affiche Hébergement d’urgence"></span><span class="h3">Hébergement d’urgence</span><span class="acc">Mise à l’abri, maraudes et plan Grand Froid</span></button>
+        <button type="button" class="uni-card" data-goto="10"><span class="thumb"><img src="assets/apercus/affiche-hygiene.webp" alt="Affiche Hygiène corporelle"></span><span class="h3">Hygiène corporelle</span><span class="acc">Kits d’hygiène et produits du quotidien</span></button>
+      </div>
+      <p class="uni-note">Affiches 60 × 80 cm. Sur chacune : le sous-titre « Un équipement complet », le pied « Retrouvez nos gammes sur sainleau.com » et un QR code vers sainleau.com.</p>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Quatre univers, une affiche 60 × 80 cm pour chacun : hébergement collectivité, logement diffus, hébergement d’urgence et hygiène corporelle.</li>
+    <li>Chaque affiche a le sous-titre « Un équipement complet », le pied « Retrouvez nos gammes sur sainleau.com » et un QR code vers sainleau.com.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 7. Hébergement collectivité ======================= -->
+<section class="slide univers" data-title="Hébergement collectivité" data-section="03">
+  <div class="wm" aria-hidden="true">03</div>
+  <div class="panel"></div>
+  <button type="button" class="zoomable poster" data-zoom="assets/affiche-hebergement-collectivite.png" data-zoom-title="Affiche Hébergement collectivité · 60 × 80 cm"><img src="assets/apercus/affiche-hebergement-collectivite.webp" alt="Affiche Hébergement collectivité"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+  <div class="frame">
+    <header class="head"><h2 class="title">Hébergement collectivité</h2><span class="rule"></span></header>
+    <div class="body">
+      <p class="acc">« Chambres, espaces d’accueil et lieux de vie collective »</p>
+      <div class="cols">
+        <div>
+          <p class="label">Gammes</p>
+          <ul class="txt dots">
+            <li>Mobilier de chambre</li>
+            <li>Mobilier d’accueil</li>
+            <li>Mobilier petite enfance</li>
+            <li>Mobilier de restauration collective</li>
+            <li>Mobilier de bureau</li>
+            <li>Rideau et voilage M1</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">Atouts</p>
+          <ul class="txt checks">
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Anti-punaises</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Anti-acariens</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Norme NF Collectivité</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Norme M1 anti-feu</li>
+          </ul>
+          <div class="logos">
+            <p class="label">Logos</p>
+            <ul class="chips"><li>Sans outils</li><li>NF</li><li>Fabriqué en France</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-clair.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Hébergement collectivité : « Chambres, espaces d’accueil et lieux de vie collective ».</li>
+    <li>Mobilier de chambre, d’accueil, petite enfance, de restauration collective, de bureau, rideau et voilage M1.</li>
+    <li>Atouts : anti-punaises, anti-acariens, norme NF Collectivité, norme M1 anti-feu. Logos : sans outils, NF, Fabriqué en France.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 8. Logement diffus ======================= -->
+<section class="slide univers" data-title="Logement diffus" data-section="03">
+  <div class="wm" aria-hidden="true">03</div>
+  <div class="panel"></div>
+  <button type="button" class="zoomable poster" data-zoom="assets/affiche-logement-diffus.png" data-zoom-title="Affiche Logement diffus · 60 × 80 cm"><img src="assets/apercus/affiche-logement-diffus.webp" alt="Affiche Logement diffus"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+  <div class="frame">
+    <header class="head"><h2 class="title">Logement diffus</h2><span class="rule"></span></header>
+    <div class="body">
+      <p class="acc">« Du kit appartement à l’installation complète »</p>
+      <div class="cols">
+        <div>
+          <p class="label">Gammes</p>
+          <ul class="txt dots">
+            <li>Petite enfance</li>
+            <li>Chambre</li>
+            <li>Literie</li>
+            <li>Salle à manger</li>
+            <li>Salon</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">Services</p>
+          <ul class="txt checks">
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-truck"/></svg>Livraison</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrows-left-right"/></svg>Déploiement</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-screwdriver"/></svg>Montage</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg>Installation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-clair.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Logement diffus : « Du kit appartement à l’installation complète ».</li>
+    <li>Gammes : petite enfance, chambre, literie, salle à manger, salon.</li>
+    <li>Services : livraison, déploiement, montage, installation.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 9. Hébergement d'urgence ======================= -->
+<section class="slide univers" data-title="Hébergement d’urgence" data-section="03">
+  <div class="wm" aria-hidden="true">03</div>
+  <div class="panel"></div>
+  <button type="button" class="zoomable poster" data-zoom="assets/affiche-urgence.png" data-zoom-title="Affiche Hébergement d’urgence · 60 × 80 cm"><img src="assets/apercus/affiche-urgence.webp" alt="Affiche Hébergement d’urgence"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+  <div class="frame">
+    <header class="head"><h2 class="title">Hébergement d’urgence</h2><span class="rule"></span></header>
+    <div class="body">
+      <p class="acc">« Mise à l’abri, maraudes et plan Grand Froid »</p>
+      <div class="cols one">
+        <div>
+          <p class="label">Gammes</p>
+          <ul class="txt dots">
+            <li>Lit Picot</li>
+            <li>Kit literie</li>
+            <li>Kit plan Grand Froid</li>
+            <li>Kit hygiène</li>
+            <li>Sac de couchage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-clair.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Hébergement d’urgence : « Mise à l’abri, maraudes et plan Grand Froid ».</li>
+    <li>Lit Picot, kit literie, kit plan Grand Froid, kit hygiène et sac de couchage.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 10. Hygiène corporelle ======================= -->
+<section class="slide univers" data-title="Hygiène corporelle" data-section="03">
+  <div class="wm" aria-hidden="true">03</div>
+  <div class="panel"></div>
+  <button type="button" class="zoomable poster" data-zoom="assets/affiche-hygiene.png" data-zoom-title="Affiche Hygiène corporelle · 60 × 80 cm"><img src="assets/apercus/affiche-hygiene.webp" alt="Affiche Hygiène corporelle"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+  <div class="frame">
+    <header class="head"><h2 class="title">Hygiène corporelle</h2><span class="rule"></span></header>
+    <div class="body">
+      <p class="acc">« Kits d’hygiène et produits du quotidien »</p>
+      <div class="cols one">
+        <div>
+          <p class="label">Gammes</p>
+          <ul class="txt dots">
+            <li>Hygiène corporelle adulte et enfant</li>
+            <li>Protection individuelle</li>
+            <li>Incontinence adulte</li>
+            <li>Petite enfance</li>
+            <li>Kit hygiène homme, femme et enfant</li>
+            <li>EPI</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-clair.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Hygiène corporelle : « Kits d’hygiène et produits du quotidien ».</li>
+    <li>Hygiène corporelle adulte et enfant, protection individuelle, incontinence adulte, petite enfance, kit hygiène homme, femme et enfant, EPI.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 11. Les créas à la même échelle ======================= -->
+<section class="slide" data-title="Les créas du stand, à la même échelle" data-section="04">
+  <div class="wm" aria-hidden="true">04</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Les créas du stand, à la même échelle</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="lineup" aria-label="Créas à la même échelle">
+        <div class="floor"></div>
+        <div class="row">
+          <div class="it" style="width:272px;height:640px"><button type="button" class="zoomable" data-zoom="assets/kakemono-teal.png" data-zoom-title="Kakemono teal · roll-up 85 × 200 cm"><img src="assets/apercus/kakemono-teal.webp" alt="Kakemono teal"></button><p class="cap"><b>Kakemono teal</b><span>85 × 200 cm</span></p></div>
+          <div class="it" style="width:272px;height:640px;margin-left:24px"><button type="button" class="zoomable" data-zoom="assets/kakemono-blanc.png" data-zoom-title="Kakemono blanc « Points clés » · roll-up 85 × 200 cm"><img src="assets/apercus/kakemono-blanc.webp" alt="Kakemono blanc Points clés"></button><p class="cap"><b>Kakemono blanc</b><span>85 × 200 cm</span></p></div>
+          <div class="it" style="width:193px;height:256px;margin-left:56px"><button type="button" class="zoomable" data-zoom="assets/affiche-hebergement-collectivite.png" data-zoom-title="Affiche Hébergement collectivité · 60 × 80 cm"><img src="assets/apercus/affiche-hebergement-collectivite.webp" alt="Affiche Hébergement collectivité"></button><p class="cap"><b>4 affiches</b><span>60 × 80 cm</span></p></div>
+          <div class="it" style="width:193px;height:256px;margin-left:20px"><button type="button" class="zoomable" data-zoom="assets/affiche-logement-diffus.png" data-zoom-title="Affiche Logement diffus · 60 × 80 cm"><img src="assets/apercus/affiche-logement-diffus.webp" alt="Affiche Logement diffus"></button></div>
+          <div class="it" style="width:193px;height:256px;margin-left:20px"><button type="button" class="zoomable" data-zoom="assets/affiche-urgence.png" data-zoom-title="Affiche Hébergement d’urgence · 60 × 80 cm"><img src="assets/apercus/affiche-urgence.webp" alt="Affiche Hébergement d’urgence"></button></div>
+          <div class="it" style="width:193px;height:256px;margin-left:20px"><button type="button" class="zoomable" data-zoom="assets/affiche-hygiene.png" data-zoom-title="Affiche Hygiène corporelle · 60 × 80 cm"><img src="assets/apercus/affiche-hygiene.webp" alt="Affiche Hygiène corporelle"></button></div>
+          <div class="it" style="width:67px;height:95px;margin-left:72px"><button type="button" class="zoomable" data-zoom="assets/flyer-solicare-recto.png" data-zoom-title="Flyer Solicare A4 · recto"><img src="assets/apercus/flyer-solicare-recto.webp" alt="Flyer Solicare A4, recto"></button><p class="cap end"><b>Flyers A4 et A5</b><span>recto verso</span></p></div>
+          <div class="it" style="width:47px;height:67px;margin-left:20px"><button type="button" class="zoomable" data-zoom="assets/flyer-kits-recto.png" data-zoom-title="Flyer Kits appartement A5 · recto"><img src="assets/apercus/flyer-kits-recto.webp" alt="Flyer Kits appartement A5, recto"></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Sur le stand : le kakemono teal et le kakemono blanc « Points clés », deux roll-ups 85 × 200 cm, et les 4 affiches 60 × 80 cm.</li>
+    <li>Le flyer Solicare A4 et le flyer Kits appartement A5 sont recto verso.</li>
+    <li>Tous les fichiers d’impression ont 3 mm de fonds perdus.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 12. Plan du stand ======================= -->
+<section class="slide" data-title="Le stand M07, hall FEHAP" data-section="04" data-frame="assets/implantation-stand/index.html">
+  <div class="wm" aria-hidden="true">04</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Le stand M07, hall FEHAP</h2><span class="rule"></span>
+      <div class="head-actions"><button type="button" class="btn line" data-action="frame-fullscreen"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrows-out"/></svg>Plein écran</button></div>
+    </header>
+    <div class="body">
+      <div class="stand-plan">
+        <img class="frame-poster" src="assets/apercus/implantation-stand.webp" alt="Plan d’implantation du stand">
+        <iframe title="Plan d’implantation du stand" data-src="assets/implantation-stand/index.html" allow="fullscreen" hidden></iframe>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Le stand SAINLEAU est le M07, dans le hall FEHAP.</li>
+    <li>Le plan d’implantation est interactif : vue 3D, vue visiteur, vue de dessus, plan coté et mur du fond. On y place nos deux kakemonos.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 13. Kakemonos ======================= -->
+<section class="slide" data-title="Les kakemonos" data-section="04">
+  <div class="wm" aria-hidden="true">04</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Les kakemonos</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="kakes">
+        <div class="kake">
+          <button type="button" class="zoomable" data-zoom="assets/kakemono-teal.png" data-zoom-title="Kakemono teal · roll-up 85 × 200 cm"><img src="assets/apercus/kakemono-teal.webp" alt="Kakemono teal"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+          <div>
+            <h3 class="h3">Kakemono teal</h3>
+            <p class="fmt">Roll-up 85 × 200 cm</p>
+            <ul class="dots">
+              <li>Titre et sous-titre du message</li>
+              <li>4 photos :
+                <ul class="sub-list muted">
+                  <li>« Collectivité : mobilier métal »</li>
+                  <li>« Diffus : chambre »</li>
+                  <li>« Urgence : Gymnase »</li>
+                  <li>« Hygiène : Kit d’hygiène »</li>
+                </ul>
+              </li>
+              <li>Rangée Services</li>
+              <li>Pied : sainleau.com, 01&nbsp;48&nbsp;84&nbsp;60&nbsp;00 et QR code</li>
+            </ul>
+          </div>
+        </div>
+        <div class="kake">
+          <button type="button" class="zoomable" data-zoom="assets/kakemono-blanc.png" data-zoom-title="Kakemono blanc « Points clés » · roll-up 85 × 200 cm"><img src="assets/apercus/kakemono-blanc.webp" alt="Kakemono blanc Points clés"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+          <div>
+            <h3 class="h3">Kakemono blanc<br>«&nbsp;Points&nbsp;clés&nbsp;»</h3>
+            <p class="fmt">Roll-up 85 × 200 cm</p>
+            <ul class="dots">
+              <li>« Un partenaire. Tous vos univers. »</li>
+              <li>« Une solution pour chaque univers » : 6 univers en icônes</li>
+              <li>Chiffres</li>
+              <li>Bandeau</li>
+              <li>Engagements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Kakemono teal, roll-up 85 × 200 cm : titre et sous-titre du message, 4 photos, rangée Services, pied sainleau.com, 01 48 84 60 00 et QR code.</li>
+    <li>Kakemono blanc « Points clés », roll-up 85 × 200 cm : « Un partenaire. Tous vos univers. », « Une solution pour chaque univers » avec 6 univers en icônes, chiffres, bandeau et engagements.</li>
+    <li>Cliquez sur un kakemono pour l’ouvrir en grand et lire les détails.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 14. Flyer Solicare ======================= -->
+<section class="slide" data-title="Le flyer Solicare A4" data-section="04">
+  <div class="wm" aria-hidden="true">04</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Le flyer Solicare A4</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="flyers">
+        <div class="pair">
+          <figure><button type="button" class="zoomable" data-zoom="assets/flyer-solicare-recto.png" data-zoom-title="Flyer Solicare A4 · recto teal"><img src="assets/apercus/flyer-solicare-recto.webp" alt="Flyer Solicare, recto teal"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button><figcaption>Recto teal</figcaption></figure>
+          <figure><button type="button" class="zoomable" data-zoom="assets/flyer-solicare-verso.png" data-zoom-title="Flyer Solicare A4 · verso blanc"><img src="assets/apercus/flyer-solicare-verso.webp" alt="Flyer Solicare, verso blanc"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button><figcaption>Verso blanc</figcaption></figure>
+        </div>
+        <div class="fl-text">
+          <p class="fmt">A4 recto verso</p>
+          <p class="label">Recto teal</p>
+          <ul class="dots"><li>Version flyer du kakemono teal</li></ul>
+          <p class="label">Verso blanc</p>
+          <ul class="dots"><li>Version flyer du kakemono blanc</li></ul>
+          <p class="print"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-printer"/></svg>Imprimé par Romefort &amp; Fils</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Flyer Solicare A4 recto verso : le recto teal reprend le kakemono teal, le verso blanc reprend le kakemono blanc.</li>
+    <li>Il est imprimé par Romefort &amp; Fils.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 15. Flyer Kits appartement ======================= -->
+<section class="slide" data-title="Le flyer Kits appartement A5" data-section="04">
+  <div class="wm" aria-hidden="true">04</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">Le flyer Kits appartement A5</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="flyers">
+        <div class="pair">
+          <figure><button type="button" class="zoomable" data-zoom="assets/flyer-kits-recto.png" data-zoom-title="Flyer Kits appartement A5 · recto"><img src="assets/apercus/flyer-kits-recto.webp" alt="Flyer Kits appartement, recto"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button><figcaption>Recto</figcaption></figure>
+          <figure><button type="button" class="zoomable" data-zoom="assets/flyer-kits-verso.png" data-zoom-title="Flyer Kits appartement A5 · verso"><img src="assets/apercus/flyer-kits-verso.webp" alt="Flyer Kits appartement, verso"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button><figcaption>Verso</figcaption></figure>
+        </div>
+        <div class="fl-text">
+          <p class="fmt">A5 recto verso, distribué au salon et aux clients</p>
+          <p class="label">Recto</p>
+          <ul class="dots">
+            <li>« Équipez vos logements en une seule commande »</li>
+            <li>« En kit ou à l’unité, commandez les essentiels, de la cuisine à la literie. »</li>
+            <li>Atouts : « Jusqu’à 63 articles par kit », « Des kits à composer », « Livraison partout en France »</li>
+          </ul>
+          <p class="label">Verso</p>
+          <ul class="dots">
+            <li>« Composez ou choisissez vos kits selon vos besoins »</li>
+            <li>5 kits : cuisine, literie, appartement, hygiène, ménager</li>
+            <li>« Plusieurs logements à équiper ? »</li>
+            <li>01&nbsp;48&nbsp;84&nbsp;60&nbsp;00 · sainleau.com</li>
+            <li>« Réservé aux professionnels »</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Flyer Kits appartement A5 recto verso, distribué au salon et aux clients.</li>
+    <li>Recto : « Équipez vos logements en une seule commande », jusqu’à 63 articles par kit, des kits à composer, livraison partout en France.</li>
+    <li>Verso : 5 kits (cuisine, literie, appartement, hygiène, ménager), « Plusieurs logements à équiper ? », 01 48 84 60 00 · sainleau.com, réservé aux professionnels.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 16. Vidéo ======================= -->
+<section class="slide" data-title="La vidéo de l’écran TV" data-section="04" data-video>
+  <div class="wm" aria-hidden="true">04</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">La vidéo de l’écran TV</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="video-wrap">
+        <div class="video-box">
+          <video src="assets/video-tv.mp4" poster="assets/apercus/video-tv-poster.jpg" muted loop playsinline preload="metadata" aria-label="Vidéo pour l’écran TV du stand"></video>
+        </div>
+        <div>
+          <ul class="specs">
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-film-strip"/></svg>MP4 1920 × 1080</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrows-clockwise"/></svg>Boucle de 37 s</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-speaker-slash"/></svg>Sans son</li>
+            <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-seal-check"/></svg>Signature logo à la fin</li>
+          </ul>
+          <div class="vid-actions">
+            <button type="button" class="btn" data-action="video-toggle"><span class="v-pause"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg>Pause</span><span class="v-play" hidden><svg class="i" aria-hidden="true" focusable="false"><use href="#i-play"/></svg>Lecture</span></button>
+            <button type="button" class="btn line" data-action="video-fullscreen"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrows-out"/></svg>Plein écran</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Vidéo pour l’écran TV du stand : MP4 1920 × 1080, boucle de 37 s.</li>
+    <li>Elle tourne sans son, avec la signature logo à la fin.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 17. Communication avant le salon ======================= -->
+<section class="slide" data-title="La communication avant le salon" data-section="05">
+  <div class="wm" aria-hidden="true">05</div>
+  <div class="frame">
+    <header class="head"><h2 class="title">La communication avant le salon</h2><span class="rule"></span></header>
+    <div class="body">
+      <div class="comm">
+        <button type="button" class="zoomable banner" data-zoom="assets/banniere-site-solicare.png" data-zoom-title="Bannière d’accueil du site · 1710 × 570"><img src="assets/apercus/banniere-site-solicare.webp" alt="Bannière d’accueil du site, piste Invitation"><span class="zoom-hint"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></span></button>
+        <div>
+          <h3 class="h3">Bannière d’accueil du site</h3>
+          <p class="fmt">1710 × 570</p>
+          <ul class="dots">
+            <li>Piste « Invitation »</li>
+            <li>Bouton « Demandez votre badge » vers l’inscription visiteur</li>
+          </ul>
+        </div>
+        <div class="lower">
+          <div class="item">
+            <div class="ph sig"><b>Bandeau Solicare des signatures email</b></div>
+            <div>
+              <h3 class="h3">Signatures email de l’équipe</h3>
+              <ul class="dots">
+                <li>« Stand M07 · Hall FEHAP »</li>
+                <li>Bouton « Je m’inscris »</li>
+                <li>Logo Solicare</li>
+              </ul>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ph post"><b>Post Google « Événement »</b></div>
+            <div>
+              <h3 class="h3">Fiche Google de SAINLEAU</h3>
+              <ul class="dots">
+                <li>Post « Événement »</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/logo-sainleau-degrade.svg" alt="SAINLEAU"></footer>
+  <aside class="notes"><ul>
+    <li>Bannière d’accueil du site, 1710 × 570, piste « Invitation », avec le bouton « Demandez votre badge » vers l’inscription visiteur.</li>
+    <li>Bandeau Solicare dans les signatures email de l’équipe : « Stand M07 · Hall FEHAP », bouton « Je m’inscris » et logo Solicare.</li>
+    <li>Post « Événement » sur la fiche Google de SAINLEAU.</li>
+  </ul></aside>
+</section>
+
+<!-- ======================= 18. Fin ======================= -->
+<section class="slide grad end" data-title="Un partenaire. Tous vos univers.">
+  <img class="logo-c" src="assets/logo-sainleau-clair.svg" alt="SAINLEAU">
+  <p class="sig-big">Un partenaire.<br>Tous vos univers.</p>
+  <span class="rule"></span>
+  <div class="end-info">
+    <div>
+      <p class="rdv">Stand M07, hall FEHAP</p>
+      <p class="when">Mercredi 9 et jeudi 10 décembre 2026<br>Palais des Congrès de Paris, Porte Maillot</p>
+      <ul class="contact">
+        <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>01&nbsp;48&nbsp;84&nbsp;60&nbsp;00</li>
+        <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>sainleau.com</li>
+      </ul>
+    </div>
+    <a class="end-qr" href="https://www.solicare-expo.com/content/demandez-votre-badge-visiteur?iw_exhibitorid=5f3ba658-6dda-f111-bf5b-000d3a2087ae" target="_blank" rel="noopener"><span class="qr" role="img" aria-label="QR code vers la demande de badge visiteur"><svg viewBox="0 0 53 53" shape-rendering="crispEdges" aria-hidden="true"><rect width="53" height="53" fill="#FFFFFF"/><path d="M4 4h7v1h-7zM12 4h5v1h-5zM18 4h1v1h-1zM20 4h1v1h-1zM24 4h4v1h-4zM30 4h1v1h-1zM32 4h1v1h-1zM34 4h1v1h-1zM37 4h1v1h-1zM40 4h1v1h-1zM42 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h3v1h-3zM17 5h2v1h-2zM21 5h2v1h-2zM24 5h2v1h-2zM27 5h3v1h-3zM32 5h1v1h-1zM37 5h1v1h-1zM39 5h1v1h-1zM42 5h1v1h-1zM48 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h6v1h-6zM19 6h1v1h-1zM21 6h2v1h-2zM24 6h1v1h-1zM26 6h1v1h-1zM28 6h2v1h-2zM33 6h5v1h-5zM39 6h1v1h-1zM42 6h1v1h-1zM44 6h3v1h-3zM48 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h1v1h-1zM17 7h1v1h-1zM22 7h1v1h-1zM28 7h2v1h-2zM31 7h4v1h-4zM36 7h1v1h-1zM39 7h2v1h-2zM42 7h1v1h-1zM44 7h3v1h-3zM48 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM12 8h1v1h-1zM15 8h1v1h-1zM17 8h2v1h-2zM23 8h9v1h-9zM34 8h1v1h-1zM38 8h3v1h-3zM42 8h1v1h-1zM44 8h3v1h-3zM48 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM13 9h4v1h-4zM18 9h1v1h-1zM20 9h3v1h-3zM24 9h1v1h-1zM28 9h1v1h-1zM30 9h3v1h-3zM42 9h1v1h-1zM48 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM36 10h1v1h-1zM38 10h1v1h-1zM40 10h1v1h-1zM42 10h7v1h-7zM13 11h5v1h-5zM19 11h4v1h-4zM24 11h1v1h-1zM28 11h1v1h-1zM30 11h1v1h-1zM32 11h1v1h-1zM34 11h2v1h-2zM37 11h1v1h-1zM40 11h1v1h-1zM4 12h1v1h-1zM7 12h6v1h-6zM14 12h3v1h-3zM18 12h1v1h-1zM22 12h1v1h-1zM24 12h5v1h-5zM32 12h1v1h-1zM39 12h3v1h-3zM44 12h1v1h-1zM46 12h3v1h-3zM4 13h3v1h-3zM8 13h2v1h-2zM11 13h1v1h-1zM13 13h4v1h-4zM20 13h4v1h-4zM26 13h2v1h-2zM30 13h1v1h-1zM33 13h8v1h-8zM42 13h2v1h-2zM45 13h1v1h-1zM47 13h1v1h-1zM5 14h1v1h-1zM7 14h2v1h-2zM10 14h1v1h-1zM12 14h1v1h-1zM14 14h1v1h-1zM16 14h2v1h-2zM19 14h2v1h-2zM24 14h1v1h-1zM26 14h3v1h-3zM31 14h1v1h-1zM33 14h1v1h-1zM38 14h1v1h-1zM41 14h1v1h-1zM43 14h1v1h-1zM47 14h2v1h-2zM4 15h1v1h-1zM6 15h2v1h-2zM12 15h1v1h-1zM16 15h1v1h-1zM18 15h1v1h-1zM20 15h1v1h-1zM22 15h7v1h-7zM31 15h1v1h-1zM36 15h3v1h-3zM40 15h3v1h-3zM46 15h1v1h-1zM4 16h3v1h-3zM10 16h3v1h-3zM14 16h3v1h-3zM18 16h2v1h-2zM21 16h3v1h-3zM25 16h1v1h-1zM27 16h1v1h-1zM29 16h1v1h-1zM31 16h2v1h-2zM34 16h1v1h-1zM36 16h1v1h-1zM38 16h2v1h-2zM41 16h1v1h-1zM44 16h2v1h-2zM47 16h1v1h-1zM6 17h2v1h-2zM14 17h2v1h-2zM17 17h1v1h-1zM20 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h1v1h-1zM34 17h4v1h-4zM39 17h2v1h-2zM42 17h2v1h-2zM47 17h1v1h-1zM4 18h2v1h-2zM7 18h4v1h-4zM12 18h3v1h-3zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h3v1h-3zM24 18h1v1h-1zM28 18h3v1h-3zM32 18h2v1h-2zM37 18h1v1h-1zM40 18h1v1h-1zM42 18h1v1h-1zM45 18h2v1h-2zM5 19h2v1h-2zM8 19h2v1h-2zM12 19h3v1h-3zM24 19h3v1h-3zM29 19h2v1h-2zM33 19h1v1h-1zM37 19h1v1h-1zM39 19h2v1h-2zM42 19h2v1h-2zM45 19h2v1h-2zM5 20h1v1h-1zM7 20h2v1h-2zM10 20h1v1h-1zM13 20h7v1h-7zM22 20h1v1h-1zM25 20h2v1h-2zM28 20h1v1h-1zM30 20h1v1h-1zM33 20h4v1h-4zM38 20h1v1h-1zM47 20h2v1h-2zM4 21h2v1h-2zM8 21h2v1h-2zM11 21h1v1h-1zM15 21h1v1h-1zM20 21h2v1h-2zM23 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM34 21h5v1h-5zM40 21h1v1h-1zM43 21h2v1h-2zM46 21h1v1h-1zM48 21h1v1h-1zM4 22h1v1h-1zM9 22h4v1h-4zM17 22h2v1h-2zM21 22h1v1h-1zM23 22h1v1h-1zM28 22h1v1h-1zM31 22h3v1h-3zM35 22h3v1h-3zM44 22h3v1h-3zM48 22h1v1h-1zM4 23h1v1h-1zM6 23h2v1h-2zM9 23h1v1h-1zM15 23h2v1h-2zM22 23h3v1h-3zM29 23h4v1h-4zM35 23h1v1h-1zM37 23h3v1h-3zM42 23h1v1h-1zM44 23h3v1h-3zM4 24h1v1h-1zM6 24h1v1h-1zM8 24h5v1h-5zM14 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM24 24h5v1h-5zM32 24h1v1h-1zM38 24h7v1h-7zM47 24h1v1h-1zM5 25h1v1h-1zM8 25h1v1h-1zM12 25h1v1h-1zM15 25h6v1h-6zM24 25h1v1h-1zM28 25h1v1h-1zM30 25h2v1h-2zM34 25h7v1h-7zM44 25h3v1h-3zM8 26h1v1h-1zM10 26h1v1h-1zM12 26h4v1h-4zM18 26h3v1h-3zM23 26h2v1h-2zM26 26h1v1h-1zM28 26h2v1h-2zM32 26h2v1h-2zM35 26h6v1h-6zM42 26h1v1h-1zM44 26h5v1h-5zM7 27h2v1h-2zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM28 27h4v1h-4zM33 27h1v1h-1zM36 27h5v1h-5zM44 27h1v1h-1zM46 27h3v1h-3zM4 28h1v1h-1zM8 28h7v1h-7zM16 28h4v1h-4zM23 28h6v1h-6zM30 28h1v1h-1zM32 28h1v1h-1zM34 28h1v1h-1zM36 28h1v1h-1zM40 28h5v1h-5zM47 28h2v1h-2zM4 29h3v1h-3zM8 29h2v1h-2zM11 29h2v1h-2zM16 29h2v1h-2zM19 29h2v1h-2zM22 29h1v1h-1zM26 29h1v1h-1zM28 29h1v1h-1zM30 29h2v1h-2zM33 29h5v1h-5zM40 29h2v1h-2zM43 29h1v1h-1zM45 29h1v1h-1zM47 29h1v1h-1zM8 30h3v1h-3zM16 30h3v1h-3zM22 30h3v1h-3zM26 30h2v1h-2zM29 30h5v1h-5zM35 30h2v1h-2zM41 30h1v1h-1zM44 30h1v1h-1zM5 31h1v1h-1zM7 31h2v1h-2zM11 31h2v1h-2zM14 31h2v1h-2zM17 31h1v1h-1zM23 31h2v1h-2zM26 31h5v1h-5zM34 31h1v1h-1zM37 31h1v1h-1zM39 31h1v1h-1zM41 31h1v1h-1zM43 31h5v1h-5zM4 32h1v1h-1zM9 32h4v1h-4zM14 32h9v1h-9zM24 32h1v1h-1zM27 32h4v1h-4zM33 32h4v1h-4zM39 32h1v1h-1zM44 32h1v1h-1zM47 32h2v1h-2zM4 33h1v1h-1zM9 33h1v1h-1zM13 33h1v1h-1zM20 33h2v1h-2zM27 33h1v1h-1zM32 33h3v1h-3zM36 33h5v1h-5zM42 33h3v1h-3zM46 33h3v1h-3zM4 34h2v1h-2zM7 34h1v1h-1zM9 34h3v1h-3zM17 34h1v1h-1zM19 34h3v1h-3zM23 34h1v1h-1zM25 34h2v1h-2zM29 34h1v1h-1zM31 34h2v1h-2zM37 34h1v1h-1zM40 34h9v1h-9zM5 35h5v1h-5zM11 35h1v1h-1zM13 35h3v1h-3zM21 35h1v1h-1zM23 35h1v1h-1zM26 35h1v1h-1zM28 35h1v1h-1zM31 35h2v1h-2zM37 35h1v1h-1zM39 35h1v1h-1zM41 35h1v1h-1zM45 35h2v1h-2zM48 35h1v1h-1zM4 36h1v1h-1zM6 36h1v1h-1zM9 36h2v1h-2zM12 36h3v1h-3zM16 36h3v1h-3zM21 36h4v1h-4zM26 36h1v1h-1zM28 36h1v1h-1zM32 36h3v1h-3zM38 36h1v1h-1zM43 36h1v1h-1zM48 36h1v1h-1zM8 37h1v1h-1zM11 37h4v1h-4zM18 37h1v1h-1zM20 37h2v1h-2zM23 37h2v1h-2zM28 37h1v1h-1zM30 37h2v1h-2zM33 37h2v1h-2zM37 37h3v1h-3zM42 37h1v1h-1zM44 37h4v1h-4zM8 38h1v1h-1zM10 38h2v1h-2zM13 38h1v1h-1zM18 38h1v1h-1zM20 38h1v1h-1zM25 38h1v1h-1zM27 38h1v1h-1zM29 38h1v1h-1zM32 38h2v1h-2zM35 38h1v1h-1zM38 38h1v1h-1zM40 38h1v1h-1zM42 38h1v1h-1zM45 38h4v1h-4zM5 39h4v1h-4zM11 39h2v1h-2zM18 39h1v1h-1zM20 39h1v1h-1zM22 39h1v1h-1zM25 39h2v1h-2zM28 39h1v1h-1zM35 39h2v1h-2zM38 39h1v1h-1zM40 39h1v1h-1zM42 39h1v1h-1zM44 39h1v1h-1zM46 39h2v1h-2zM4 40h1v1h-1zM7 40h2v1h-2zM10 40h2v1h-2zM15 40h2v1h-2zM19 40h3v1h-3zM23 40h7v1h-7zM32 40h1v1h-1zM34 40h4v1h-4zM39 40h7v1h-7zM47 40h1v1h-1zM12 41h2v1h-2zM15 41h1v1h-1zM17 41h1v1h-1zM21 41h1v1h-1zM23 41h2v1h-2zM28 41h3v1h-3zM32 41h4v1h-4zM37 41h1v1h-1zM39 41h2v1h-2zM44 41h4v1h-4zM4 42h7v1h-7zM12 42h3v1h-3zM17 42h3v1h-3zM24 42h1v1h-1zM26 42h1v1h-1zM28 42h1v1h-1zM30 42h1v1h-1zM32 42h2v1h-2zM37 42h1v1h-1zM39 42h2v1h-2zM42 42h1v1h-1zM44 42h1v1h-1zM46 42h1v1h-1zM4 43h1v1h-1zM10 43h1v1h-1zM12 43h1v1h-1zM15 43h4v1h-4zM22 43h3v1h-3zM28 43h3v1h-3zM33 43h2v1h-2zM37 43h4v1h-4zM44 43h4v1h-4zM4 44h1v1h-1zM6 44h3v1h-3zM10 44h1v1h-1zM12 44h4v1h-4zM19 44h1v1h-1zM24 44h7v1h-7zM33 44h4v1h-4zM38 44h1v1h-1zM40 44h5v1h-5zM47 44h1v1h-1zM4 45h1v1h-1zM6 45h3v1h-3zM10 45h1v1h-1zM12 45h4v1h-4zM18 45h4v1h-4zM23 45h4v1h-4zM28 45h2v1h-2zM31 45h1v1h-1zM34 45h1v1h-1zM38 45h1v1h-1zM41 45h3v1h-3zM46 45h3v1h-3zM4 46h1v1h-1zM6 46h3v1h-3zM10 46h1v1h-1zM13 46h2v1h-2zM20 46h3v1h-3zM24 46h2v1h-2zM28 46h1v1h-1zM31 46h3v1h-3zM35 46h1v1h-1zM37 46h1v1h-1zM39 46h2v1h-2zM44 46h3v1h-3zM48 46h1v1h-1zM4 47h1v1h-1zM10 47h1v1h-1zM13 47h2v1h-2zM16 47h3v1h-3zM20 47h4v1h-4zM25 47h2v1h-2zM31 47h2v1h-2zM34 47h2v1h-2zM39 47h2v1h-2zM42 47h2v1h-2zM45 47h4v1h-4zM4 48h7v1h-7zM12 48h6v1h-6zM25 48h1v1h-1zM27 48h2v1h-2zM31 48h2v1h-2zM34 48h1v1h-1zM38 48h1v1h-1zM40 48h3v1h-3zM44 48h1v1h-1z" fill="#1B1B1B"/></svg></span><span>Badge visiteur gratuit</span></a>
+  </div>
+  <aside class="notes"><ul>
+    <li>« Un partenaire. Tous vos univers. »</li>
+    <li>Rendez-vous stand M07, hall FEHAP, les 9 et 10 décembre 2026 au Palais des Congrès de Paris.</li>
+    <li>Contact : 01 48 84 60 00 · sainleau.com. Le badge visiteur est gratuit.</li>
+  </ul></aside>
+</section>
+
+</main>
+</div>
+
+<!-- Barre de commandes -->
+<nav id="ui" aria-label="Commandes de la présentation">
+  <button type="button" data-cmd="prev" aria-label="Slide précédente" title="Précédente (←)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-caret-left"/></svg></button>
+  <span class="count" aria-live="polite">1 / 18</span>
+  <button type="button" data-cmd="next" aria-label="Slide suivante" title="Suivante (→)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-caret-right"/></svg></button>
+  <button type="button" data-cmd="overview" aria-label="Vue d’ensemble" aria-pressed="false" title="Vue d’ensemble (O)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-squares-four"/></svg></button>
+  <button type="button" data-cmd="notes" aria-label="Notes de présentation" aria-pressed="false" title="Notes (N)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-note"/></svg></button>
+  <button type="button" data-cmd="fullscreen" aria-label="Plein écran" title="Plein écran (F)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrows-out"/></svg></button>
+  <button type="button" data-cmd="help" aria-label="Raccourcis clavier" aria-pressed="false" title="Raccourcis (?)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-keyboard"/></svg></button>
+</nav>
+
+<div id="help" hidden role="dialog" aria-label="Raccourcis clavier">
+  <h2>Raccourcis clavier</h2>
+  <dl>
+    <dt>← →</dt><dd>Slide précédente ou suivante</dd>
+    <dt>O</dt><dd>Vue d’ensemble cliquable</dd>
+    <dt>F</dt><dd>Plein écran</dd>
+    <dt>N</dt><dd>Panneau de notes</dd>
+    <dt>Clic</dt><dd>Sur une créa : zoom plein écran</dd>
+    <dt>Échap</dt><dd>Fermer le zoom ou la vue d’ensemble</dd>
+  </dl>
+</div>
+
+<aside id="notes-panel" hidden aria-label="Notes de présentation">
+  <div class="np-top"><p class="np-count"></p><button type="button" class="np-close" aria-label="Fermer les notes"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+  <h2 class="np-title"></h2><span class="np-rule"></span>
+  <div class="np-body"></div>
+  <p class="np-next"></p>
+</aside>
+
+<div id="zoom" hidden role="dialog" aria-modal="true" aria-label="Créa en grand">
+  <div class="z-bar">
+    <p class="z-title"></p>
+    <p class="z-state" aria-live="polite"></p>
+    <p class="z-pct"></p>
+    <button type="button" data-z="out" aria-label="Dézoomer" title="Dézoomer (−)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-minus"/></svg></button>
+    <button type="button" data-z="in" aria-label="Zoomer" title="Zoomer (+)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-magnifying-glass-plus"/></svg></button>
+    <button type="button" data-z="fit" title="Ajuster (0)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-frame-corners"/></svg><span>Ajuster</span></button>
+    <button type="button" data-z="close" title="Fermer (Échap)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg><span>Fermer</span></button>
+  </div>
+  <div class="z-stage"><img alt=""><p class="z-help">Molette ou +/− pour zoomer, glisser pour déplacer, double-clic pour agrandir</p></div>
+</div>
+
+<script src="assets/js/gsap.min.js"></script>
+<script>
+(function(){
+"use strict";
+var W=1920, H=1080, COLS=5;
+var root=document.documentElement, body=document.body;
+var viewport=document.getElementById("viewport");
+var deck=document.getElementById("deck");
+var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+var N=slides.length;
+var ui=document.getElementById("ui");
+var countEl=ui.querySelector(".count");
+var notesPanel=document.getElementById("notes-panel");
+var help=document.getElementById("help");
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)");
+var G=window.gsap || null;
+var cur=0, overview=false, notesOpen=false, sel=0;
+
+/* GSAP de secours si le fichier manque : on applique les états sans animation */
+function set(el,props){
+  if(G){ G.set(el,props); return; }
+  [].concat(el).forEach(function(e){
+    if("autoAlpha" in props){ e.style.opacity=props.autoAlpha; e.style.visibility=props.autoAlpha?"visible":"hidden"; }
+    if("x" in props || "y" in props){ e.style.transform="translate("+(props.x||0)+"px,"+(props.y||0)+"px)"; }
+  });
+}
+function animated(){ return !!G && !reduce.matches; }
+
+slides.forEach(function(s,i){
+  s.setAttribute("aria-roledescription","diapositive");
+  s.setAttribute("aria-label",(i+1)+" sur "+N+" : "+s.dataset.title);
+  s.dataset.num=String(i+1);
+});
+
+function setCurrent(s,on){
+  s.classList.toggle("is-current",on);
+  s.inert=!on;
+  s.setAttribute("aria-hidden",on?"false":"true");
+}
+
+/* ---------- Mise à l'échelle ---------- */
+function layout(){
+  var pw=notesOpen?notesPanel.offsetWidth:0;
+  var aw=window.innerWidth-pw, ah=window.innerHeight, k, tw, th;
+  if(!overview){
+    k=Math.min(aw/W,ah/H);
+    deck.style.width=W+"px"; deck.style.height=H+"px";
+    deck.style.transform="translate("+((aw-W*k)/2)+"px,"+((ah-H*k)/2)+"px) scale("+k+")";
+  } else {
+    var rows=Math.ceil(N/COLS), gap=80, pad=48;
+    tw=COLS*W+(COLS-1)*gap; th=rows*H+(rows-1)*gap;
+    k=Math.min((aw-2*pad)/tw,(ah-2*pad)/th);
+    deck.style.width=tw+"px"; deck.style.height=th+"px";
+    deck.style.transform="translate("+((aw-tw*k)/2)+"px,"+((ah-th*k)/2)+"px) scale("+k+")";
+    slides.forEach(function(s,i){ set(s,{x:(i%COLS)*(W+gap), y:Math.floor(i/COLS)*(H+gap), autoAlpha:1}); });
+  }
+}
+
+/* ---------- Médias propres à une slide ---------- */
+function enter(s){
+  var v=s.querySelector("video");
+  if(v){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); syncVideoBtn(s); }
+  var f=s.querySelector("iframe[data-src]");
+  if(f && !f.src){
+    f.addEventListener("load",function(){ f.hidden=false; var poster=s.querySelector(".frame-poster"); if(poster) poster.hidden=true; },{once:true});
+    f.src=f.dataset.src;
+  }
+}
+function leave(s){
+  var v=s.querySelector("video"); if(v) v.pause();
+  if(document.activeElement && s.contains(document.activeElement)) document.activeElement.blur();
+  viewport.focus({preventScroll:true});
+}
+
+/* ---------- Navigation ---------- */
+function go(i,instant){
+  i=Math.max(0,Math.min(N-1,i));
+  if(overview){ sel=i; highlight(); return; }
+  if(i===cur){ return; }
+  var prev=slides[cur], next=slides[i], dir=i>cur?1:-1;
+  leave(prev);
+  cur=i;
+  if(G) G.killTweensOf(slides);
+  slides.forEach(function(s){ if(s!==prev && s!==next) set(s,{autoAlpha:0,x:0,y:0}); });
+  setCurrent(prev,false); setCurrent(next,true);
+  if(instant || !animated()){
+    set(prev,{autoAlpha:0,x:0,y:0}); set(next,{autoAlpha:1,x:0,y:0});
+  } else {
+    G.to(prev,{autoAlpha:0,x:-36*dir,duration:.3,ease:"power2.in",onComplete:function(){ G.set(prev,{x:0}); }});
+    G.fromTo(next,{autoAlpha:0,x:48*dir,y:0},{autoAlpha:1,x:0,duration:.5,delay:.12,ease:"power3.out"});
+  }
+  enter(next);
+  update();
+}
+function update(){
+  countEl.textContent=(cur+1)+" / "+N;
+  ui.querySelector('[data-cmd="prev"]').disabled=cur===0;
+  ui.querySelector('[data-cmd="next"]').disabled=cur===N-1;
+  try{ history.replaceState(null,"","#"+(cur+1)); }catch(e){}
+  renderNotes();
+}
+
+/* ---------- Vue d'ensemble ---------- */
+function highlight(){ slides.forEach(function(s,i){ s.classList.toggle("is-selected",i===sel); }); }
+function setOverview(on){
+  if(on===overview) return;
+  overview=on;
+  body.classList.toggle("is-overview",on);
+  ui.querySelector('[data-cmd="overview"]').setAttribute("aria-pressed",String(on));
+  if(G) G.killTweensOf(slides);
+  if(on){
+    sel=cur; highlight();
+    leave(slides[cur]);
+    slides.forEach(function(s){ s.inert=false; s.setAttribute("aria-hidden","false"); });
+    layout();
+    if(animated()) G.fromTo(deck,{autoAlpha:0},{autoAlpha:1,duration:.3,ease:"power1.out"});
+  } else {
+    slides.forEach(function(s,i){ s.classList.remove("is-selected"); set(s,{x:0,y:0,autoAlpha:i===cur?1:0}); setCurrent(s,i===cur); });
+    layout();
+    if(animated()) G.fromTo(deck,{autoAlpha:0},{autoAlpha:1,duration:.3,ease:"power1.out"});
+    enter(slides[cur]);
+    update();
+  }
+}
+function openFromOverview(i){ cur=i; setOverview(false); }
+
+/* ---------- Notes ---------- */
+function renderNotes(){
+  if(!notesOpen) return;
+  var s=slides[cur], n=s.querySelector(".notes");
+  notesPanel.querySelector(".np-count").textContent="Notes · "+(cur+1)+" / "+N;
+  notesPanel.querySelector(".np-title").textContent=s.dataset.title;
+  notesPanel.querySelector(".np-body").innerHTML=n?n.innerHTML:"";
+  var nx=slides[cur+1];
+  notesPanel.querySelector(".np-next").innerHTML=nx?"Ensuite<b></b>":"";
+  if(nx) notesPanel.querySelector(".np-next b").textContent=nx.dataset.title;
+}
+function setNotes(on){
+  notesOpen=on; notesPanel.hidden=!on;
+  ui.querySelector('[data-cmd="notes"]').setAttribute("aria-pressed",String(on));
+  ui.style.right=on?(notesPanel.offsetWidth+24)+"px":"";
+  help.style.right=ui.style.right;
+  renderNotes(); layout();
+}
+
+/* ---------- Plein écran ---------- */
+function toggleFullscreen(el){
+  if(document.fullscreenElement){ document.exitFullscreen().catch(function(){}); }
+  else { (el||root).requestFullscreen().catch(function(){}); }
+}
+
+/* ---------- Vidéo ---------- */
+function syncVideoBtn(s){
+  var v=s.querySelector("video"), b=s.querySelector('[data-action="video-toggle"]');
+  if(!v||!b) return;
+  b.querySelector(".v-pause").hidden=v.paused;
+  b.querySelector(".v-play").hidden=!v.paused;
+}
+deck.querySelectorAll("video").forEach(function(v){
+  var s=v.closest(".slide");
+  v.addEventListener("play",function(){ syncVideoBtn(s); });
+  v.addEventListener("pause",function(){ syncVideoBtn(s); });
+});
+
+/* ---------- Zoom plein écran sur une créa ---------- */
+var Z={el:document.getElementById("zoom")};
+Z.stage=Z.el.querySelector(".z-stage"); Z.img=Z.stage.querySelector("img");
+Z.title=Z.el.querySelector(".z-title"); Z.state=Z.el.querySelector(".z-state"); Z.pct=Z.el.querySelector(".z-pct");
+Z.s=1; Z.tx=0; Z.ty=0; Z.w0=0; Z.h0=0; Z.max=8; Z.ratio=1; Z.full=0; Z.token=0; Z.ptrs=new Map(); Z.last=null;
+
+function zApply(){
+  Z.img.style.width=(Z.w0*Z.s)+"px";
+  Z.img.style.height=(Z.h0*Z.s)+"px";
+  Z.img.style.transform="translate("+Z.tx+"px,"+Z.ty+"px)";
+  Z.pct.textContent=Math.round(Z.s*100)+" %";
+}
+function zClamp(){
+  var vw=Z.stage.clientWidth, vh=Z.stage.clientHeight, sw=Z.w0*Z.s, sh=Z.h0*Z.s;
+  Z.tx = sw<=vw ? (vw-sw)/2 : Math.min(0,Math.max(vw-sw,Z.tx));
+  Z.ty = sh<=vh ? (vh-sh)/2 : Math.min(0,Math.max(vh-sh,Z.ty));
+}
+function zFit(){
+  var vw=Z.stage.clientWidth, vh=Z.stage.clientHeight, pad=24;
+  var k=Math.min((vw-2*pad)/Z.ratio,(vh-2*pad));
+  Z.h0=k; Z.w0=k*Z.ratio;
+  Z.s=1; Z.tx=(vw-Z.w0)/2; Z.ty=(vh-Z.h0)/2;
+  Z.max=Math.max(4,(Z.full||Z.w0*4)/Z.w0*1.25);
+  zApply();
+}
+function zTo(s,cx,cy,smooth){
+  s=Math.max(1,Math.min(Z.max,s));
+  if(cx==null){ cx=Z.stage.clientWidth/2; cy=Z.stage.clientHeight/2; }
+  var target={s:s, tx:cx-(cx-Z.tx)*(s/Z.s), ty:cy-(cy-Z.ty)*(s/Z.s)};
+  if(smooth && animated()){
+    G.killTweensOf(Z);
+    var st={s:Z.s, tx:Z.tx, ty:Z.ty};
+    G.to(st,{s:target.s, tx:target.tx, ty:target.ty, duration:.3, ease:"power2.out", onUpdate:function(){ Z.s=st.s; Z.tx=st.tx; Z.ty=st.ty; zClamp(); zApply(); }});
+  } else {
+    Z.s=target.s; Z.tx=target.tx; Z.ty=target.ty; zClamp(); zApply();
+  }
+}
+function openZoom(src,preview,title){
+  var token=++Z.token;
+  Z.title.textContent=title||"";
+  Z.state.textContent="";
+  Z.full=0;
+  Z.el.hidden=false;
+  if(animated()) G.fromTo(Z.el,{autoAlpha:0},{autoAlpha:1,duration:.25,ease:"power1.out"});
+  var pre=new Image();
+  pre.onload=function(){
+    if(token!==Z.token) return;
+    Z.ratio=pre.naturalWidth/pre.naturalHeight;
+    Z.img.src=preview; Z.img.alt=title||""; zFit();
+    if(src && src!==preview){
+      Z.state.textContent="Chargement de la haute définition…";
+      var hi=new Image();
+      hi.decoding="async";
+      hi.onload=function(){
+        if(token!==Z.token) return;
+        var go=function(){ if(token!==Z.token) return; Z.img.src=src; Z.full=hi.naturalWidth; Z.max=Math.max(4,Z.full/Z.w0*1.25); Z.state.textContent=""; };
+        if(hi.decode) hi.decode().then(go,go); else go();
+      };
+      hi.onerror=function(){ if(token===Z.token) Z.state.textContent=""; };
+      hi.src=src;
+    }
+  };
+  pre.src=preview;
+  Z.el.querySelector('[data-z="close"]').focus({preventScroll:true});
+}
+function closeZoom(){
+  Z.token++;
+  Z.el.hidden=true; Z.img.removeAttribute("src");
+  viewport.focus({preventScroll:true});
+}
+Z.stage.addEventListener("wheel",function(e){
+  e.preventDefault();
+  var r=Z.stage.getBoundingClientRect();
+  zTo(Z.s*Math.exp(-e.deltaY*(e.ctrlKey?0.01:0.0018)),e.clientX-r.left,e.clientY-r.top,false);
+},{passive:false});
+Z.stage.addEventListener("pointerdown",function(e){
+  Z.stage.setPointerCapture(e.pointerId);
+  Z.ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  Z.stage.classList.add("dragging");
+  if(G) G.killTweensOf(Z);
+});
+Z.stage.addEventListener("pointermove",function(e){
+  if(!Z.ptrs.has(e.pointerId)) return;
+  var p=Z.ptrs.get(e.pointerId), r=Z.stage.getBoundingClientRect();
+  if(Z.ptrs.size===2){
+    var ids=Array.from(Z.ptrs.keys()), other=Z.ptrs.get(ids[0]===e.pointerId?ids[1]:ids[0]);
+    var d0=Math.hypot(p.x-other.x,p.y-other.y), d1=Math.hypot(e.clientX-other.x,e.clientY-other.y);
+    if(d0>0) zTo(Z.s*d1/d0,(e.clientX+other.x)/2-r.left,(e.clientY+other.y)/2-r.top,false);
+  } else {
+    Z.tx+=e.clientX-p.x; Z.ty+=e.clientY-p.y; zClamp(); zApply();
+  }
+  Z.ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+});
+function endPtr(e){ Z.ptrs.delete(e.pointerId); if(!Z.ptrs.size) Z.stage.classList.remove("dragging"); }
+Z.stage.addEventListener("pointerup",endPtr);
+Z.stage.addEventListener("pointercancel",endPtr);
+Z.stage.addEventListener("dblclick",function(e){
+  var r=Z.stage.getBoundingClientRect();
+  if(Z.s>1.5) zTo(1,null,null,true); else zTo(3,e.clientX-r.left,e.clientY-r.top,true);
+});
+Z.el.querySelector(".z-bar").addEventListener("click",function(e){
+  var b=e.target.closest("[data-z]"); if(!b) return;
+  var a=b.dataset.z;
+  if(a==="in") zTo(Z.s*1.6,null,null,true);
+  else if(a==="out") zTo(Z.s/1.6,null,null,true);
+  else if(a==="fit") zTo(1,null,null,true);
+  else if(a==="close") closeZoom();
+});
+
+/* ---------- Clics dans les slides ---------- */
+deck.addEventListener("click",function(e){
+  if(overview){
+    var s=e.target.closest(".slide"); if(s) openFromOverview(slides.indexOf(s));
+    return;
+  }
+  var z=e.target.closest("[data-zoom]");
+  if(z){ var im=z.querySelector("img"); openZoom(z.dataset.zoom, im?im.getAttribute("src"):z.dataset.zoom, z.dataset.zoomTitle); return; }
+  var g=e.target.closest("[data-goto]");
+  if(g){ go(parseInt(g.dataset.goto,10)-1); return; }
+  var a=e.target.closest("[data-action]");
+  if(a){
+    var sl=a.closest(".slide");
+    if(a.dataset.action==="video-toggle"){ var v=sl.querySelector("video"); if(v.paused) v.play(); else v.pause(); }
+    else if(a.dataset.action==="video-fullscreen"){ toggleFullscreen(sl.querySelector("video")); }
+    else if(a.dataset.action==="frame-fullscreen"){
+      var f=sl.querySelector("iframe");
+      enter(sl);
+      toggleFullscreen(f.hidden?sl.querySelector(".stand-plan"):f);
+    }
+  }
+});
+
+ui.addEventListener("click",function(e){
+  var b=e.target.closest("[data-cmd]"); if(!b) return;
+  var c=b.dataset.cmd;
+  if(c==="prev") go(cur-1); else if(c==="next") go(cur+1);
+  else if(c==="overview") setOverview(!overview);
+  else if(c==="notes") setNotes(!notesOpen);
+  else if(c==="fullscreen") toggleFullscreen();
+  else if(c==="help"){ help.hidden=!help.hidden; b.setAttribute("aria-pressed",String(!help.hidden)); }
+});
+notesPanel.querySelector(".np-close").addEventListener("click",function(){ setNotes(false); });
+
+/* ---------- Clavier ---------- */
+function onKey(key,e){
+  if(!Z.el.hidden){
+    if(key==="Escape") closeZoom();
+    else if(key==="+"||key==="=") zTo(Z.s*1.6,null,null,true);
+    else if(key==="-"||key==="_") zTo(Z.s/1.6,null,null,true);
+    else if(key==="0") zTo(1,null,null,true);
+    else if(key==="ArrowLeft"){ Z.tx+=120; zClamp(); zApply(); }
+    else if(key==="ArrowRight"){ Z.tx-=120; zClamp(); zApply(); }
+    else if(key==="ArrowUp"){ Z.ty+=120; zClamp(); zApply(); }
+    else if(key==="ArrowDown"){ Z.ty-=120; zClamp(); zApply(); }
+    else return false;
+    return true;
+  }
+  var k=key.length===1?key.toLowerCase():key;
+  if(overview){
+    if(k==="ArrowRight") go(sel+1);
+    else if(k==="ArrowLeft") go(sel-1);
+    else if(k==="ArrowDown") go(Math.min(N-1,sel+COLS));
+    else if(k==="ArrowUp") go(Math.max(0,sel-COLS));
+    else if(k==="Enter"||k===" ") openFromOverview(sel);
+    else if(k==="Escape"||k==="o") setOverview(false);
+    else if(k==="Home") go(0); else if(k==="End") go(N-1);
+    else if(k==="f") toggleFullscreen();
+    else if(k==="n") setNotes(!notesOpen);
+    else return false;
+    return true;
+  }
+  if(k==="ArrowRight"||k==="PageDown"||k===" "||k==="ArrowDown") go(cur+1);
+  else if(k==="ArrowLeft"||k==="PageUp"||k==="ArrowUp") go(cur-1);
+  else if(k==="Home") go(0);
+  else if(k==="End") go(N-1);
+  else if(k==="o") setOverview(true);
+  else if(k==="f") toggleFullscreen();
+  else if(k==="n") setNotes(!notesOpen);
+  else if(k==="?"||k==="h"){ help.hidden=!help.hidden; ui.querySelector('[data-cmd="help"]').setAttribute("aria-pressed",String(!help.hidden)); }
+  else if(k==="Escape"){ if(!help.hidden){ help.hidden=true; ui.querySelector('[data-cmd="help"]').setAttribute("aria-pressed","false"); } else return false; }
+  else return false;
+  return true;
+}
+document.addEventListener("keydown",function(e){
+  if(e.altKey||e.ctrlKey||e.metaKey) return;
+  var t=e.target;
+  if(t && t.closest && t.closest("input,textarea,select,[contenteditable]")) return;
+  if((e.key===" "||e.key==="Enter") && t && t.closest && t.closest("button,a") && !overview) return;
+  if(onKey(e.key,e)) e.preventDefault();
+});
+/* Touches transmises par le plan 3D du stand (iframe) */
+window.addEventListener("message",function(e){
+  var d=e.data;
+  if(d && d.type==="deck-key" && typeof d.key==="string") onKey(d.key,null);
+});
+
+/* ---------- Barre de commandes : masquée au repos ---------- */
+var idleT=null;
+function wake(){
+  ui.classList.remove("idle"); body.classList.remove("hide-cursor");
+  clearTimeout(idleT);
+  idleT=setTimeout(function(){
+    if(ui.matches(":hover")||!help.hidden) return;
+    ui.classList.add("idle");
+    if(document.fullscreenElement && Z.el.hidden) body.classList.add("hide-cursor");
+  },2600);
+}
+document.addEventListener("mousemove",wake);
+document.addEventListener("keydown",function(){ if(!document.fullscreenElement) wake(); });
+wake();
+
+/* Balayage tactile */
+var tx0=null;
+viewport.addEventListener("touchstart",function(e){ if(e.touches.length===1) tx0=e.touches[0].clientX; },{passive:true});
+viewport.addEventListener("touchend",function(e){
+  if(tx0==null||overview) return;
+  var dx=e.changedTouches[0].clientX-tx0; tx0=null;
+  if(Math.abs(dx)>60) go(cur+(dx<0?1:-1));
+},{passive:true});
+
+window.addEventListener("resize",function(){ layout(); if(!Z.el.hidden && Z.w0){ var s=Z.s; zFit(); if(s>1) zTo(s); } });
+document.addEventListener("fullscreenchange",function(){ layout(); wake(); });
+
+/* ---------- Démarrage ---------- */
+var start=parseInt((location.hash||"").replace("#",""),10);
+cur=(start>=1&&start<=N)?start-1:0;
+slides.forEach(function(s,i){ set(s,{autoAlpha:i===cur?1:0,x:0,y:0}); setCurrent(s,i===cur); });
+layout(); update(); enter(slides[cur]);
+viewport.focus({preventScroll:true});
+window.addEventListener("hashchange",function(){
+  var n=parseInt((location.hash||"").replace("#",""),10);
+  if(n>=1&&n<=N&&n-1!==cur){ if(overview) setOverview(false); go(n-1,true); }
+});
+})();
+</script>
+</body>
+</html>
