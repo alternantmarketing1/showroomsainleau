@@ -602,13 +602,13 @@ button,select{font:inherit;color:inherit}
       <section class="blk">
         <h2 class="eyebrow">Meubles du studio</h2>
         <div class="items" id="items"></div>
-        <p class="note">Changez le modèle dans la liste ou en touchant le meuble. La kitchenette, la fenêtre, le radiateur, les rideaux et la télévision sont du décor, hors catalogue.</p>
+        <p class="note">Changez le modèle dans la liste ou en touchant le meuble. La kitchenette, la fenêtre, le radiateur et la télévision sont du décor, hors catalogue.</p>
       </section>
 
       <section class="blk">
         <h2 class="eyebrow">Récapitulatif des références</h2>
         <table class="recap"><thead><tr><th>Réf.</th><th>Article</th><th>Qté</th></tr></thead><tbody id="recap"></tbody></table>
-        <p class="note">Références et pages du catalogue mobilier 2026. Prix sur demande.</p>
+        <p class="note">Références et pages du catalogue mobilier 2026, rideaux réf. 719007 sur sainleau.com. Prix sur demande.</p>
       </section>
 
       <section class="blk">
@@ -660,6 +660,7 @@ const P = {
   table4:{ name:"Table rectangulaire 120 × 80 cm, 4 personnes", short:"Table", price:180.00, url:URL_M+"3415-table-rectangle-4-personnes-1200-x-800-mm.html", dims:"120 × 80 cm, h 75 cm · plateau mélaminé 18 mm" },
   chaise:{ name:"Chaise en polypropylène noir", short:"Chaise", price:15.60, url:URL_M+"3587-chaise-en-pp-noir.html", dims:"h 78 cm · légère et lavable" },
   boite:{ name:"Boîte de rangement sous lit à roulettes 30 L", short:"Rangement sous lit", price:13.27, url:URL_M+"3582-boite-de-rangement-roulettes-dessous-le-lit-30-litres.html", dims:"60 × 40 × 18 cm · avec couvercle" },
+  rideau:{ name:"Rideau occultant anti-feu M1 135 × 240 cm", short:"Rideaux", price:42.00, url:URL_M+"3612-rideau-en-tissu-occultant-norme-anti-feu-135-x240-cm.html", dims:"Réf. 719007 · 100 % polyester M1, 202 g/m² · 8 œillets ronds · tissé en France" },
   tringle:{ name:"Tringle à rideaux extensible 210 à 380 cm", price:32.00, url:URL_M+"3511-tringle-a-rideau-extensible-210-a-380-cm-couleur-noire.html", dims:"Métal noir, embouts chanvre" }
 };
 const LINGE = { blanc:"#f1f2f0", bleu:"#a9c7e6", vert:"#8dcbbb", orange:"#f2a25d" };
@@ -668,7 +669,7 @@ const H = 2.5, T = 0.1;
 /* Chambres type : W = largeur (mur de la fenêtre), D = profondeur. Positions : centre de l'emprise, rot = orientation de la façade du meuble */
 const PI = Math.PI;
 const ROOMS = {
-  1:{ W:3.0, D:3.2, title:"Chambre 1 personne", beds:"1 lit simple", win:2.05, door:1.95, items:[
+  1:{ W:3.0, D:3.2, title:"Chambre 1 personne", beds:"1 lit simple", win:1.88, door:1.95, items:[
     { id:"lit", k:"bedSingle", x:.495, z:.99, rot:0 },
     { id:"boite", k:"boite", x:.48, z:1.3, rot:0, under:true },
     { id:"chevet", k:"chevet", x:1.17, z:.18, rot:0 },
@@ -718,7 +719,7 @@ const euro = n => n.toLocaleString("fr-FR",{ minimumFractionDigits:2, maximumFra
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- état ---------- */
-const KEY = "chambre-sainleau-v2";
+const KEY = "chambre-sainleau-v3";
 let store = {};
 try { store = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { store = {}; }
 if (!store.layouts) store.layouts = {};
@@ -765,7 +766,7 @@ const M = {
   chair:std("#2d3130",.55),
   boxClear:std("#e8f1f4",.15,0,{ transparent:true, opacity:.38 }), boxLid:std("#7d8283",.5),
   pvc:std("#fafafa",.5), glass:std("#cfe6ef",.05,0,{ transparent:true, opacity:.28 }),
-  radiator:std("#f7f7f5",.45), curtain:new THREE.MeshStandardMaterial({ color:"#cfd4d2", roughness:.95, side:THREE.DoubleSide }),
+  radiator:std("#f7f7f5",.45), curtain:new THREE.MeshStandardMaterial({ color:"#c4ad9c", roughness:.96, side:THREE.DoubleSide, emissiveIntensity:.32 }), grommet:std("#2e3134",.35,.75),
   rod:std("#1b1b1b",.4,.6), hemp:std("#c9b48c",.95), doorLeaf:std("#e9e4da",.6), switchPlate:std("#ffffff",.5)
 };
 for (const k in M) if (M[k].isMeshStandardMaterial) M[k].envMapIntensity = .55;
@@ -956,17 +957,34 @@ function windowFit(g, cx, w, y0, y1, rad){
   for (let i=0;i<14;i++) box(r,rw/14-.012,.56,.06,M.radiator,-rw/2+(i+.5)*rw/14,.16,0);
   box(r,rw,.03,.07,M.radiator,0,.14,0); box(r,rw,.03,.07,M.radiator,0,.7,0);
   for (const x of [-rw/2+.04,rw/2-.04]) cyl(r,.008,.008,.14,M.radiator,x,0,-.02,8);
-  // tringle noire à embouts chanvre + rideaux
-  const tl=w+.7, ty=y1+.13;
-  cylX(g,.012,tl,M.rod,cx,ty,.1);
-  for (const s of [-1,1]){ const e=new THREE.Mesh(new THREE.SphereGeometry(.03,14,10),M.hemp); e.position.set(cx+s*(tl/2+.02),ty,.1); g.add(e);
-    box(g,.015,.02,.1,M.rod,cx+s*(tl/2-.08),ty-.01,.05);
-    const cw=.36, ch=ty-.8, geo=new THREE.PlaneGeometry(cw,ch,24,1), pos=geo.attributes.position;
-    for (let i=0;i<pos.count;i++){ const x=pos.getX(i); pos.setZ(i,.025*Math.sin((x+cw/2)/cw*PI*7)); }
-    geo.computeVertexNormals();
-    const c=new THREE.Mesh(geo,M.curtain); c.position.set(cx+s*(w/2+.05),.8+ch/2-.02,.1); g.add(c);
-  }
 }
+/* ---------- rideaux occultants anti-feu réf. 719007 : 2 × 135 × 240 cm, 8 œillets, ouverts de chaque côté ---------- */
+let curtG=null, curt=null;
+function curtains(g, cx, w, lo, hi, cap){
+  const ty=2.365, zr=.06, len=2.4, top=ty+.045, bot=top-len;
+  const rh=Math.min(1.05, cx-lo-.08, hi-cx-.08);            // tringle de 2,10 m au plus, sans toucher les murs
+  cylX(g,.012,2*rh,M.rod,cx,ty,zr);
+  for (const s of [-1,1]){
+    const e=new THREE.Mesh(new THREE.SphereGeometry(.028,14,10),cap); e.position.set(cx+s*(rh+.02),ty,zr); g.add(e);
+    box(g,.015,.02,zr,M.rod,cx+s*(rh-.1),ty-.01,zr/2);
+  }
+  const grp=new THREE.Group(); grp.userData.id="rideaux"; g.add(grp); curtG=grp;
+  const x0=w/2+.06, sw=Math.min(.3, rh-.03-x0), ring=new THREE.TorusGeometry(.021,.0055,8,20), v=new THREE.Vector3();
+  for (const s of [-1,1]){
+    const geo=new THREE.PlaneGeometry(sw,len,42,30), pos=geo.attributes.position;
+    for (let i=0;i<pos.count;i++){
+      const u=(pos.getX(i)+sw/2)/sw, y=pos.getY(i)+bot+len/2, k=Math.min(1,Math.max(0,(y-2.05)/(top-2.05)));
+      pos.setY(i,y); pos.setZ(i,(.017+(zr-.017)*k)+(.012+.03*k)*Math.sin(u*PI*7));   // plis entre les 8 œillets, plaqués au mur en partie basse
+    }
+    geo.computeVertexNormals();
+    const nr=geo.attributes.normal;
+    for (let i=0;i<nr.count;i++){ v.set(nr.getX(i)*2.1,nr.getY(i),nr.getZ(i)).normalize(); nr.setXYZ(i,v.x,v.y,v.z); }
+    const xc=cx+s*(x0+sw/2), c=new THREE.Mesh(geo,M.curtain); c.position.x=xc; c.castShadow=true; grp.add(c);
+    for (let j=0;j<8;j++){ const r=new THREE.Mesh(ring,M.grommet); r.rotation.y=PI/2; r.position.set(xc-sw/2+j/7*sw,ty,zr); grp.add(r); }
+  }
+  grp.userData.label=new THREE.Vector3(cx-(x0+sw/2),1.95,.12);
+}
+function hiCurt(on){ M.curtain.emissive.set(on?"#25acb0":"#000000"); }
 function doorFit(g, x0, w){
   const f=.05, hh=2.04;
   box(g,f,hh+f,T+.02,M.pvc,x0-f/2,0,-T/2); box(g,f,hh+f,T+.02,M.pvc,x0+w+f/2,0,-T/2); box(g,w+2*f,f,T+.02,M.pvc,x0+w/2,hh,-T/2);
@@ -986,7 +1004,7 @@ function buildWall(len, ext, opening, fit){
 let roomG=null, W=3, D=3, walls=[], items={}, order=[], labels=[], selected=null, selOutline=null, cotes=null;
 function half(it){ const c=Math.abs(Math.cos(it.st.rot)), s=Math.abs(Math.sin(it.st.rot)); return [it.w/2*c+it.d/2*s, it.w/2*s+it.d/2*c]; }
 function clampIt(it){ const [hx,hz]=half(it); it.st.x=Math.min(Math.max(it.st.x,hx+.01),W-hx-.01); it.st.z=Math.min(Math.max(it.st.z,hz+.01),D-hz-.01); }
-function place(it){ it.g.position.set(it.st.x,0,it.st.z); it.g.rotation.y=it.st.rot; it.g.visible=it.st.visible; }
+function place(it){ if (it.fixed){ it.g.visible=it.st.visible; return; } it.g.position.set(it.st.x,0,it.st.z); it.g.rotation.y=it.st.rot; it.g.visible=it.st.visible; }
 function shadows(o){ o.traverse(m=>{ if (m.isMesh){ m.castShadow=!m.material.transparent; m.receiveShadow=true; } }); }
 function addLabel(text, cls, pos, show){ const el=document.createElement("div"); el.className="lbl"+(cls?" "+cls:""); el.textContent=text; $("#labels").appendChild(el); labels.push({ el, pos, show }); return labels[labels.length-1]; }
 function layoutKey(){ return state.n+"|"+state.arm; }
@@ -1002,7 +1020,7 @@ function buildRoom(){
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(40,40),M.outside); ground.rotation.x=-PI/2; ground.position.set(W/2,-.012,D/2); ground.receiveShadow=true; roomG.add(ground);
 
   const win={ x0:R.win-.55, x1:R.win+.55, y0:.95, y1:2.2 };
-  const back=buildWall(W,T,win,g=>windowFit(g,R.win,1.1,.95,2.2,R.rad)); back.position.set(0,0,0);
+  const back=buildWall(W,T,win,g=>{ windowFit(g,R.win,1.1,.95,2.2,R.rad); curtains(g,R.win,1.1,0,W,M.hemp); }); back.position.set(0,0,0);
   const dl=W-R.door-.83;
   const front=buildWall(W,T,{ x0:dl, x1:dl+.83, y0:0, y1:2.04 },g=>doorFit(g,dl,.83)); front.position.set(W,0,D); front.rotation.y=PI;
   const left=buildWall(D,0,null); left.position.set(0,0,D); left.rotation.y=PI/2;
@@ -1031,6 +1049,11 @@ function buildRoom(){
     if (K.ly) { const L=addLabel(P[it.p].short||P[it.p].name,"",()=>new THREE.Vector3(g.position.x,K.ly,g.position.z),()=>state.labels&&it.st.visible); L.item=it; }
   }
 
+  // rideaux : élément fixe du mur de la fenêtre
+  curt={ id:"rideaux", fixed:true, g:curtG, p:"rideau", w:0, d:0, st:{ visible:!(saved.rideaux&&saved.rideaux.visible===false) } };
+  items.rideaux=curt; place(curt);
+  { const c=curt, L=addLabel("Rideaux","",()=>curtG.userData.label,()=>state.labels&&c.st.visible&&walls[0].g.userData.full.visible); L.item=c; }
+
   const cx=W/2, cz=D/2, Rr=Math.max(W,D)/2+2;
   sun.position.set(cx+1.6,8,cz+2.2); sun.target.position.set(cx,0,cz);
   Object.assign(sun.shadow.camera,{ left:-Rr, right:Rr, top:Rr, bottom:-Rr, near:.5, far:20 }); sun.shadow.camera.updateProjectionMatrix();
@@ -1049,6 +1072,7 @@ function compRows(){
   for (const k of ["litSup","litDouble","litSimple"]) { const r=rows.find(r=>r.key===k); if (r) sorted.push(r); }
   sorted.push(...mats, ...kits);
   for (const r of rows) if (!sorted.includes(r)) sorted.push(r);
+  if (curt&&curt.st.visible) sorted.push({ key:"rideau", qty:2, ids:["rideaux"] });
   sorted.push({ key:"tringle", qty:1, ids:[] });
   return sorted;
 }
@@ -1076,8 +1100,10 @@ function markRows(){ document.querySelectorAll(".row").forEach(r=>r.classList.to
 /* ---------- sélection ---------- */
 function select(id){
   if (selOutline){ selOutline.parent && selOutline.parent.remove(selOutline); selOutline=null; }
+  hiCurt(false);
   selected=id&&items[id]&&items[id].st.visible?id:null;
-  if (selected){
+  if (selected&&items[selected].fixed) hiCurt(true);
+  else if (selected){
     const it=items[selected], a=it.w+.06, b=it.d+.06, t=.025, g=new THREE.Group();
     for (const [x,z,w,h] of [[0,b/2,a+t,t],[0,-b/2,a+t,t],[a/2,0,t,b+t],[-a/2,0,t,b+t]]){ const m=new THREE.Mesh(gBox(w,.004,h),selMat); m.position.set(x,.004,z); g.add(m); }
     it.g.add(g); selOutline=g;
@@ -1091,14 +1117,16 @@ function updateSel(){
   $("#sel-name").textContent=p.name;
   let dims=p.dims;
   if (it.places) dims+=" · matelas et linge de lit comptés dans la composition";
+  if (it.fixed) dims+=" · 2 rideaux, un de chaque côté de la fenêtre";
+  $("#sel-rot").hidden=!!it.fixed;
   $("#sel-dims").textContent=dims;
-  $("#sel-price").textContent=state.prices?euro(p.price)+" HT":"";
+  $("#sel-price").textContent=state.prices?euro(p.price)+" HT"+(it.fixed?" l’unité":""):"";
   $("#sel-price").hidden=!state.prices;
   $("#sel-link").href=p.url;
 }
-function save(){ const L={}; for (const id of order) L[id]=Object.assign({},items[id].st); store.layouts[layoutKey()]=L; persist(); }
+function save(){ const L={}; for (const id of order) L[id]=Object.assign({},items[id].st); if (curt) L.rideaux={ visible:curt.st.visible }; store.layouts[layoutKey()]=L; persist(); }
 $("#sel-x").addEventListener("click",()=>select(null));
-$("#sel-rot").addEventListener("click",()=>{ if (!selected) return; const it=items[selected]; it.st.rot=(it.st.rot+PI/2)%(2*PI); clampIt(it); place(it); save(); });
+$("#sel-rot").addEventListener("click",()=>{ if (!selected||items[selected].fixed) return; const it=items[selected]; it.st.rot=(it.st.rot+PI/2)%(2*PI); clampIt(it); place(it); save(); });
 $("#sel-hide").addEventListener("click",()=>{ if (!selected) return; const it=items[selected]; it.st.visible=false; place(it); select(null); save(); renderComp(); });
 
 /* ---------- vue ---------- */
@@ -1133,7 +1161,7 @@ function pick(){
   const gs=order.map(id=>items[id]).filter(i=>i.st.visible).map(i=>i.g);
   const ws=walls.map(w=>w.g).filter(g=>g.userData.full.visible);
   const hits=ray.intersectObjects(gs.concat(ws),true);
-  for (const h of hits){ if (!h.object.isMesh) continue; let o=h.object, id=null; while (o){ if (o.userData.id){ id=o.userData.id; break; } o=o.parent; } if (id) return { it:items[id], point:h.point }; return null; }
+  for (const h of hits){ if (!h.object.isMesh) continue; let o=h.object, id=null; while (o){ if (o.userData.id){ id=o.userData.id; break; } o=o.parent; } if (id){ if (!items[id]||!items[id].st.visible) continue; return { it:items[id], point:h.point }; } return null; }
   return null;
 }
 let drag=null, down=null;
@@ -1142,7 +1170,7 @@ canvas.addEventListener("pointerdown",e=>{
   setRay(e); const hit=pick(); down={ x:e.clientX, y:e.clientY, hit:!!hit };
   if (!hit) return;
   select(hit.it.id);
-  if (state.locked) return;
+  if (state.locked||hit.it.fixed) return;
   controls.enabled=false; tween=null; setSpin(false);
   try { canvas.setPointerCapture(e.pointerId); } catch(_){}
   const plane=new THREE.Plane(new THREE.Vector3(0,1,0),-hit.point.y), p=new THREE.Vector3(); ray.ray.intersectPlane(plane,p);
@@ -1158,7 +1186,7 @@ canvas.addEventListener("pointermove",e=>{
   }
   if (e.buttons||hoverPending||e.pointerType!=="mouse") return;
   hoverPending=true;
-  requestAnimationFrame(()=>{ hoverPending=false; setRay(e); canvas.style.cursor=pick()?(state.locked?"pointer":"grab"):""; });
+  requestAnimationFrame(()=>{ hoverPending=false; setRay(e); const h=pick(); canvas.style.cursor=h?(state.locked||h.it.fixed?"pointer":"grab"):""; });
 });
 function endPointer(e){
   if (drag){ if (drag.moved) save(); drag=null; controls.enabled=true; canvas.style.cursor=""; }
@@ -1170,6 +1198,7 @@ canvas.addEventListener("pointercancel",()=>{ if (drag){ drag=null; controls.ena
 K.listen(window,"keydown",e=>{
   if (!selected||e.target.closest("input,textarea")) return;
   const it=items[selected], st=it.st, step=e.shiftKey?.25:.05; let used=true;
+  if (it.fixed && e.key!=="Escape") return;
   if (e.key==="Escape") select(null);
   else if (e.key==="r"||e.key==="R"){ st.rot=(st.rot+PI/2)%(2*PI); clampIt(it); place(it); save(); }
   else if (e.key.startsWith("Arrow") && !state.locked){ st.x+=e.key==="ArrowLeft"?-step:e.key==="ArrowRight"?step:0; st.z+=e.key==="ArrowUp"?-step:e.key==="ArrowDown"?step:0; clampIt(it); place(it); save(); }
@@ -1255,7 +1284,7 @@ if (!window.THREE || !THREE.OrbitControls) {
 const PI = Math.PI;
 
 /* ---------- catalogue mobilier 2026 — articles entourés (dimensions L × l × H en cm) ---------- */
-const CATS = { canape:"Canapé", fauteuil:"Fauteuil", tableBasse:"Table basse", meubleTV:"Meuble TV", repas:"Table et assises", rangement:"Rangement", bureau:"Bureau", chaise:"Chaise", chevet:"Bout de canapé", vaisselle:"Vaisselle" };
+const CATS = { canape:"Canapé", fauteuil:"Fauteuil", tableBasse:"Table basse", meubleTV:"Meuble TV", repas:"Table et assises", rangement:"Rangement", bureau:"Bureau", chaise:"Chaise", chevet:"Bout de canapé", vaisselle:"Vaisselle", rideaux:"Rideaux" };
 const C = {
   "724016":{ cat:"canape", lbl:"Canapé", name:"Canapé convertible", dims:[182,80,80], colors:"Gris foncé et bois", p:15 },
   "724017":{ cat:"canape", lbl:"Canapé", name:"Canapé convertible 3 places", dims:[191,92,77], colors:"Gris, velours", p:15 },
@@ -1289,6 +1318,7 @@ const C = {
   "722022":{ cat:"bureau", lbl:"Bureau", name:"Bureau structuré, 10 niches", dims:[110,60,75], colors:"Bois et blanc", p:5 },
   "724011":{ cat:"chaise", lbl:"", name:"Chaise en PP avec pieds bois", dims:[45.5,52,81], colors:"Noir et bois", p:5 },
   "726002":{ cat:"chevet", lbl:"", name:"Table de chevet 1 tiroir", dims:[40,35,50], colors:"Bois et métal", p:4 },
+  "719007":{ cat:"rideaux", lbl:"", name:"Rideau occultant anti-feu M1 135 × 240 cm", txt:"135 × 240 cm, 8 œillets ronds · 100 % polyester M1, 202 g/m² · tissé en France", colors:"Beige", qty:2 },
   "622006":{ cat:"vaisselle", name:"Set de couverts inox, 16 pièces", txt:"4 couteaux, 4 fourchettes, 4 cuillères à soupe, 4 petites cuillères", p:16 },
   "732020":{ cat:"vaisselle", name:"Set d’assiettes en verre, 18 pièces", txt:"6 plates, 6 creuses, 6 à dessert", p:16 }
 };
@@ -1337,7 +1367,7 @@ const fmtN = (n,d=2) => n.toFixed(d).replace(".", ",");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- état ---------- */
-const KEY = "studio-sainleau-v1";
+const KEY = "studio-sainleau-v2";
 let store = {};
 try { store = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { store = {}; }
 if (!store.layouts) store.layouts = {};
@@ -1393,7 +1423,7 @@ const M = {
   screen:std("#0f1215",.25,.2,{ emissive:"#0a1822", emissiveIntensity:.6 }), plate:std("#f4f6f6",.08,0,{ transparent:true, opacity:.85 }), cutlery:std("#1c1c1c",.4,.3),
   kFront:std("#f4f4f1",.5), kPlinth:std("#9a9c9b",.7), kTop:std("#c9c4bb",.5), kSeam:std("#c9cbca",.6), inox:std("#cfd4d4",.28,.8), inoxIn:std("#9ea4a4",.3,.8), hob:std("#141515",.2,.2), hobRing:std("#555a5a",.4), tile:std("#ffffff",.4,0,{ map:tileTex }),
   pvc:std("#fafafa",.5), glass:std("#cfe6ef",.05,0,{ transparent:true, opacity:.28 }), radiator:std("#f7f7f5",.45),
-  curtain:new THREE.MeshStandardMaterial({ color:"#d9d4ca", roughness:.95, side:THREE.DoubleSide }), rod:std("#1b1b1b",.4,.6), doorLeaf:std("#e9e4da",.6), switchPlate:std("#ffffff",.5)
+  curtain:new THREE.MeshStandardMaterial({ color:"#c4ad9c", roughness:.96, side:THREE.DoubleSide, emissiveIntensity:.32 }), grommet:std("#2e3134",.35,.75), rod:std("#1b1b1b",.4,.6), doorLeaf:std("#e9e4da",.6), switchPlate:std("#ffffff",.5)
 };
 for (const k in M) if (M[k].isMeshStandardMaterial) M[k].envMapIntensity = .55;
 const lineMat = new THREE.LineBasicMaterial({ color:"#2b3333" });
@@ -1561,11 +1591,34 @@ function windowFit(g, cx, w, y0, y1){
   box(g,w+.08,.025,.2,M.pvc,cx,y0-.025,.03);
   const rw=Math.min(.8,w-.2), r=new THREE.Group(); r.position.set(cx,0,.06); g.add(r);
   for (let i=0;i<14;i++) box(r,rw/14-.012,.56,.06,M.radiator,-rw/2+(i+.5)*rw/14,.16,0); box(r,rw,.03,.07,M.radiator,0,.14,0); box(r,rw,.03,.07,M.radiator,0,.7,0);
-  const tl=w+.7, ty=y1+.13; cylX(g,.012,tl,M.rod,cx,ty,.1);
-  for (const s of [-1,1]){ const cw=.36, ch=ty-.8, geo=new THREE.PlaneGeometry(cw,ch,24,1), pos=geo.attributes.position;
-    for (let i=0;i<pos.count;i++){ const x=pos.getX(i); pos.setZ(i,.025*Math.sin((x+cw/2)/cw*PI*7)); } geo.computeVertexNormals();
-    const c=new THREE.Mesh(geo,M.curtain); c.position.set(cx+s*(w/2+.05),.8+ch/2-.02,.1); g.add(c); }
 }
+/* ---------- rideaux occultants anti-feu réf. 719007 : 2 × 135 × 240 cm, 8 œillets, ouverts de chaque côté ---------- */
+let curtG=null, curt=null;
+function curtains(g, cx, w, lo, hi, cap){
+  const ty=2.365, zr=.06, len=2.4, top=ty+.045, bot=top-len;
+  const rh=Math.min(1.05, cx-lo-.08, hi-cx-.08);            // tringle de 2,10 m au plus, sans toucher les murs
+  cylX(g,.012,2*rh,M.rod,cx,ty,zr);
+  for (const s of [-1,1]){
+    const e=new THREE.Mesh(new THREE.SphereGeometry(.028,14,10),cap); e.position.set(cx+s*(rh+.02),ty,zr); g.add(e);
+    box(g,.015,.02,zr,M.rod,cx+s*(rh-.1),ty-.01,zr/2);
+  }
+  const grp=new THREE.Group(); grp.userData.id="rideaux"; g.add(grp); curtG=grp;
+  const x0=w/2+.06, sw=Math.min(.3, rh-.03-x0), ring=new THREE.TorusGeometry(.021,.0055,8,20), v=new THREE.Vector3();
+  for (const s of [-1,1]){
+    const geo=new THREE.PlaneGeometry(sw,len,42,30), pos=geo.attributes.position;
+    for (let i=0;i<pos.count;i++){
+      const u=(pos.getX(i)+sw/2)/sw, y=pos.getY(i)+bot+len/2, k=Math.min(1,Math.max(0,(y-2.05)/(top-2.05)));
+      pos.setY(i,y); pos.setZ(i,(.017+(zr-.017)*k)+(.012+.03*k)*Math.sin(u*PI*7));   // plis entre les 8 œillets, plaqués au mur en partie basse
+    }
+    geo.computeVertexNormals();
+    const nr=geo.attributes.normal;
+    for (let i=0;i<nr.count;i++){ v.set(nr.getX(i)*2.1,nr.getY(i),nr.getZ(i)).normalize(); nr.setXYZ(i,v.x,v.y,v.z); }
+    const xc=cx+s*(x0+sw/2), c=new THREE.Mesh(geo,M.curtain); c.position.x=xc; c.castShadow=true; grp.add(c);
+    for (let j=0;j<8;j++){ const r=new THREE.Mesh(ring,M.grommet); r.rotation.y=PI/2; r.position.set(xc-sw/2+j/7*sw,ty,zr); grp.add(r); }
+  }
+  grp.userData.label=new THREE.Vector3(cx-(x0+sw/2),1.95,.12);
+}
+function hiCurt(on){ M.curtain.emissive.set(on?"#25acb0":"#000000"); }
 function doorFit(g, x0, w){
   const f=.05, hh=2.04;
   box(g,f,hh+f,T+.02,M.pvc,x0-f/2,0,-T/2); box(g,f,hh+f,T+.02,M.pvc,x0+w+f/2,0,-T/2); box(g,w+2*f,f,T+.02,M.pvc,x0+w/2,hh,-T/2);
@@ -1582,7 +1635,7 @@ function buildWall(len, ext, opening, fit){
 let roomG=null, W=4, D=4.5, walls=[], items={}, order=[], labels=[], selected=null, selOutline=null, cotes=null;
 function half(it){ const c=Math.abs(Math.cos(it.st.rot)), s=Math.abs(Math.sin(it.st.rot)); return [it.w/2*c+it.d/2*s, it.w/2*s+it.d/2*c]; }
 function clampIt(it){ const [hx,hz]=half(it); it.st.x=Math.min(Math.max(it.st.x,hx+.01),W-hx-.01); it.st.z=Math.min(Math.max(it.st.z,hz+.01),D-hz-.01); }
-function place(it){ it.g.position.set(it.st.x,0,it.st.z); it.g.rotation.y=it.st.rot; it.g.visible=it.st.visible; }
+function place(it){ if (it.fixed){ it.g.visible=it.st.visible; return; } it.g.position.set(it.st.x,0,it.st.z); it.g.rotation.y=it.st.rot; it.g.visible=it.st.visible; }
 function shadows(o){ o.traverse(m=>{ if (m.isMesh){ m.castShadow=!m.material.transparent; m.receiveShadow=true; } }); }
 function addLabel(text, cls, pos, show){ const el=document.createElement("div"); el.className="lbl"+(cls?" "+cls:""); el.textContent=text; $("#labels").appendChild(el); const L={ el, pos, show }; labels.push(L); return L; }
 function heightOf(r){ const c=C[r]; return c.dims ? c.dims[2]/100 : (c.cat==="repas" ? .9 : .8); }
@@ -1611,7 +1664,7 @@ function buildRoom(){
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(40,40),M.outside); ground.rotation.x=-PI/2; ground.position.set(W/2,-.012,D/2); ground.receiveShadow=true; roomG.add(ground);
 
   const ww=1.2, win={ x0:R.win-ww/2, x1:R.win+ww/2, y0:.95, y1:2.2 };
-  const back=buildWall(W,T,win,g=>windowFit(g,R.win,ww,.95,2.2));
+  const back=buildWall(W,T,win,g=>{ windowFit(g,R.win,ww,.95,2.2); curtains(g,R.win,ww,R.kit,W,M.rod); });
   const dl=W-R.door-.83;
   const front=buildWall(W,T,{ x0:dl, x1:dl+.83, y0:0, y1:2.04 },g=>doorFit(g,dl,.83)); front.position.set(W,0,D); front.rotation.y=PI;
   const left=buildWall(D,0,null); left.position.set(0,0,D); left.rotation.y=PI/2;
@@ -1638,6 +1691,11 @@ function buildRoom(){
     buildItemMesh(it);
   }
 
+  // rideaux : élément fixe du mur de la fenêtre
+  curt={ id:"rideaux", fixed:true, g:curtG, ref:"719007", cat:"rideaux", w:0, d:0, st:{ visible:!(saved.rideaux&&saved.rideaux.visible===false) } };
+  items.rideaux=curt; place(curt);
+  { const c=curt, L=addLabel("Rideaux","",()=>curtG.userData.label,()=>state.labels&&c.st.visible&&walls[0].g.userData.full.visible); L.item=c; }
+
   const cx=W/2, cz=D/2, Rr=Math.max(W,D)/2+2;
   sun.position.set(cx+1.6,8,cz+2.2); sun.target.position.set(cx,0,cz);
   Object.assign(sun.shadow.camera,{ left:-Rr, right:Rr, top:Rr, bottom:-Rr, near:.5, far:20 }); sun.shadow.camera.updateProjectionMatrix();
@@ -1651,7 +1709,7 @@ function buildRoom(){
 function optionLabel(r){ const c=C[r]; return c.name+(c.dims?" · "+c.dims[0]+" cm":""); }
 function renderPanel(){
   const host=$("#items"); host.innerHTML="";
-  for (const id of order){
+  for (const id of (curt?order.concat("rideaux"):order)){
     const it=items[id], alts=BY_CAT[it.cat], row=document.createElement("div");
     row.className="it"+(it.st.visible?"":" off"); row.dataset.id=id;
     const cat=document.createElement("span"); cat.className="cat"; cat.textContent=CATS[it.cat]; row.appendChild(cat);
@@ -1661,7 +1719,7 @@ function renderPanel(){
       s.addEventListener("click",e=>e.stopPropagation()); s.addEventListener("change",()=>{ setRef(id,s.value); select(id); });
       row.appendChild(s);
     } else { const f=document.createElement("span"); f.className="fixed"; f.textContent=C[it.ref].name; row.appendChild(f); }
-    const sm=document.createElement("small"); sm.textContent="Réf. "+it.ref+" · "+dimTxt(it.ref)+" · p. "+C[it.ref].p; row.appendChild(sm);
+    const sm=document.createElement("small"); sm.textContent="Réf. "+it.ref+" · "+dimTxt(it.ref)+(C[it.ref].p?" · p. "+C[it.ref].p:" · "+C[it.ref].qty+" rideaux"); row.appendChild(sm);
     if (!it.st.visible){ const b=document.createElement("button"); b.type="button"; b.className="back"; b.textContent="Remettre dans le studio"; b.addEventListener("click",e=>{ e.stopPropagation(); it.st.visible=true; place(it); save(); renderPanel(); select(id); }); row.appendChild(b); }
     row.addEventListener("click",()=>{ if (it.st.visible) select(id); });
     host.appendChild(row);
@@ -1675,6 +1733,7 @@ function renderRecap(){
   const q=new Map(), add=(r,n)=>{ q.set(r,(q.get(r)||0)+n); };
   let repas=false;
   for (const id of order){ const it=items[id]; if (!it.st.visible) continue; add(it.ref,1); const w=C[it.ref].with; if (w) add(w.ref,w.n); if (it.cat==="repas") repas=true; }
+  if (curt&&curt.st.visible) add("719007",C["719007"].qty);
   if (repas) for (const r of BY_CAT.vaisselle) add(r,1);
   const tb=$("#recap"); tb.innerHTML="";
   for (const [r,n] of q){ const tr=document.createElement("tr"); tr.innerHTML="<td></td><td></td><td></td>"; tr.children[0].textContent=r; tr.children[1].textContent=C[r].name; tr.children[2].textContent=n; tb.appendChild(tr); }
@@ -1689,8 +1748,10 @@ function setRef(id, ref){
 /* ---------- sélection ---------- */
 function select(id){
   if (selOutline){ selOutline.parent && selOutline.parent.remove(selOutline); selOutline=null; }
+  hiCurt(false);
   selected=id&&items[id]&&items[id].st.visible?id:null;
-  if (selected){
+  if (selected&&items[selected].fixed) hiCurt(true);
+  else if (selected){
     const it=items[selected], a=it.w+.06, b=it.d+.06, t=.025, g=new THREE.Group();
     for (const [x,z,w,h] of [[0,b/2,a+t,t],[0,-b/2,a+t,t],[a/2,0,t,b+t],[-a/2,0,t,b+t]]){ const m=new THREE.Mesh(gBox(w,.004,h),selMat); m.position.set(x,.004,z); g.add(m); }
     it.g.add(g); selOutline=g;
@@ -1703,14 +1764,15 @@ function updateSel(){
   const it=items[selected], c=C[it.ref]; card.hidden=false;
   $("#sel-cat").textContent=CATS[it.cat];
   $("#sel-name").textContent=c.name;
-  $("#sel-dims").textContent="Réf. "+it.ref+" · "+dimTxt(it.ref)+" · "+c.colors+" · catalogue p. "+c.p;
+  $("#sel-dims").textContent="Réf. "+it.ref+" · "+dimTxt(it.ref)+" · "+c.colors+(c.p?" · catalogue p. "+c.p:" · "+c.qty+" rideaux, un de chaque côté de la fenêtre");
+  $("#sel-rot").hidden=!!it.fixed;
   const alts=BY_CAT[it.cat], host=$("#alts"); host.innerHTML="";
   $("#alts-title").hidden=alts.length<2; host.hidden=alts.length<2;
   for (const r of alts){ const b=document.createElement("button"); b.type="button"; b.textContent=C[r].name; b.setAttribute("aria-pressed",String(r===it.ref)); b.addEventListener("click",()=>setRef(it.id,r)); host.appendChild(b); }
 }
-function save(){ const L={}; for (const id of order) L[id]=Object.assign({},items[id].st); store.layouts[state.n]=L; persist(); }
+function save(){ const L={}; for (const id of order) L[id]=Object.assign({},items[id].st); if (curt) L.rideaux={ visible:curt.st.visible }; store.layouts[state.n]=L; persist(); }
 $("#sel-x").addEventListener("click",()=>select(null));
-$("#sel-rot").addEventListener("click",()=>{ if (!selected) return; const it=items[selected]; it.st.rot=(it.st.rot+PI/2)%(2*PI); clampIt(it); place(it); save(); });
+$("#sel-rot").addEventListener("click",()=>{ if (!selected||items[selected].fixed) return; const it=items[selected]; it.st.rot=(it.st.rot+PI/2)%(2*PI); clampIt(it); place(it); save(); });
 $("#sel-hide").addEventListener("click",()=>{ if (!selected) return; const it=items[selected]; it.st.visible=false; place(it); select(null); save(); renderPanel(); });
 
 /* ---------- vue ---------- */
@@ -1743,7 +1805,7 @@ function setRay(e){ const r=canvas.getBoundingClientRect(); ndc.set(((e.clientX-
 function pick(){
   const gs=order.map(id=>items[id]).filter(i=>i.st.visible).map(i=>i.g);
   const ws=walls.map(w=>w.g).filter(g=>g.userData.full.visible);
-  for (const h of ray.intersectObjects(gs.concat(ws),true)){ if (!h.object.isMesh) continue; let o=h.object, id=null; while (o){ if (o.userData.id){ id=o.userData.id; break; } o=o.parent; } return id ? { it:items[id], point:h.point } : null; }
+  for (const h of ray.intersectObjects(gs.concat(ws),true)){ if (!h.object.isMesh) continue; let o=h.object, id=null; while (o){ if (o.userData.id){ id=o.userData.id; break; } o=o.parent; } if (id&&(!items[id]||!items[id].st.visible)) continue; return id ? { it:items[id], point:h.point } : null; }
   return null;
 }
 let drag=null, down=null;
@@ -1752,7 +1814,7 @@ canvas.addEventListener("pointerdown",e=>{
   setRay(e); const hit=pick(); down={ x:e.clientX, y:e.clientY, hit:!!hit };
   if (!hit) return;
   select(hit.it.id);
-  if (state.locked) return;
+  if (state.locked||hit.it.fixed) return;
   controls.enabled=false; tween=null; setSpin(false);
   try { canvas.setPointerCapture(e.pointerId); } catch(_){}
   const plane=new THREE.Plane(new THREE.Vector3(0,1,0),-hit.point.y), p=new THREE.Vector3(); ray.ray.intersectPlane(plane,p);
@@ -1768,7 +1830,7 @@ canvas.addEventListener("pointermove",e=>{
   }
   if (e.buttons||hoverPending||e.pointerType!=="mouse") return;
   hoverPending=true;
-  requestAnimationFrame(()=>{ hoverPending=false; setRay(e); canvas.style.cursor=pick()?(state.locked?"pointer":"grab"):""; });
+  requestAnimationFrame(()=>{ hoverPending=false; setRay(e); const h=pick(); canvas.style.cursor=h?(state.locked||h.it.fixed?"pointer":"grab"):""; });
 });
 function endPointer(e){
   if (drag){ if (drag.moved) save(); drag=null; controls.enabled=true; canvas.style.cursor=""; }
@@ -1780,6 +1842,7 @@ canvas.addEventListener("pointercancel",()=>{ if (drag){ drag=null; controls.ena
 K.listen(window,"keydown",e=>{
   if (!selected||e.target.closest("input,textarea,select")) return;
   const it=items[selected], st=it.st, step=e.shiftKey?.25:.05; let used=true;
+  if (it.fixed && e.key!=="Escape") return;
   if (e.key==="Escape") select(null);
   else if (e.key==="r"||e.key==="R"){ st.rot=(st.rot+PI/2)%(2*PI); clampIt(it); place(it); save(); }
   else if (e.key.startsWith("Arrow") && !state.locked){ st.x+=e.key==="ArrowLeft"?-step:e.key==="ArrowRight"?step:0; st.z+=e.key==="ArrowUp"?-step:e.key==="ArrowDown"?step:0; clampIt(it); place(it); save(); }
