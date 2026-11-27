@@ -1,0 +1,1953 @@
+/* ==========================================================================
+   SAINLEAU · Feuille de style de la refonte graphique
+   Thème enfant PRS005_07_sainleau (parent : PRS005_07)
+
+   Chargée après toutes les feuilles du thème et des modules (priorité 2000
+   dans config/theme.yml). CSS natif, sans préprocesseur ni étape de build.
+
+   Sommaire
+     0. Polices
+     1. Variables
+     2. Base (typographie, liens, focus, mouvement réduit)
+     3. Composants (pictogrammes, boutons, champs, compteurs)
+     4. En-tête (bandeau pro, logo, recherche, favoris, compte, panier)
+     5. Menu (Tous nos produits, univers, méga-menu)
+     6. Engagements (réassurance du pied de page)
+     7. Newsletter
+     8. Pied de page
+     9. Responsive de l'en-tête et du pied de page
+
+   Règle : !important n'est utilisé que pour passer devant une règle du thème
+   parent ou d'un module impossible à surcharger autrement. Chaque usage est
+   commenté.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   0. Polices
+   Montserrat 400, 500 et 600, hébergée dans le thème (licence SIL OFL 1.1,
+   voir assets/fonts/OFL.txt). Aucun appel à fonts.googleapis.com.
+   Deux sous-ensembles : latin (français) et latin étendu, chargé seulement
+   si une page contient un caractère de cette plage.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Medium-latin-ext.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-SemiBold-latin-ext.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* ==========================================================================
+   1. Variables
+   ========================================================================== */
+
+:root {
+  /* Couleurs SAINLEAU : aucune autre couleur n'est utilisée dans ce fichier */
+  --sl-teal: #25acb0;          /* accent décoratif, jamais de texte courant */
+  --sl-teal-profond: #0d6e72;  /* boutons, liens, bandeau, pied de page */
+  --sl-action-survol: #0a5a5d; /* survol du bouton principal */
+  --sl-teal-100: #cdf3f4;      /* fonds teintés, pastilles */
+  --sl-gris: #6c6666;          /* texte secondaire */
+  --sl-encre: #1b1b1b;         /* titres et texte courant */
+  --sl-neutre-100: #f5f5f5;    /* fonds de sections et de blocs */
+  --sl-filet: #d6d6d6;         /* filets et bordures de cartes */
+  --sl-bordure: #707070;       /* bordure des champs (accessibilité) */
+  --sl-logo-clair: #d0f3fd;    /* texte clair sur teal profond */
+  --sl-blanc: #ffffff;
+
+  /* Rayons et espacements */
+  --sl-rayon-sm: 4px;
+  --sl-rayon-md: 8px;
+  --sl-rayon-pill: 999px;
+  --sl-marge: 48px;            /* marges latérales, 16 px sur mobile */
+  --sl-gouttiere: 24px;
+  --sl-section: 64px;
+  --sl-contenu: 1440px;        /* largeur de la maquette */
+
+  /* Animations */
+  --sl-duree: 180ms;
+  --sl-courbe: ease-out;
+
+  /* Police */
+  --sl-police: Montserrat, "Segoe UI", system-ui, sans-serif;
+
+  /* Couleur de l'anneau de focus (blanc dans les zones teal profond) */
+  --sl-focus: var(--sl-teal-profond);
+
+  /* Variables du thème parent, réalignées sur la charte.
+     Le thème PRS005_07 les utilise dans des centaines de règles. */
+  --primary-font: var(--sl-police);
+  --secondary-font: var(--sl-police);
+  --primary-bg-color: var(--sl-teal-profond);
+  --primary-bg-gradient-color: var(--sl-teal-profond);
+  --primary-text-color: var(--sl-blanc);
+  --secondary-bg-color: var(--sl-teal-100);
+  --secondary-text-color: var(--sl-teal-profond);
+  --body-text-color: var(--sl-gris);
+  --body-background-color: var(--sl-blanc);
+  --main-title-color: var(--sl-encre);
+  --header-nav-text-color: var(--sl-blanc);
+  --header-nav-text-hvr-color: var(--sl-blanc);
+  --header-nav-bg-color: var(--sl-teal-profond);
+  --header-menu-text-color: var(--sl-encre);
+  --header-menu-text-hvr-color: var(--sl-teal-profond);
+  --header-background-color: var(--sl-blanc);
+  --header-top-text-color: var(--sl-encre);
+  --header-top-texthvr-color: var(--sl-teal-profond);
+  --header-top-bg-color: var(--sl-blanc);
+  --price-color: var(--sl-encre);
+  --border-color: var(--sl-filet);
+  --footer-bg-color: var(--sl-teal-profond);
+  --footer-news-bg-color: var(--sl-teal-100);
+  --footer-news-title-color: var(--sl-encre);
+  --footer-news-desc-color: var(--sl-encre);
+  --footer-title-color: var(--sl-blanc);
+  --footer-link-color: var(--sl-logo-clair);
+  --footer-link-hvr-color: var(--sl-blanc);
+  --bottom-footer-bg-color: var(--sl-teal-profond);
+
+  accent-color: var(--sl-teal-profond); /* cases à cocher et boutons radio natifs */
+}
+
+@media (max-width: 1199px) {
+  :root { --sl-marge: 24px; }
+}
+@media (max-width: 767px) {
+  :root { --sl-marge: 16px; }
+}
+
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+
+/* Le module ttthemecustomizer impose Poppins sur une centaine de sélecteurs,
+   dont certains avec identifiants : on remplace la police partout, sauf sur
+   les polices d'icônes Material encore utilisées par le thème.
+   !important : seule façon de passer devant toutes ces règles sans les
+   recopier une à une. */
+body,
+body *:not(.material-icons):not(.material-icons-outlined) {
+  font-family: var(--sl-police) !important;
+}
+
+body {
+  background: var(--sl-blanc);
+  color: var(--sl-encre);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  font-synthesis-weight: none; /* pas de faux gras : seules 400, 500 et 600 existent */
+}
+
+/* Le thème met souvent du 700 : Montserrat s'arrête à 600 */
+b,
+strong {
+  font-weight: 600;
+}
+
+/* Titres : styles « Site web » de la maquette */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: var(--sl-encre);
+  font-weight: 600;
+  text-transform: none;
+}
+h1, .h1 { font-size: 40px; line-height: 48px; }
+h2, .h2 { font-size: 28px; line-height: 36px; }
+h3, .h3 { font-size: 20px; line-height: 28px; }
+h4, .h4,
+h5, .h5,
+h6, .h6 { font-size: 18px; line-height: 26px; font-weight: 500; }
+
+p {
+  text-align: left;
+}
+
+/* Liens : couleur et transition courtes, sans l'animation « all 400 ms » du thème */
+a {
+  color: var(--sl-teal-profond);
+  transition: color var(--sl-duree) var(--sl-courbe),
+              background-color var(--sl-duree) var(--sl-courbe),
+              border-color var(--sl-duree) var(--sl-courbe),
+              text-decoration-color var(--sl-duree) var(--sl-courbe);
+}
+a:hover,
+a:focus {
+  color: var(--sl-teal-profond);
+}
+
+/* Liens texte dans les contenus : le soulignement apparaît au survol */
+p a:not(.btn),
+.rte a:not(.btn),
+.page-content a:not(.btn),
+.product-description a:not(.btn),
+.category-description a:not(.btn) {
+  color: var(--sl-teal-profond);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+p a:not(.btn):hover,
+.rte a:not(.btn):hover,
+.page-content a:not(.btn):hover,
+.product-description a:not(.btn):hover,
+.category-description a:not(.btn):hover {
+  text-decoration-color: currentColor;
+}
+
+/* Focus clavier : anneau plein de 2 px décalé de 2 px.
+   !important : le thème supprime le contour sur a:focus, .btn:focus,
+   .form-control:focus et d'autres sélecteurs plus précis que :focus-visible. */
+:focus-visible {
+  outline: 2px solid var(--sl-focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* Mouvement réduit : on coupe transitions et animations.
+   !important : doit l'emporter sur les animations du thème et des modules,
+   quelle que soit la précision de leurs sélecteurs. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ==========================================================================
+   3. Composants
+   ========================================================================== */
+
+/* --- 3.1 Pictogrammes Phosphor ---------------------------------------------
+   Les pictogrammes sont des SVG Phosphor (style regular) dans
+   assets/img/icones/. Ils sont posés en masque sur un pseudo-élément :
+   leur couleur suit donc la couleur du texte (currentColor) et change
+   au survol avec lui. Chaque élément fixe --sl-icone et --sl-icone-taille. */
+
+#search_block_top #searchbox::before,
+#header .top-wishlist .wishtlist_top::before,
+#header .ttuserheading > .btn > a::before,
+#header .blockcart .header::before,
+#tt-menu-horizontal .title-menu-mobile::before,
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .icon::before,
+#footer #newsletter .title-icon > i.material-icons::before,
+#footer .block-contact .block .icon::before,
+#footer .block-social li a::before,
+#goToTop::before {
+  content: "";
+  display: block;
+  flex: none;
+  width: var(--sl-icone-taille, 20px);
+  height: var(--sl-icone-taille, 20px);
+  background-color: currentColor;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+}
+
+/* --- 3.2 Boutons ------------------------------------------------------------
+   Principal : fond teal profond, texte blanc.
+   Secondaire : fond blanc, contour 1,5 px et texte teal profond.
+   Désactivé : fond gris clair, texte gris, sans effet. */
+
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.btn-default {
+  border-radius: var(--sl-rayon-sm);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  overflow: visible;
+  padding: 10px 20px;
+  text-transform: none;
+  box-shadow: none;
+  transition: background-color var(--sl-duree) var(--sl-courbe),
+              border-color var(--sl-duree) var(--sl-courbe),
+              color var(--sl-duree) var(--sl-courbe),
+              transform 120ms var(--sl-courbe);
+}
+
+/* Le thème anime un fond qui glisse sous les boutons (::after) : supprimé */
+.btn-primary::after,
+.btn-secondary::after,
+.btn-tertiary::after,
+#search_block_top .btn.button-search::after {
+  content: none;
+  display: none;
+}
+
+.btn-primary,
+.btn-primary.add-to-cart {
+  background: var(--sl-teal-profond);
+  border: 0;
+  color: var(--sl-blanc);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.add-to-cart:hover,
+.btn-primary.add-to-cart:focus {
+  background: var(--sl-action-survol);
+  color: var(--sl-blanc);
+}
+.btn-primary:active,
+.btn-primary.active {
+  background: var(--sl-action-survol);
+  color: var(--sl-blanc);
+  transform: translateY(1px);
+}
+
+.btn-secondary,
+.btn-tertiary,
+.btn-default {
+  background: var(--sl-blanc);
+  border: 1.5px solid var(--sl-teal-profond);
+  color: var(--sl-teal-profond);
+  padding: 8.5px 18.5px; /* même hauteur que le bouton principal malgré le contour */
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-tertiary:hover,
+.btn-tertiary:focus,
+.btn-tertiary:active,
+.btn-default:hover,
+.btn-default:focus {
+  background: var(--sl-teal-100);
+  border-color: var(--sl-teal-profond);
+  color: var(--sl-teal-profond);
+}
+
+.btn-primary .material-icons,
+.btn-secondary .material-icons,
+.btn-tertiary .material-icons {
+  font-size: 18px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.btn:disabled,
+.btn.disabled,
+.btn-primary:disabled,
+.btn-primary.disabled,
+.btn-secondary:disabled,
+.btn-secondary.disabled {
+  background: var(--sl-neutre-100);
+  border-color: var(--sl-neutre-100);
+  color: var(--sl-gris);
+  cursor: not-allowed;
+  opacity: 1;
+  transform: none;
+}
+
+/* --- 3.3 Champs de formulaire ----------------------------------------------
+   48 px de haut, bordure #707070 (contraste des champs), rayon 4 px. */
+
+label,
+.label,
+.form-control-label {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+}
+
+.form-control,
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea {
+  background-color: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  box-shadow: none;
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+  min-height: 48px;
+  padding: 12px 16px;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+}
+.form-control:hover {
+  border-color: var(--sl-encre);
+}
+.form-control:focus {
+  background-color: var(--sl-blanc);
+  border-color: var(--sl-teal-profond);
+  color: var(--sl-encre);
+}
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--sl-gris);
+  opacity: 1;
+}
+
+/* Listes déroulantes : flèche Phosphor caret-down */
+select.form-control,
+.form-group select,
+.custom-select {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--sl-blanc) url("../img/icones/caret-down-encre.svg") no-repeat right 14px center / 16px 16px;
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+  min-height: 48px;
+  padding: 12px 44px 12px 16px;
+}
+
+/* Le sélecteur de quantité garde le gabarit du thème (traité aux étapes 4 et 5) */
+.bootstrap-touchspin .form-control,
+.bootstrap-touchspin input {
+  min-height: 0;
+}
+
+/* --- 3.4 Compteurs (favoris, panier) ---------------------------------------
+   Pastille 12/16, graisse 500, rayon 999 px. */
+
+#header .top-wishlist .wishlist-number,
+#header .blockcart .cart-products-count {
+  border-radius: var(--sl-rayon-pill);
+  display: inline-block;
+  float: none;
+  font-size: 12px;
+  font-weight: 500;
+  height: 16px;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  min-width: 17px;
+  padding: 0 6px;
+  position: static;
+  text-align: center;
+  width: auto;
+}
+
+
+/* ==========================================================================
+   4. En-tête
+   Maquette : bandeau pro 36 px, ligne logo / recherche / actions 88 px,
+   menu 56 px. Marges latérales 48 px.
+   ========================================================================== */
+
+/* --- 4.1 Bandeau pro (module ttcmsheader, texte du back-office) ----------- */
+
+#header .nav1 {
+  --sl-focus: var(--sl-blanc);
+  background: var(--sl-teal-profond);
+}
+#header .nav1 .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#ttcmsheader,
+#ttcmsheader p {
+  color: var(--sl-blanc);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  padding: 7px 0;
+  text-align: center;
+}
+#ttcmsheader p {
+  padding: 0;
+}
+#ttcmsheader b,
+#ttcmsheader strong {
+  font-weight: 400;
+}
+#ttcmsheader a {
+  color: var(--sl-blanc);
+  text-decoration: underline;
+}
+
+/* --- 4.2 Ligne logo, recherche et actions --------------------------------- */
+
+#header .nav2 {
+  background: var(--sl-blanc);
+  box-shadow: none;
+}
+#header .nav2 > .container {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  max-width: var(--sl-contenu);
+  padding: 20px var(--sl-marge);
+  text-align: left;
+  width: 100%;
+}
+#header .nav2 > .container::before,
+#header .nav2 > .container::after {
+  display: none; /* clearfix du thème, inutile en flex */
+}
+
+/* Logo : 178 × 38 px, jamais déformé */
+#header #_desktop_logo {
+  flex: none;
+  float: none;
+  margin: 0 16px 0 0; /* 24 + 16 = 40 px avant la recherche */
+  order: 1;
+}
+#header #_desktop_logo a {
+  display: block;
+}
+#header #_desktop_logo img.logo {
+  display: block;
+  height: 38px;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
+  width: 178px;
+}
+
+/* Les conteneurs mobiles restent vides sur ordinateur : on les retire du flux */
+#header .nav2 #_mobile_logo,
+#header .nav2 .mobile,
+#header .nav2 #_mobile_cart,
+#header .nav2 #_mobile_user_info {
+  display: none;
+}
+
+/* Recherche : champ de 48 px, loupe à gauche, bouton « Rechercher » à droite */
+#header #search_block_top {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  display: block;
+  flex: 1 1 auto;
+  float: none;
+  margin: 0 16px 0 0; /* 24 + 16 = 40 px avant les actions */
+  max-width: none;
+  min-width: 0;
+  order: 2;
+  padding: 0;
+  position: relative;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+  width: auto;
+}
+#header #search_block_top:hover {
+  border-color: var(--sl-encre);
+}
+#header #search_block_top:has(input.search_query:focus) {
+  border-color: var(--sl-teal-profond);
+  outline: 2px solid var(--sl-focus);
+  outline-offset: 2px;
+}
+#search_block_top #searchbox {
+  --sl-icone: url("../img/icones/magnifying-glass.svg");
+  align-items: center;
+  background: transparent;
+  color: var(--sl-gris);
+  display: flex;
+  float: none;
+  gap: 12px;
+  height: 46px;
+  padding: 0 3px 0 16px;
+  width: 100%;
+}
+#search_block_top #searchbox input.search_query {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--sl-encre);
+  flex: 1 1 auto;
+  font-size: 14px;
+  height: 44px;
+  line-height: 22px;
+  min-height: 0;
+  min-width: 0;
+  outline: none; /* l'anneau de focus est porté par le cadre du champ */
+  padding: 0;
+  width: auto;
+}
+#search_block_top #searchbox input.search_query:focus-visible {
+  outline: none !important; /* !important : annule l'anneau global, déjà affiché sur le cadre */
+}
+#header #search_block_top .btn.button-search {
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-blanc);
+  flex: none;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  left: auto;
+  line-height: 20px;
+  margin: 0;
+  padding: 10px 20px;
+  position: static;
+  right: auto;
+  transition: background-color var(--sl-duree) var(--sl-courbe),
+              transform 120ms var(--sl-courbe);
+}
+#header #search_block_top .btn.button-search:hover {
+  background: var(--sl-action-survol);
+}
+#header #search_block_top .btn.button-search:active {
+  transform: translateY(1px);
+}
+#header #search_block_top .btn.button-search span {
+  color: var(--sl-blanc);
+}
+#header #search_block_top .btn.button-search .material-icons {
+  display: none; /* la loupe est à gauche du champ, comme sur la maquette */
+}
+/* Résultats de la recherche instantanée sous le champ */
+#header #search_block_top #ttsearch_content_result {
+  top: calc(100% + 4px);
+}
+
+/* Actions : Favoris, Mon compte, Mon panier (24 px entre chacune) */
+#header .nav2 .top-wishlist {
+  flex: none;
+  float: none;
+  margin: 0;
+  order: 3;
+  padding: 0;
+}
+#header .nav2 .top-wishlist .wishtlist_top {
+  --sl-icone: url("../img/icones/heart.svg");
+  --sl-icone-taille: 22px;
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  gap: 8px;
+}
+#header .nav2 .top-wishlist .wishtlist_top > i.material-icons {
+  display: none; /* remplacé par le cœur Phosphor */
+}
+#header .nav2 .top-wishlist .wishlist-title {
+  color: inherit;
+  display: inline;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+#header .nav2 .top-wishlist .wishlist-number {
+  background: var(--sl-teal-100);
+  color: var(--sl-teal-profond);
+}
+#header .nav2 .top-wishlist .wishtlist_top:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* Mon compte : lien texte avec pictogramme (le thème en fait un bouton noir) */
+#header #_desktop_user_info {
+  flex: none;
+  float: none;
+  order: 4;
+  position: relative;
+  width: auto;
+}
+#header .ttuserheading {
+  padding: 0;
+}
+#header .ttuserheading > .btn {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--sl-encre);
+  height: auto;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  width: auto; /* le thème fixe 160 px */
+}
+#header .ttuserheading > .btn > a {
+  --sl-icone: url("../img/icones/user.svg");
+  --sl-icone-taille: 22px;
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 8px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+#header .ttuserheading > .btn > a > i.material-icons {
+  display: none; /* remplacé par l'utilisateur Phosphor */
+}
+#header .ttuserheading > .btn:hover > a,
+#header .ttuserheading > .btn > a:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* Menu déroulant du compte (Se connecter / Créer un compte) */
+#header .ttuserheading .toggle-userbutton {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  box-shadow: none;
+  padding: 16px;
+}
+#header .ttuserheading .toggle-userbutton {
+  min-width: 200px;
+  right: 0;
+  top: calc(100% + 12px);
+}
+#header .ttuserheading .toggle-userbutton button {
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+#header .ttuserheading .toggle-userbutton button + button {
+  margin-top: 8px;
+}
+/* !important : le thème force le texte de ces boutons en noir puis en blanc
+   au survol avec !important, ce qui le rendrait illisible sur fond clair */
+#header .ttuserheading .toggle-userbutton button a,
+#header .ttuserheading .toggle-userbutton button:hover a {
+  color: var(--sl-teal-profond) !important;
+  display: block;
+}
+
+/* Mon panier : bouton principal avec compteur */
+#header #_desktop_cart {
+  flex: none;
+  float: none;
+  margin: 0;
+  order: 5;
+  padding: 0;
+  position: relative;
+}
+#header .blockcart {
+  margin: 0;
+}
+#header .blockcart .header {
+  --sl-icone: url("../img/icones/shopping-cart-simple.svg");
+  align-items: center;
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-blanc);
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  min-height: 44px;
+  padding: 12px 16px;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+}
+#header .blockcart .header:hover {
+  background: var(--sl-action-survol);
+}
+/* Panier non vide : le thème entoure le contenu d'un lien, qui devient le bouton */
+#header .blockcart .header:has(> a) {
+  padding: 0;
+}
+#header .blockcart .header > a {
+  align-items: center;
+  color: var(--sl-blanc);
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+}
+#header .blockcart .header i.shopping-cart {
+  display: none; /* remplacé par le chariot Phosphor */
+}
+#header .blockcart .header .hidden-sm-down {
+  color: var(--sl-blanc);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  order: 2;
+  white-space: nowrap;
+}
+#header .blockcart .cart-products-count {
+  background: var(--sl-blanc);
+  color: var(--sl-teal-profond);
+  order: 3;
+  padding: 0 7px;
+}
+
+
+/* ==========================================================================
+   5. Menu
+   « Tous nos produits » (module ttmegamenu) puis les univers (module
+   tttoplink). Le contenu reste celui des modules ; seul l'habillage change.
+   ========================================================================== */
+
+#header .header-top {
+  background: var(--sl-blanc);
+  border-bottom: 1px solid var(--sl-filet);
+  border-top: 1px solid var(--sl-filet);
+}
+#header .header-top > .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#header .header-top .position-static {
+  align-items: center;
+  display: flex;
+  gap: 32px;
+  min-height: 54px;
+}
+
+/* Tous nos produits */
+#header .tt-menu-horizontal {
+  flex: none;
+  float: none;
+  order: 1; /* le module place les univers avant « Tous nos produits » dans le code */
+  padding: 0;
+  position: relative;
+  width: auto;
+}
+#header .tt-menu-horizontal .title-menu-mobile {
+  --sl-icone: url("../img/icones/list.svg");
+  align-items: center;
+  color: var(--sl-teal-profond);
+  display: flex;
+  float: none;
+  gap: 8px;
+  padding: 17px 32px 17px 0; /* 32 px jusqu'au séparateur */
+  position: relative;
+  width: auto;
+}
+#header .tt-menu-horizontal .title-menu-mobile::after {
+  background: var(--sl-filet);
+  bottom: auto;
+  height: 24px;
+  margin: 0;
+  top: calc(50% - 12px);
+  width: 1px;
+}
+#header .tt-menu-horizontal .title-menu-mobile > span {
+  color: inherit;
+  float: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+#header .tt-menu-horizontal .title-menu-mobile > i.material-icons,
+#header .tt-menu-horizontal .title-menu-mobile .menu-icons {
+  display: none; /* pictogramme liste à gauche, comme sur la maquette */
+}
+#header .tt-menu-horizontal .title-menu-mobile:hover,
+#header .tt-menu-horizontal.open .title-menu-mobile {
+  color: var(--sl-action-survol);
+}
+
+/* Univers (liens du module tttoplink) */
+#header #tttop-link-block {
+  flex: 1 1 auto;
+  order: 2;
+  float: none;
+  margin: 0;
+  max-width: none;
+  min-width: 0;
+  padding: 0;
+  width: auto;
+}
+#header #tttop-link-block #tttoplink {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 32px;
+  margin: 0;
+  padding: 0;
+}
+#header #tttop-link-block li.tttoplink {
+  float: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+#header #tttop-link-block li.tttoplink > a {
+  color: var(--sl-encre);
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 17px 0;
+  white-space: nowrap;
+}
+#header #tttop-link-block li.tttoplink > a:hover {
+  color: var(--sl-teal-profond);
+}
+#header .header-top .more {
+  order: 3;
+  color: var(--sl-teal-profond);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* Méga-menu (non maquetté) : liste des univers et panneaux de sous-catégories */
+@media (min-width: 992px) {
+  #header .tt-menu-horizontal .ttmenu-content {
+    border: 1px solid var(--sl-filet) !important; /* !important : le module force sa bordure avec !important */
+    border-radius: 0 0 var(--sl-rayon-md) var(--sl-rayon-md);
+    box-shadow: none;
+    min-width: 280px;
+    top: calc(100% + 1px);
+  }
+  #header .tt-menu-horizontal .menu-dropdown {
+    border: 1px solid var(--sl-filet);
+    border-radius: var(--sl-rayon-md);
+    box-shadow: none;
+    padding: 24px;
+  }
+}
+#header .tt-menu-horizontal ul.menu-content > li > a {
+  align-items: center;
+  border-radius: 0;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 12px;
+  line-height: 20px;
+  padding: 10px 16px;
+}
+#header .tt-menu-horizontal ul.menu-content > li > a > img {
+  float: none;
+  margin: 0;
+}
+#header .tt-menu-horizontal ul.menu-content > li:hover > a {
+  background: var(--sl-neutre-100);
+  color: var(--sl-teal-profond);
+}
+#header #tt-menu-horizontal.tt-menu-horizontal ul li.item-header > a {
+  border-bottom: 1px solid var(--sl-filet);
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0 0 8px;
+  padding: 12px 0 8px;
+}
+#header #tt-menu-horizontal.tt-menu-horizontal ul li ul li > a {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+}
+#header #tt-menu-horizontal.tt-menu-horizontal ul li ul li > a:hover,
+#header #tt-menu-horizontal.tt-menu-horizontal ul li.item-header > a:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* En-tête collant : au défilement, le script du thème fixe la ligne logo /
+   recherche / actions en haut de l'écran et y déplace « Tous nos produits » */
+#header .header-nav.fixed {
+  box-shadow: 0 1px 0 var(--sl-filet);
+}
+#header .header-nav.fixed .nav2 > .container {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal {
+  margin-right: 0;
+  order: 0;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal .title-menu-mobile {
+  padding: 10px 0;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal .title-menu-mobile > span {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal .title-menu-mobile::after {
+  display: none;
+}
+
+
+/* ==========================================================================
+   6. Engagements (module ttcmsfooterservice, haut du pied de page)
+   Encadré à bordure grise, 4 engagements centrés (retouche validée n° 4).
+   ========================================================================== */
+
+#footer .footer-top {
+  background: var(--sl-blanc);
+  padding: var(--sl-section) 0 0;
+}
+#ttcmsfooterservice > .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#ttcmsfooterservice .ttcmsfooterservices {
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  margin: 0;
+  padding: 32px;
+}
+/* Le module affiche les engagements dans un carrousel Owl : chaque
+   engagement occupe une case calculée par le script ; on centre son contenu */
+#ttcmsfooterservice .owl-item {
+  display: flex;
+  justify-content: center;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice {
+  align-items: center;
+  border: 0;
+  display: flex;
+  float: none;
+  gap: 16px;
+  margin: 0;
+  max-width: 301px;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice::before,
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice::after {
+  display: none; /* séparateurs verticaux du thème */
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .icon {
+  --sl-icone-taille: 24px;
+  align-items: center;
+  background: var(--sl-teal-100);
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  display: flex;
+  flex: none;
+  float: none;
+  height: 48px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 48px;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .icon .service-icon {
+  display: none; /* images du thème, remplacées par les pictogrammes Phosphor */
+}
+/* Un pictogramme par engagement, repéré par la classe d'image du module */
+#ttcmsfooterservice .icon:has(.ttsupport_img) { --sl-icone: url("../img/icones/medal.svg"); }
+#ttcmsfooterservice .icon:has(.ttshipping_img) { --sl-icone: url("../img/icones/package.svg"); }
+#ttcmsfooterservice .icon:has(.ttgift_img) { --sl-icone: url("../img/icones/truck.svg"); }
+#ttcmsfooterservice .icon:has(.ttdisc_img) { --sl-icone: url("../img/icones/tag.svg"); }
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .service-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  float: none;
+  gap: 2px;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  width: auto;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .service-title {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .service-desc {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   7. Newsletter (module ps_emailsubscription)
+   Bloc teal clair sur fond blanc, juste au-dessus du pied de page teal.
+   ========================================================================== */
+
+#footer .footer-container #newsletter {
+  float: none;
+  grid-column: 1 / -1;
+  isolation: isolate;
+  margin: 0 0 var(--sl-section);
+  max-width: none;
+  padding: var(--sl-section) 0;
+  position: relative;
+  width: auto;
+}
+/* Bande blanche pleine largeur derrière le bloc : le pied de page est teal */
+#footer .footer-container #newsletter::before {
+  background: var(--sl-blanc);
+  bottom: 0;
+  content: "";
+  left: 50%;
+  margin-left: -50vw;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+#footer .footer-container {
+  overflow-x: clip; /* la bande de 100vw ne crée pas de défilement horizontal */
+}
+#footer #newsletter .newsletter {
+  float: none;
+  width: auto;
+  align-items: center;
+  background: var(--sl-teal-100);
+  border-radius: var(--sl-rayon-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  margin: 0;
+  padding: 32px 40px;
+  box-shadow: none;
+}
+#footer #newsletter .newsletter > .container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+#footer #newsletter .newsletter > .container::before,
+#footer #newsletter .newsletter > .container::after {
+  display: none;
+}
+#footer #newsletter .tt-content {
+  align-items: center;
+  column-gap: 20px;
+  display: grid;
+  flex: 0 1 auto;
+  float: none;
+  grid-template-columns: 56px auto;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  row-gap: 4px;
+  width: auto;
+}
+#footer #newsletter .title-icon {
+  display: contents; /* le pictogramme, le titre et l'accroche partagent la grille */
+}
+#footer #newsletter .title-icon > i.material-icons {
+  /* pastille blanche de 56 px ; la ligature Material est masquée (taille 0) */
+  --sl-icone: url("../img/icones/envelope-simple.svg");
+  --sl-icone-taille: 28px;
+  align-items: center;
+  background: var(--sl-blanc);
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  display: flex;
+  float: none;
+  font-size: 0;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 56px;
+  justify-content: center;
+  margin: 0;
+  width: 56px;
+}
+#footer #newsletter .tt-title {
+  text-align: left;
+  color: var(--sl-encre);
+  font-size: 28px;
+  font-weight: 600;
+  grid-column: 2;
+  line-height: 36px;
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+}
+#footer #newsletter .tt-content > p {
+  text-align: left;
+  color: var(--sl-encre);
+  float: none;
+  font-size: 16px;
+  grid-column: 2;
+  line-height: 26px;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#footer #newsletter .block_content {
+  flex: 0 1 520px;
+  float: none;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  width: auto;
+}
+#footer #newsletter .block_content form {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+#footer #newsletter .block_content .input-wrapper {
+  flex: 1 1 280px;
+  margin: 0;
+  order: 1;
+  padding: 0;
+}
+#footer #newsletter .block_content .input-wrapper input[type="email"] {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-encre);
+  font-size: 14px;
+  height: 48px;
+  line-height: 22px;
+  padding: 0 16px;
+  width: 100%;
+}
+#footer #newsletter .block_content input.btn-primary {
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-blanc);
+  float: none;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  line-height: 20px;
+  margin: 0;
+  order: 2;
+  padding: 0 20px;
+  position: static;
+}
+#footer #newsletter .block_content input.btn-primary:hover {
+  background: var(--sl-action-survol);
+}
+#footer #newsletter .block_content .msg {
+  color: var(--sl-gris);
+  flex: 1 1 100%;
+  font-size: 12px;
+  line-height: 16px;
+  order: 3;
+  padding: 0;
+}
+#footer #newsletter .block_content .msg .news_desc {
+  color: var(--sl-gris);
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   8. Pied de page
+   Fond teal profond, 5 colonnes, ligne Avis Garantis, bas de page avec
+   copyright et moyens de paiement. Les liens restent ceux des modules.
+   ========================================================================== */
+
+#footer {
+  --sl-focus: var(--sl-blanc);
+  background: var(--sl-teal-profond);
+}
+#footer .footer-top,
+#footer #newsletter {
+  --sl-focus: var(--sl-teal-profond);
+}
+#footer .footer-container {
+  background: var(--sl-teal-profond);
+  margin: 0;
+  padding: 0;
+}
+#footer .footer-container > .container,
+#footer .bottom-footer > .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#footer .footer-container > .container > .row {
+  column-gap: 48px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  row-gap: 0;
+}
+#footer .footer-container > .container > .row::before,
+#footer .footer-container > .container > .row::after {
+  display: none;
+}
+/* Les 4 colonnes de liens sont dans un même bloc : elles rejoignent la grille */
+#footer .footer-container .links.link-list {
+  display: contents;
+}
+#footer .footer-container .links {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#footer .footer-container .links .wrapper,
+#footer .footer-container .block-contact {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+
+/* Titres de colonnes */
+#footer .footer-container .links h3,
+#footer .footer-container .block-contact h3,
+#footer .footer-container .links .title .h3,
+#footer .footer-container .block-contact .block-contact-title {
+  color: var(--sl-blanc);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+  margin: 0 0 16px;
+  padding: 0;
+  text-transform: none;
+}
+#footer .footer-container .links h3::after,
+#footer .footer-container .links h3::before {
+  display: none; /* filets décoratifs du thème */
+}
+
+/* Liens */
+#footer .footer-container .links ul {
+  margin: 0;
+  padding: 0;
+}
+#footer .footer-container .links ul > li {
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 8px;
+  padding: 0;
+}
+#footer .footer-container .links ul > li:last-child {
+  margin-bottom: 0;
+}
+#footer .footer-container li a,
+#footer .footer-container .links li a {
+  color: var(--sl-logo-clair);
+  display: inline;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+#footer .footer-container li a:hover,
+#footer .footer-container .links li a:hover {
+  color: var(--sl-blanc);
+  padding: 0;
+  text-decoration-color: currentColor;
+}
+#footer .footer-container li a::before {
+  display: none; /* puces animées du thème */
+}
+
+/* Nos informations : adresse, téléphone, e-mail
+   (le bloc porte aussi la classe .links : sélecteurs renforcés) */
+#footer .footer-container .block-contact ul > li.block {
+  align-items: center; /* lignes d'une seule ligne : pictogramme centré (retouche n° 5) */
+  color: var(--sl-logo-clair);
+  display: flex;
+  font-size: 14px;
+  gap: 10px;
+  line-height: 22px;
+  margin: 0 0 16px;
+  padding: 0;
+}
+#footer .footer-container .block-contact ul > li.block:last-child {
+  margin-bottom: 0;
+}
+#footer .footer-container .block-contact ul > li.block:first-child {
+  align-items: flex-start; /* l'adresse reste alignée en haut (retouche n° 5) */
+}
+#footer .block-contact .block:first-child .icon {
+  margin-top: 2px;
+}
+#footer .block-contact .block .data,
+#footer .block-contact .block .data a {
+  align-items: center;
+  color: var(--sl-logo-clair);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 0 10px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+#footer .block-contact .block:first-child .data {
+  display: block;
+}
+#footer .block-contact .block .data a:hover {
+  color: var(--sl-blanc);
+}
+#footer .block-contact .block .icon {
+  --sl-icone: url("../img/icones/map-pin.svg");
+  --sl-icone-taille: 18px;
+  color: var(--sl-logo-clair);
+  flex: none;
+  float: none;
+  height: auto;
+  margin: 0;
+  width: auto;
+}
+#footer .block-contact .block .icon > i.material-icons {
+  display: none; /* remplacé par les pictogrammes Phosphor */
+}
+#footer .block-contact .block:has(a[href^="tel:"]) .icon {
+  --sl-icone: url("../img/icones/phone.svg");
+}
+#footer .block-contact .block:has(script, a[href^="mailto:"]) .icon {
+  --sl-icone: url("../img/icones/envelope-simple.svg");
+}
+/* Les mentions « Appelez-nous : » et « Email : » restent lues par les
+   lecteurs d'écran mais ne s'affichent pas, comme sur la maquette */
+#footer .block-contact .block .title {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Ligne Avis Garantis (module steavisgarantis) */
+#footer #steavisgarantisFooterVerif {
+  align-items: center;
+  color: var(--sl-logo-clair);
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  line-height: 22px;
+  margin: 48px 0;
+  padding: 0;
+  text-align: left;
+}
+#footer #steavisgarantisFooterVerif img {
+  height: 20px;
+  margin: 0;
+  width: 20px;
+}
+#footer #steavisgarantisFooterText,
+#footer #steavisgarantisFooterText a {
+  color: var(--sl-logo-clair);
+  font-size: 14px;
+  line-height: 22px;
+}
+#footer #steavisgarantisFooterText a:hover {
+  color: var(--sl-blanc);
+}
+
+/* Bas de page : copyright, réseaux sociaux, moyens de paiement */
+#footer .bottom-footer {
+  background: var(--sl-teal-profond);
+  margin: 0;
+  padding: 0;
+}
+#footer .bottom-footer > .container > .row {
+  align-items: center;
+  border-top: 1px solid var(--sl-logo-clair);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  justify-content: space-between;
+  margin: 0;
+  padding: 20px 0;
+}
+#footer .bottom-footer > .container > .row::before,
+#footer .bottom-footer > .container > .row::after {
+  display: none;
+}
+#footer .bottom-footer .ttcontent,
+#footer .bottom-footer .block-social,
+#footer .bottom-footer #ttcmspaymentlogo {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#footer .bottom-footer .ttcontent p,
+#footer .bottom-footer .ttcontent a {
+  color: var(--sl-logo-clair);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  text-align: left;
+}
+#footer .bottom-footer .ttcontent a:hover {
+  color: var(--sl-blanc);
+}
+
+/* Réseaux sociaux (absents de la maquette, conservés) */
+#footer .block-social ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+#footer .block-social li {
+  background: none;
+  height: auto;
+  margin: 0;
+  width: auto;
+}
+#footer .block-social li a {
+  --sl-icone-taille: 20px;
+  align-items: center;
+  background: none;
+  color: var(--sl-logo-clair);
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+#footer .block-social li a:hover {
+  color: var(--sl-blanc);
+}
+#footer .block-social li a p {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+#footer .block-social li.facebook a { --sl-icone: url("../img/icones/facebook-logo.svg"); }
+#footer .block-social li.youtube a { --sl-icone: url("../img/icones/youtube-logo.svg"); }
+#footer .block-social li.linkedin a { --sl-icone: url("../img/icones/linkedin-logo.svg"); }
+
+/* Moyens de paiement : logos sur pastilles blanches */
+#ttcmspaymentlogo .payment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+#ttcmspaymentlogo .payment-list li {
+  align-items: center;
+  background: var(--sl-blanc);
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  float: none;
+  height: 30px;
+  justify-content: center;
+  margin: 0;
+  padding: 4px 6px;
+  width: 60px;
+}
+#ttcmspaymentlogo .payment-list li img {
+  height: 22px;
+  max-width: 48px;
+  object-fit: contain;
+  width: 48px;
+}
+
+/* Bouton « retour en haut » */
+#goToTop {
+  --sl-icone: url("../img/icones/caret-up.svg");
+  align-items: center;
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-blanc);
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+  width: 40px;
+}
+#goToTop:hover {
+  background: var(--sl-action-survol);
+  color: var(--sl-blanc);
+}
+#goToTop > i.material-icons {
+  display: none; /* remplacé par la flèche Phosphor */
+}
+
+
+/* ==========================================================================
+   9. Responsive de l'en-tête et du pied de page
+   Aucune version mobile n'est maquettée. Points de rupture du thème
+   parent : le script du thème passe en mode mobile sous 992 px (il déplace
+   alors logo, compte et panier dans les conteneurs _mobile_).
+   Grilles du pied de page : 5 → 3 → 2 → 1 colonnes.
+   ========================================================================== */
+
+/* Texte réservé aux lecteurs d'écran (libellés masqués à l'écran) */
+@media (max-width: 1199px) {
+  #header .tt-menu-horizontal .title-menu-mobile > span {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+/* 992 à 1199 px : la recherche passe sur sa propre ligne,
+   « Tous nos produits » devient un pictogramme pour garder les univers sur une ligne */
+@media (min-width: 992px) and (max-width: 1199px) {
+  #header .nav2 > .container {
+    flex-wrap: wrap;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    row-gap: 16px;
+  }
+  #header #_desktop_logo {
+    margin-right: auto;
+  }
+  #header #search_block_top {
+    flex: 1 1 100%;
+    margin: 0;
+    order: 6;
+  }
+  /* !important : le thème enfant actuel fixe ici la largeur (157 px), supprime
+     la marge et le séparateur avec !important */
+  #header .tt-menu-horizontal {
+    width: auto !important;
+  }
+  #header .tt-menu-horizontal .title-menu-mobile {
+    padding-right: 24px !important;
+  }
+  #header .tt-menu-horizontal .title-menu-mobile::after {
+    display: block !important;
+  }
+  #header .header-top .position-static {
+    gap: 24px;
+  }
+  #header #tttop-link-block #tttoplink {
+    gap: 0 24px;
+  }
+}
+
+/* À partir de 992 px : libellé « Mon panier » toujours affiché */
+@media (min-width: 992px) {
+  #header .blockcart .header .hidden-sm-down {
+    display: inline;
+  }
+}
+
+/* Moins de 992 px : en-tête compact
+   ligne 1 : menu, logo, favoris, compte, panier ; ligne 2 : recherche */
+@media (max-width: 991px) {
+  #header .nav2 > .container {
+    column-gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px var(--sl-marge);
+    row-gap: 12px;
+  }
+  #header .nav2 #_desktop_logo,
+  #header .nav2 #_desktop_cart,
+  #header .nav2 #_desktop_user_info,
+  #header .nav2 .mobile {
+    display: none; /* vidés par le script du thème en mode mobile */
+  }
+
+  /* Bouton du menu (le thème déplace ici « Tous nos produits ») */
+  #header .nav2 #tt-menu-horizontal {
+    order: 1;
+  }
+  #header .nav2 #tt-menu-horizontal .title-menu-mobile {
+    --sl-icone-taille: 24px;
+    border-radius: var(--sl-rayon-sm);
+    color: var(--sl-encre);
+    margin: 0;
+    padding: 10px 10px 10px 0;
+  }
+  #header .nav2 #tt-menu-horizontal .title-menu-mobile::after {
+    display: none;
+  }
+
+  /* Logo */
+  #header .nav2 #_mobile_logo {
+    display: block;
+    flex: 1 1 0;
+    float: none;
+    margin: 0;
+    min-width: 0; /* le logo rétrécit plutôt que de pousser les actions à la ligne */
+    order: 2;
+  }
+  #header .nav2 #_mobile_logo a {
+    display: block;
+  }
+  #header .nav2 #_mobile_logo img.logo {
+    display: block;
+    height: 32px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+    width: 150px;
+  }
+
+  /* Favoris, compte : pictogrammes seuls (libellés lus par les lecteurs d'écran) */
+  #header .nav2 .top-wishlist {
+    display: block;
+    float: none;
+    order: 3;
+    width: auto;
+  }
+  #header .nav2 .top-wishlist .wishtlist_top {
+    gap: 4px;
+    padding: 10px 6px;
+  }
+  #header .nav2 .top-wishlist .wishlist-title,
+  #header .ttuserheading > .btn > a {
+    font-size: 0;
+  }
+  #header .nav2 .top-wishlist .wishlist-title {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+  #header .nav2 #_mobile_user_info {
+    display: block;
+    flex: none;
+    float: none;
+    margin: 0;
+    order: 4;
+    padding: 0;
+  }
+  #header .nav2 #_mobile_user_info .ttuserheading {
+    padding: 0 !important; /* !important : le thème force 5 px sous 544 px */
+  }
+  #header .ttuserheading > .btn > a {
+    padding: 10px 6px;
+    visibility: visible; /* le thème masque le lien et ne garde que l'icône Material */
+  }
+  #header .ttuserheading .toggle-userbutton {
+    right: -60px;
+  }
+
+  /* Panier : bouton principal compact */
+  /* !important : le thème enfant actuel force marges, fond #23adb0 et texte
+     blanc du panier mobile avec !important */
+  #header .nav2 #_mobile_cart {
+    display: block;
+    flex: none;
+    float: none;
+    margin: 0;
+    order: 5;
+    padding: 0 !important;
+  }
+  #header #_mobile_cart .blockcart .header {
+    background-color: var(--sl-teal-profond) !important;
+    gap: 8px;
+    min-height: 44px;
+    padding: 12px !important;
+  }
+  #header #_mobile_cart .blockcart .header:hover {
+    background-color: var(--sl-action-survol) !important;
+  }
+  #header #_mobile_cart .blockcart .header:has(> a) {
+    padding: 0 !important;
+  }
+  #header #_mobile_cart .blockcart .header > a {
+    gap: 8px;
+    padding: 12px;
+  }
+  #header #_mobile_cart .blockcart .header .cart-products-count {
+    color: var(--sl-teal-profond) !important;
+  }
+
+  /* Recherche sur toute la largeur */
+  #header #search_block_top {
+    flex: 1 1 100%;
+    margin: 0;
+    order: 6;
+  }
+
+  /* Pied de page : 2 colonnes */
+  #footer .footer-container > .container > .row {
+    column-gap: 32px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+  #footer #steavisgarantisFooterVerif {
+    margin: 0 0 40px;
+  }
+  #footer #newsletter .newsletter {
+    padding: 24px;
+  }
+  #footer #newsletter .block_content {
+    flex: 1 1 100%;
+  }
+}
+
+/* 992 à 1199 px : pied de page sur 3 colonnes */
+@media (min-width: 992px) and (max-width: 1199px) {
+  #footer .footer-container > .container > .row {
+    column-gap: 32px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+  #footer #steavisgarantisFooterVerif {
+    margin: 0 0 40px;
+  }
+}
+
+/* Moins de 768 px : téléphone */
+@media (max-width: 767px) {
+  #ttcmsheader,
+  #ttcmsheader p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  #ttcmsheader {
+    padding: 6px 0;
+  }
+  #header .nav2 #_mobile_logo img.logo {
+    height: 28px;
+    width: 120px;
+  }
+  #header .blockcart .header .hidden-sm-down {
+    display: none;
+  }
+  #search_block_top #searchbox {
+    gap: 8px;
+    padding-left: 12px;
+  }
+  #header #search_block_top .btn.button-search {
+    padding: 10px 14px;
+  }
+  #ttcmsfooterservice .ttcmsfooterservices {
+    padding: 24px 16px;
+  }
+  /* Les 4 engagements sont empilés au lieu de défiler un par un.
+     !important : le script du carrousel Owl écrit largeurs et décalage en
+     style en ligne */
+  #ttcmsfooterservice .owl-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transform: none !important;
+    width: auto !important;
+  }
+  #ttcmsfooterservice .owl-item {
+    justify-content: flex-start;
+    width: auto !important;
+  }
+  #ttcmsfooterservice .owl-item.cloned {
+    display: none;
+  }
+  #footer #newsletter .tt-title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  #footer #newsletter .tt-content > p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  /* Pied de page : une colonne, titres en accordéon (fonctionnement du thème) */
+  #footer .footer-container > .container > .row {
+    display: block;
+  }
+  #footer .footer-container .links .wrapper,
+  #footer .footer-container .block-contact {
+    border-bottom: 1px solid var(--sl-teal);
+    padding: 16px 0;
+  }
+  #footer .footer-container .links .title {
+    align-items: center;
+    color: var(--sl-blanc);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+  #footer .footer-container .links .title .h3,
+  #footer .footer-container .block-contact .block-contact-title {
+    margin: 0;
+  }
+  #footer .footer-container .links .title .material-icons {
+    color: var(--sl-blanc);
+  }
+  #footer .footer-container .links ul.collapse.in,
+  #footer .footer-container .links ul.collapse.show {
+    padding-top: 16px;
+  }
+  #footer #steavisgarantisFooterVerif {
+    margin: 24px 0;
+  }
+  #footer .bottom-footer > .container > .row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

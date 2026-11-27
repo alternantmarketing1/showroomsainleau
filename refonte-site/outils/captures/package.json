@@ -1,0 +1,10 @@
+{
+  "name": "captures-refonte-sainleau",
+  "private": true,
+  "description": "Captures du site en ligne avec et sans la feuille SAINLEAU (outil interne, rien n'est envoyé au site)",
+  "dependencies": {
+    "jquery": "3.6.0",
+    "slick-carousel": "1.8.1",
+    "sweetalert2": "11.22.0"
+  }
+}
