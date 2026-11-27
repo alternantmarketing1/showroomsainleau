@@ -8,7 +8,9 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const NM = path.join(__dirname, 'node_modules');
-const BLOCK = /googletagmanager|google-analytics|googleadservices|doubleclick|hotjar|smartsupp|facebook\.(com|net)|fbcdn|doofinder|klaviyo|clarity\.ms|bing\.com|googlesyndication|recaptcha|societe-des-avis-garantis|cloudflareinsights|tiktok|linkedin\.com|tawk/i;
+const BLOCK = /googletagmanager|google-analytics|googleadservices|doubleclick|hotjar|facebook\.(com|net)|fbcdn|doofinder|klaviyo|clarity\.ms|bing\.com|googlesyndication|recaptcha|cloudflareinsights|tiktok|linkedin\.com|tawk/i;
+// Widgets affichés sur la page (chat, avis, paiement) : chargés, sauf avec sansTiers
+const TIERS = /smartsupp|societe-des-avis-garantis|fintecture/i;
 const MIME = { '.css': 'text/css', '.js': 'application/javascript', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png' };
 function local(url) {
   let m;
@@ -52,9 +54,14 @@ async function defiler(page) {
   for (const t of taches) {
     const ctx = await browser.newContext({ viewport: { width: t.width, height: t.height || 900 }, deviceScaleFactor: t.scale || 1, locale: 'fr-FR' });
     const page = await ctx.newPage();
+    if (t.journal) {
+      page.on('requestfailed', q => { if (TIERS.test(q.url())) console.log('échec', q.url().slice(0, 120), q.failure() && q.failure().errorText); });
+      page.on('pageerror', e => console.log('erreur JS', e.message.split('\n')[0]));
+    }
     await page.route('**/*', async r => {
       const u = r.request().url();
-      const m = u.match(/\/__module__\/(.+?)(\?.*)?$/);
+      // Fichiers du module : la copie de travail remplace la version installée
+      const m = u.match(/\/__module__\/(.+?)(\?.*)?$/) || u.match(/\/modules\/sainleaurefonte\/(.+?)(\?.*)?$/);
       if (m) {
         const p = path.join(moduleDir, m[1]);
         return fs.existsSync(p) ? r.fulfill({ path: p, contentType: MIME[path.extname(p)] || 'application/octet-stream' }) : r.fulfill({ status: 404, body: '' });
@@ -64,15 +71,17 @@ async function defiler(page) {
       if (t.css && r.request().resourceType() === 'document' && r.request().isNavigationRequest() && r.request().frame() === page.mainFrame()) {
         try {
           let html = execFileSync('curl', ['-sS', '-L', '--max-time', '60', '-A', 'Mozilla/5.0 (X11; Linux x86_64) Chrome/130 Safari/537.36', u], { maxBuffer: 50 * 1024 * 1024 }).toString('utf8');
-          html = html.replace('</head>', '<link rel="stylesheet" href="/__module__/views/css/sainleau.css" media="all"></head>');
-          html = html.replace(/<\/body>(?![\s\S]*<\/body>)/, '<script src="/__module__/views/js/sainleau.js"></script></body>');
+          if (!/modules\/sainleaurefonte\//.test(html)) {
+            html = html.replace('</head>', '<link rel="stylesheet" href="/__module__/views/css/sainleau.css" media="all"></head>');
+            html = html.replace(/<\/body>(?![\s\S]*<\/body>)/, '<script src="/__module__/views/js/sainleau.js"></script></body>');
+          }
           return r.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html });
         } catch (e) { console.log('curl ?', e.message.split('\n')[0]); }
       }
-      if (BLOCK.test(u)) return r.abort();
+      if (BLOCK.test(u) || (t.sansTiers && TIERS.test(u))) return r.abort();
       const f = local(u);
       if (f && fs.existsSync(f)) return r.fulfill({ path: f, contentType: MIME[path.extname(f)] || 'text/plain' });
-      if (/^https?:\/\/(?!dev\.sainleau\.com|sainleau\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)/.test(u)) return r.abort();
+      if (/^https?:\/\/(?!dev\.sainleau\.com|sainleau\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)/.test(u) && !TIERS.test(u)) return r.abort();
       return r.continue();
     });
     try {

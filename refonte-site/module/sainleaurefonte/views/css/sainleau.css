@@ -858,8 +858,20 @@ select.form-control,
   float: none;
   order: 1; /* le module place les univers avant « Tous nos produits » dans le code */
   padding: 0;
-  position: relative;
   width: auto;
+}
+/* Panneau du menu : filet gris de la charte (le module le borde en teal
+   clair avec !important) */
+#header .tt-menu-horizontal .ttmenu-content {
+  border-color: var(--sl-filet) !important; /* !important : couleur imposée par le module avec !important */
+}
+/* Ordinateur seulement : la liste se cale sous le bouton. Sous 992 px, le
+   panneau du menu mobile doit se caler sur l'en-tête (position: static du
+   thème), sinon il ne fait que 4 px de large (défaut B1). */
+@media (min-width: 992px) {
+  #header .tt-menu-horizontal {
+    position: relative;
+  }
 }
 #header .tt-menu-horizontal .title-menu-mobile {
   --sl-icone: url("../img/icons/list.svg");
@@ -916,6 +928,21 @@ select.form-control,
   margin: 0;
   padding: 0;
 }
+/* Sous 1440 px, l'écart entre les univers se resserre pour que les 7 liens
+   tiennent sur une ligne (défaut M4). 100vw compte la barre de défilement. */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  #header #tttop-link-block #tttoplink {
+    column-gap: clamp(12px, calc((100vw - 1120px) / 6), 32px);
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  #header #tttop-link-block #tttoplink {
+    column-gap: clamp(10px, calc((100vw - 880px) / 6), 32px);
+  }
+  #header #tttop-link-block #tttoplink li.tttoplink > a {
+    font-size: 13px; /* sélecteur renforcé : la règle de base (14 px) vient plus loin */
+  }
+}
 #header #tttop-link-block li.tttoplink {
   float: none;
   margin: 0;
@@ -931,8 +958,16 @@ select.form-control,
   padding: 17px 0;
   white-space: nowrap;
 }
-#header #tttop-link-block li.tttoplink > a:hover {
+/* Survol : texte teal profond souligné, sans fond. Le module tttoplink
+   met un fond teal clair, illisible avec ce texte (défaut M3). */
+#header #tttop-link-block .block_content li.tttoplink:hover > a,
+#header #tttop-link-block li.tttoplink > a:hover,
+#header #tttop-link-block li.tttoplink > a:focus-visible {
+  background: transparent;
   color: var(--sl-teal-profond);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 #header .header-top .more {
   order: 3;
@@ -952,11 +987,30 @@ select.form-control,
     min-width: 280px;
     top: calc(100% + 1px);
   }
+  /* Sous-menu aligné sur le haut de la liste : le thème le centre en
+     hauteur, il remontait sur l'en-tête (défaut M8) */
   #header .tt-menu-horizontal .menu-dropdown {
     border: 1px solid var(--sl-filet);
     border-radius: var(--sl-rayon-md);
+    bottom: auto;
     box-shadow: none;
+    margin: 0;
     padding: 24px;
+    top: -1px;
+  }
+  /* Chevron à droite, orienté vers le sous-menu qui s'ouvre à droite */
+  #header .tt-menu-horizontal ul.menu-content > li > a::before {
+    display: none;
+  }
+  #header .tt-menu-horizontal ul.menu-content > li.parent > a::after {
+    background-color: currentColor;
+    content: "";
+    flex: none;
+    height: 14px;
+    margin-left: auto;
+    -webkit-mask: url("../img/icons/caret-right.svg") center / contain no-repeat;
+    mask: url("../img/icons/caret-right.svg") center / contain no-repeat;
+    width: 14px;
   }
 }
 #header .tt-menu-horizontal ul.menu-content > li > a {
@@ -2025,6 +2079,7 @@ select.form-control,
 #wrapper > .breadcrumb {
   background: transparent;
   border: 0; /* le filet sous le menu est déjà porté par l'en-tête */
+  float: none; /* en float, le centrage disparaît au-delà de 1440 px (défaut M2) */
   margin: 0 auto;
   max-width: var(--sl-contenu);
   padding: 24px var(--sl-marge) 0;
@@ -2123,6 +2178,8 @@ select.form-control,
 #index #tt_cat_featured .product-list,
 #index #ttcmstopbanner .cmstopbanner,
 #product .product-accessories .products {
+  border: 0;
+  box-shadow: none; /* ombre du thème : elle dessinait un cadre plus large que le contenu (défaut M13) */
   display: block;
   float: none;
   margin: 0;
@@ -2132,6 +2189,27 @@ select.form-control,
 }
 #wrapper .owl-carousel .owl-item {
   padding-right: var(--sl-gap-carrousel);
+}
+html {
+  overflow-x: clip; /* aucun défilement horizontal, même avec le mini-panier rangé hors écran (défaut M4) */
+}
+/* Cartes d'un carrousel à hauteur égale, boutons alignés en bas (défaut M13) */
+#wrapper .owl-carousel .owl-stage {
+  display: flex;
+}
+#wrapper .owl-carousel .owl-item {
+  display: flex;
+  flex: 0 0 auto;
+}
+#wrapper .owl-carousel .owl-item > *,
+#wrapper .owl-carousel .owl-item .product-miniature {
+  height: 100%;
+  width: 100%;
+}
+/* Rognage au bord du contenu : la gouttière ajoutée à droite ne laisse
+   plus voir le bord de la carte suivante (défaut M13) */
+#wrapper .owl-carousel .owl-stage-outer {
+  clip-path: inset(0 var(--sl-gap-carrousel) 0 0);
 }
 #wrapper .owl-carousel .owl-stage-outer {
   float: none; /* le thème le met en float : le carrousel n'aurait plus de hauteur */
@@ -2643,7 +2721,8 @@ select.form-control,
    Le menu vertical ouvert par-dessus (« Shop Categories ») est un décor du
    thème absent de la maquette : il est masqué, le menu « Tous nos produits »
    de l'en-tête reste disponible. */
-#index .tt-serviceslider {
+#index #wrapper .tt-serviceslider {
+  float: none; /* en float, le slider reste collé à gauche au-delà de 1440 px (défaut M2) */
   margin: 0 auto;
   max-width: var(--sl-contenu);
   padding: 24px var(--sl-marge) 0;
@@ -3008,9 +3087,20 @@ select.form-control,
 /* --- 12.8 Avis Garantis : widget du module, entre les conseils et les engagements */
 #index #steavisgarantis,
 #index .da_sa_global_container {
+  box-sizing: border-box;
   margin: 0 auto;
   max-width: var(--sl-contenu);
   padding: var(--sl-section) var(--sl-marge) 0;
+}
+/* Le module écrit « padding: 5px 0; width: 100% » en style en ligne : sans
+   marges latérales, le widget débordait du contenu (défaut M14).
+   !important : seule façon de passer devant ce style en ligne. */
+#index #steavisgarantis {
+  padding: var(--sl-section) var(--sl-marge) 0 !important;
+}
+#index #steavisgarantis iframe {
+  display: block;
+  max-width: 100%;
 }
 
 
@@ -3946,7 +4036,9 @@ select.form-control,
   align-items: center;
   column-gap: 20px;
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
+  /* fit-content : la référence et la marque passent à la ligne plutôt que
+     d'élargir la colonne */
+  grid-template-columns: fit-content(60%) minmax(0, 1fr);
   position: relative;
 }
 #product .product-information-inner::before {
@@ -4032,6 +4124,7 @@ select.form-control,
 /* !important : le nombre en stock a une couleur verte écrite en style en ligne */
 #product #product-availability span {
   color: inherit !important;
+  white-space: nowrap;
 }
 #product #product-availability .material-icons {
   font-size: 0;
@@ -4585,9 +4678,10 @@ select.form-control,
   border: 1px solid var(--sl-filet);
   border-bottom: 0;
   border-radius: var(--sl-rayon-md) var(--sl-rayon-md) 0 0;
+  align-items: center;
   display: grid;
   gap: 16px;
-  grid-template-columns: 160px minmax(0, 1fr);
+  grid-template-columns: 144px minmax(0, 1fr); /* valeur alignée sur celles du tableau (défaut m5) */
   margin: 0;
   order: 2;
   padding: 12px 16px;
@@ -4877,6 +4971,7 @@ select.form-control,
 #js-product-list .tab-pane,
 #products .grid-default {
   border: 0;
+  box-shadow: none; /* ombre du thème autour de la liste, visible avec peu de produits */
   margin: 0;
   padding: 0; /* #wrapper : le thème met 30 px 15 px et un cadre autour de la liste */
 }
@@ -5052,12 +5147,16 @@ select.form-control,
    240 px + 3 cartes ; sous 992 px : une colonne, filtres au-dessus, 3 puis
    2 cartes par ligne. Sous 768 px, les filtres s'ouvrent avec le bouton
    « Filtre » du thème. */
+/* 4 cartes à partir de 1366 px seulement : en dessous, elles feraient moins
+   de 220 px et le bouton passerait sous la quantité */
+@media (max-width: 1365px) {
+  #js-product-list .tab-content .tab-pane.active {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 @media (max-width: 1199px) {
   :is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #wrapper > .content_wrap > .container {
     grid-template-columns: 240px minmax(0, 1fr);
-  }
-  #js-product-list .tab-content .tab-pane.active {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @media (max-width: 991px) {
@@ -5159,6 +5258,13 @@ select.form-control,
 #product .product-cover {
   overflow: hidden; /* image de zoom positionnée par le thème */
 }
+/* 992 à 1279 px : galerie et informations se partagent la largeur */
+@media (min-width: 992px) and (max-width: 1279px) {
+  #product #main .product-container > .row {
+    gap: 32px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
 @media (max-width: 991px) {
   #product #main .product-container > .row {
     gap: 32px;
@@ -5218,4 +5324,259 @@ select.form-control,
   #product .sl-paiement { grid-row: 9; }
   #product #ttsizeguide { grid-row: 10; }
   #product .product-additional-info { grid-row: 11; }
+}
+
+
+/* ==========================================================================
+   17. Corrections de la version 1.1.0 (recensement des défauts du 27/11)
+   ========================================================================== */
+
+/* --- 17.1 Fiche produit : déclinaisons en pastilles (défaut m5) ----------- */
+#product .product-variants {
+  position: relative;
+  z-index: 1; /* au-dessus du fond gris du bloc d'achat (le libellé passait dessous) */
+}
+#product .product-variants-item .control-label {
+  display: block;
+  float: none; /* en float, le libellé repoussait les pastilles à droite */
+}
+#product .product-variants-item ul {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  width: auto;
+}
+#product .product-variants-item .input-container {
+  float: none;
+  margin: 0;
+  position: relative;
+}
+#product .product-variants-item .input-radio {
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+#product .product-variants-item .radio-label {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  box-shadow: none;
+  color: var(--sl-encre);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 9px 15px;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+}
+#product .product-variants-item .input-radio:hover + .radio-label {
+  border-color: var(--sl-teal-profond);
+}
+#product .product-variants-item .input-radio:checked + .radio-label {
+  border: 2px solid var(--sl-teal-profond);
+  color: var(--sl-teal-profond);
+  padding: 8px 14px;
+}
+#product .product-variants-item .input-radio:focus-visible + .radio-label {
+  outline: 2px solid var(--sl-teal-profond);
+  outline-offset: 2px;
+}
+/* Image « pas de photo » de PrestaShop collée à chaque valeur */
+#product .product-variants-item .radio-label img[src*="/default.jpg"],
+#product .product-variants-item .radio-label img[data-lazy-src*="/default.jpg"] {
+  display: none;
+}
+#product .product-variants-item select.form-control {
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  height: 44px;
+  margin-top: 8px;
+}
+
+/* --- 17.2 Fiche produit : référence et marque (défaut m5) ---------------- */
+#product .product-labels {
+  gap: 4px 16px;
+}
+#product .product-labels .sl-paire,
+#product .product-labels .js-product-reference-block {
+  display: inline-flex;
+  gap: 4px;
+  white-space: nowrap;
+}
+#product .product-labels .label {
+  margin: 0;
+}
+/* !important : marge de 25 px écrite en style en ligne par le thème */
+#product .product-labels .js-product-reference-value {
+  margin-right: 0 !important;
+}
+
+/* --- 17.3 Fiche produit : encadré rose Virement Maîtrisé (défaut M11) ----
+   La bannière « it-st » du module Fintecture répète la ligne placée sous le
+   bouton d'ajout, dans un rose hors charte. */
+#product img.fintecture-banner,
+#product picture:has(> img.fintecture-banner) {
+  display: none;
+}
+
+/* --- 17.4 Barre d'ajout collante (défaut M12) -----------------------------
+   Quantité en − 1 + à partir des boutons haut / bas du module, comme dans le
+   bloc d'achat. */
+.add_to_cart_sticky .container {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+.add_to_cart_sticky .ttstickyAddToCart-qty-container {
+  align-items: stretch;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  height: 44px;
+  overflow: hidden;
+  position: relative;
+  width: 120px;
+}
+.add_to_cart_sticky .ttstickyAddToCart-qty-container .quantity-nav {
+  display: contents;
+}
+.add_to_cart_sticky .ttstickyAddToCart-qty-container .ttstickyAddToCart-qty {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  background: transparent;
+  border: 0;
+  color: var(--sl-encre);
+  flex: 1 1 auto;
+  font-size: 14px;
+  height: 100%;
+  min-width: 0;
+  order: 0;
+  padding: 0;
+  text-align: center;
+  width: auto;
+}
+.add_to_cart_sticky .ttstickyAddToCart-qty::-webkit-inner-spin-button,
+.add_to_cart_sticky .ttstickyAddToCart-qty::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.add_to_cart_sticky .quantity-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--sl-encre);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 36px;
+  height: auto;
+  justify-content: center;
+  margin: 0;
+  position: static;
+  width: 36px;
+}
+.add_to_cart_sticky .quantity-button:hover {
+  background: var(--sl-neutre-100);
+}
+.add_to_cart_sticky .quantity-button > i {
+  display: none;
+}
+.add_to_cart_sticky .quantity-button::after {
+  background-color: currentColor;
+  content: "";
+  height: 16px;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+  width: 16px;
+}
+.add_to_cart_sticky .quantity-down {
+  --sl-icone: url("../img/icons/minus.svg");
+  order: -1;
+}
+.add_to_cart_sticky .quantity-up {
+  --sl-icone: url("../img/icons/plus.svg");
+  order: 1;
+}
+@media (max-width: 767px) {
+  .add_to_cart_sticky .container {
+    padding: 10px var(--sl-marge);
+  }
+  .add_to_cart_sticky .sticky-product {
+    gap: 12px;
+  }
+  .add_to_cart_sticky .sticky-image,
+  .add_to_cart_sticky .ttstickyAddToCart-standart {
+    display: none; /* la photo et le choix de déclinaison restent dans le bloc d'achat */
+  }
+  .add_to_cart_sticky .ttstickyAddToCart-price {
+    min-width: 0;
+  }
+  .add_to_cart_sticky .product-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .add_to_cart_sticky .price {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .add_to_cart_sticky .ttstickyAddToCart-qty-add {
+    gap: 8px;
+  }
+  .add_to_cart_sticky .ttstickyAddToCart-qty-container {
+    height: 40px;
+    width: 104px;
+  }
+  .add_to_cart_sticky .quantity-button {
+    flex-basis: 32px;
+    width: 32px;
+  }
+  .add_to_cart_sticky .add-to-cart {
+    height: 40px;
+    padding: 0 14px;
+  }
+}
+
+/* --- 17.5 Éléments flottants (défaut M5) ---------------------------------
+   Retour en haut : à droite, au-dessus de la bulle de chat, et masqué sur
+   mobile (la liste a déjà son lien « Retour au sommet »).
+   Badge Avis Garantis : masqué sur mobile ; sur ordinateur, il remonte
+   au-dessus de la barre d'ajout collante quand elle est affichée. */
+#goToTop {
+  bottom: 96px;
+  left: auto;
+  right: max(24px, env(safe-area-inset-right, 0px));
+}
+body:has(.add_to_cart_sticky.fixed) #goToTop {
+  bottom: 112px;
+}
+body:has(.add_to_cart_sticky.fixed) .agJsWidget {
+  bottom: 81px !important; /* !important : position écrite par le script du widget */
+}
+@media (max-width: 767px) {
+  #goToTop {
+    display: none;
+  }
+  /* !important et sélecteur renforcé : le script du widget ajoute après la
+     feuille une règle « .agJsWidget { display: block !important } » */
+  html body .agJsWidget {
+    display: none !important;
+  }
+}
+
+/* --- 17.6 Bandeau pro sur mobile (défaut M17) ----------------------------
+   Le script découpe le texte en segments : sur mobile, seuls les deux
+   premiers restent (professionnels et téléphone). */
+@media (max-width: 767px) {
+  #ttcmsheader .sl-secondaire {
+    display: none;
+  }
 }
