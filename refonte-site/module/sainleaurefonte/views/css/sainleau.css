@@ -1,0 +1,5221 @@
+/* ==========================================================================
+   SAINLEAU · Feuille de style de la refonte graphique
+   Thème enfant PRS005_07_sainleau (parent : PRS005_07)
+
+   Chargée après toutes les feuilles du thème et des modules (priorité 2000
+   dans config/theme.yml). CSS natif, sans préprocesseur ni étape de build.
+
+   Sommaire
+     0. Polices
+     1. Variables
+     2. Base (typographie, liens, focus, mouvement réduit)
+     3. Composants (pictogrammes, boutons, champs, compteurs)
+     4. En-tête (bandeau pro, logo, recherche, favoris, compte, panier)
+     5. Menu (Tous nos produits, univers, méga-menu)
+     6. Engagements (réassurance du pied de page)
+     7. Newsletter
+     8. Pied de page
+     9. Responsive de l'en-tête et du pied de page
+
+   Règle : !important n'est utilisé que pour passer devant une règle du thème
+   parent ou d'un module impossible à surcharger autrement. Chaque usage est
+   commenté.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   0. Polices
+   Montserrat 400, 500 et 600, hébergée dans le thème (licence SIL OFL 1.1,
+   voir assets/fonts/OFL.txt). Aucun appel à fonts.googleapis.com.
+   Deux sous-ensembles : latin (français) et latin étendu, chargé seulement
+   si une page contient un caractère de cette plage.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Medium-latin-ext.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-SemiBold-latin-ext.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* ==========================================================================
+   1. Variables
+   ========================================================================== */
+
+:root {
+  /* Couleurs SAINLEAU : aucune autre couleur n'est utilisée dans ce fichier */
+  --sl-teal: #25acb0;          /* accent décoratif, jamais de texte courant */
+  --sl-teal-profond: #0d6e72;  /* boutons, liens, bandeau, pied de page */
+  --sl-action-survol: #0a5a5d; /* survol du bouton principal */
+  --sl-teal-100: #cdf3f4;      /* fonds teintés, pastilles */
+  --sl-gris: #6c6666;          /* texte secondaire */
+  --sl-encre: #1b1b1b;         /* titres et texte courant */
+  --sl-neutre-100: #f5f5f5;    /* fonds de sections et de blocs */
+  --sl-filet: #d6d6d6;         /* filets et bordures de cartes */
+  --sl-bordure: #707070;       /* bordure des champs (accessibilité) */
+  --sl-logo-clair: #d0f3fd;    /* texte clair sur teal profond */
+  --sl-blanc: #ffffff;
+
+  /* Rayons et espacements */
+  --sl-rayon-sm: 4px;
+  --sl-rayon-md: 8px;
+  --sl-rayon-pill: 999px;
+  --sl-marge: 48px;            /* marges latérales, 16 px sur mobile */
+  --sl-gouttiere: 24px;
+  --sl-section: 64px;
+  --sl-contenu: 1440px;        /* largeur de la maquette */
+
+  /* Animations */
+  --sl-duree: 180ms;
+  --sl-courbe: ease-out;
+
+  /* Police */
+  --sl-police: Montserrat, "Segoe UI", system-ui, sans-serif;
+
+  /* Couleur de l'anneau de focus (blanc dans les zones teal profond) */
+  --sl-focus: var(--sl-teal-profond);
+
+  /* Variables du thème parent, réalignées sur la charte.
+     Le thème PRS005_07 les utilise dans des centaines de règles. */
+  --primary-font: var(--sl-police);
+  --secondary-font: var(--sl-police);
+  --primary-bg-color: var(--sl-teal-profond);
+  --primary-bg-gradient-color: var(--sl-teal-profond);
+  --primary-text-color: var(--sl-blanc);
+  --secondary-bg-color: var(--sl-teal-100);
+  --secondary-text-color: var(--sl-teal-profond);
+  --body-text-color: var(--sl-gris);
+  --body-background-color: var(--sl-blanc);
+  --main-title-color: var(--sl-encre);
+  --header-nav-text-color: var(--sl-blanc);
+  --header-nav-text-hvr-color: var(--sl-blanc);
+  --header-nav-bg-color: var(--sl-teal-profond);
+  --header-menu-text-color: var(--sl-encre);
+  --header-menu-text-hvr-color: var(--sl-teal-profond);
+  --header-background-color: var(--sl-blanc);
+  --header-top-text-color: var(--sl-encre);
+  --header-top-texthvr-color: var(--sl-teal-profond);
+  --header-top-bg-color: var(--sl-blanc);
+  --price-color: var(--sl-encre);
+  --border-color: var(--sl-filet);
+  --footer-bg-color: var(--sl-teal-profond);
+  --footer-news-bg-color: var(--sl-teal-100);
+  --footer-news-title-color: var(--sl-encre);
+  --footer-news-desc-color: var(--sl-encre);
+  --footer-title-color: var(--sl-blanc);
+  --footer-link-color: var(--sl-logo-clair);
+  --footer-link-hvr-color: var(--sl-blanc);
+  --bottom-footer-bg-color: var(--sl-teal-profond);
+
+  accent-color: var(--sl-teal-profond); /* cases à cocher et boutons radio natifs */
+}
+
+@media (max-width: 1199px) {
+  :root { --sl-marge: 24px; }
+}
+@media (max-width: 767px) {
+  :root { --sl-marge: 16px; }
+}
+
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+
+/* Le module ttthemecustomizer impose Poppins sur une centaine de sélecteurs,
+   dont certains avec identifiants : on remplace la police partout, sauf sur
+   les polices d'icônes Material encore utilisées par le thème.
+   !important : seule façon de passer devant toutes ces règles sans les
+   recopier une à une. */
+body,
+body *:not(.material-icons):not(.material-icons-outlined) {
+  font-family: var(--sl-police) !important;
+}
+
+body {
+  background: var(--sl-blanc);
+  color: var(--sl-encre);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  font-synthesis-weight: none; /* pas de faux gras : seules 400, 500 et 600 existent */
+}
+
+/* Le thème met souvent du 700 : Montserrat s'arrête à 600 */
+b,
+strong {
+  font-weight: 600;
+}
+
+/* Titres : styles « Site web » de la maquette */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: var(--sl-encre);
+  font-weight: 600;
+  text-transform: none;
+}
+h1, .h1 { font-size: 40px; line-height: 48px; }
+h2, .h2 { font-size: 28px; line-height: 36px; }
+h3, .h3 { font-size: 20px; line-height: 28px; }
+h4, .h4,
+h5, .h5,
+h6, .h6 { font-size: 18px; line-height: 26px; font-weight: 500; }
+
+p {
+  text-align: left;
+}
+
+/* Liens : couleur et transition courtes, sans l'animation « all 400 ms » du thème */
+a {
+  color: var(--sl-teal-profond);
+  transition: color var(--sl-duree) var(--sl-courbe),
+              background-color var(--sl-duree) var(--sl-courbe),
+              border-color var(--sl-duree) var(--sl-courbe),
+              text-decoration-color var(--sl-duree) var(--sl-courbe);
+}
+a:hover,
+a:focus {
+  color: var(--sl-teal-profond);
+}
+
+/* Liens texte dans les contenus : le soulignement apparaît au survol */
+p a:not(.btn),
+.rte a:not(.btn),
+.page-content a:not(.btn),
+.product-description a:not(.btn),
+.category-description a:not(.btn) {
+  color: var(--sl-teal-profond);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+p a:not(.btn):hover,
+.rte a:not(.btn):hover,
+.page-content a:not(.btn):hover,
+.product-description a:not(.btn):hover,
+.category-description a:not(.btn):hover {
+  text-decoration-color: currentColor;
+}
+
+/* Focus clavier : anneau plein de 2 px décalé de 2 px.
+   !important : le thème supprime le contour sur a:focus, .btn:focus,
+   .form-control:focus et d'autres sélecteurs plus précis que :focus-visible. */
+:focus-visible {
+  outline: 2px solid var(--sl-focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* Mouvement réduit : on coupe transitions et animations.
+   !important : doit l'emporter sur les animations du thème et des modules,
+   quelle que soit la précision de leurs sélecteurs. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ==========================================================================
+   3. Composants
+   ========================================================================== */
+
+/* --- 3.1 Pictogrammes Phosphor ---------------------------------------------
+   Les pictogrammes sont des SVG Phosphor (style regular) dans
+   assets/img/icones/. Ils sont posés en masque sur un pseudo-élément :
+   leur couleur suit donc la couleur du texte (currentColor) et change
+   au survol avec lui. Chaque élément fixe --sl-icone et --sl-icone-taille. */
+
+#search_block_top #searchbox::before,
+#header .top-wishlist .wishtlist_top::before,
+#header .ttuserheading > .btn > a::before,
+#header .blockcart .header::before,
+#tt-menu-horizontal .title-menu-mobile::before,
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .icon::before,
+#footer #newsletter .title-icon > i.material-icons::before,
+#footer .block-contact .block .icon::before,
+#footer .block-social li a::before,
+#goToTop::before {
+  content: "";
+  display: block;
+  flex: none;
+  width: var(--sl-icone-taille, 20px);
+  height: var(--sl-icone-taille, 20px);
+  background-color: currentColor;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+}
+
+/* --- 3.2 Boutons ------------------------------------------------------------
+   Principal : fond teal profond, texte blanc.
+   Secondaire : fond blanc, contour 1,5 px et texte teal profond.
+   Désactivé : fond gris clair, texte gris, sans effet. */
+
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.btn-default {
+  border-radius: var(--sl-rayon-sm);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+  overflow: visible;
+  padding: 10px 20px;
+  text-transform: none;
+  box-shadow: none;
+  transition: background-color var(--sl-duree) var(--sl-courbe),
+              border-color var(--sl-duree) var(--sl-courbe),
+              color var(--sl-duree) var(--sl-courbe),
+              transform 120ms var(--sl-courbe);
+}
+
+/* Le thème anime un fond qui glisse sous les boutons (::after) : supprimé */
+.btn-primary::after,
+.btn-secondary::after,
+.btn-tertiary::after,
+#search_block_top .btn.button-search::after {
+  content: none;
+  display: none;
+}
+
+.btn-primary,
+.btn-primary.add-to-cart {
+  background: var(--sl-teal-profond);
+  border: 0;
+  color: var(--sl-blanc);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.add-to-cart:hover,
+.btn-primary.add-to-cart:focus {
+  background: var(--sl-action-survol);
+  color: var(--sl-blanc);
+}
+.btn-primary:active,
+.btn-primary.active {
+  background: var(--sl-action-survol);
+  color: var(--sl-blanc);
+  transform: translateY(1px);
+}
+
+.btn-secondary,
+.btn-tertiary,
+.btn-default {
+  background: var(--sl-blanc);
+  border: 1.5px solid var(--sl-teal-profond);
+  color: var(--sl-teal-profond);
+  padding: 8.5px 18.5px; /* même hauteur que le bouton principal malgré le contour */
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-tertiary:hover,
+.btn-tertiary:focus,
+.btn-tertiary:active,
+.btn-default:hover,
+.btn-default:focus {
+  background: var(--sl-teal-100);
+  border-color: var(--sl-teal-profond);
+  color: var(--sl-teal-profond);
+}
+
+.btn-primary .material-icons,
+.btn-secondary .material-icons,
+.btn-tertiary .material-icons {
+  font-size: 18px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.btn:disabled,
+.btn.disabled,
+.btn-primary:disabled,
+.btn-primary.disabled,
+.btn-secondary:disabled,
+.btn-secondary.disabled {
+  background: var(--sl-neutre-100);
+  border-color: var(--sl-neutre-100);
+  color: var(--sl-gris);
+  cursor: not-allowed;
+  opacity: 1;
+  transform: none;
+}
+
+/* --- 3.3 Champs de formulaire ----------------------------------------------
+   48 px de haut, bordure #707070 (contraste des champs), rayon 4 px. */
+
+label,
+.label,
+.form-control-label {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+}
+
+.form-control,
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea {
+  background-color: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  box-shadow: none;
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+  min-height: 48px;
+  padding: 12px 16px;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+}
+.form-control:hover {
+  border-color: var(--sl-encre);
+}
+.form-control:focus {
+  background-color: var(--sl-blanc);
+  border-color: var(--sl-teal-profond);
+  color: var(--sl-encre);
+}
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--sl-gris);
+  opacity: 1;
+}
+
+/* Listes déroulantes : flèche Phosphor caret-down */
+select.form-control,
+.form-group select,
+.custom-select {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--sl-blanc) url("../img/icons/caret-down-encre.svg") no-repeat right 14px center / 16px 16px;
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+  min-height: 48px;
+  padding: 12px 44px 12px 16px;
+}
+
+/* Le sélecteur de quantité garde le gabarit du thème (traité aux étapes 4 et 5) */
+.bootstrap-touchspin .form-control,
+.bootstrap-touchspin input {
+  min-height: 0;
+}
+
+/* --- 3.4 Compteurs (favoris, panier) ---------------------------------------
+   Pastille 12/16, graisse 500, rayon 999 px. */
+
+#header .top-wishlist .wishlist-number,
+#header .blockcart .cart-products-count {
+  border-radius: var(--sl-rayon-pill);
+  display: inline-block;
+  float: none;
+  font-size: 12px;
+  font-weight: 500;
+  height: 16px;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  min-width: 17px;
+  padding: 0 6px;
+  position: static;
+  text-align: center;
+  width: auto;
+}
+
+
+/* ==========================================================================
+   4. En-tête
+   Maquette : bandeau pro 36 px, ligne logo / recherche / actions 88 px,
+   menu 56 px. Marges latérales 48 px.
+   ========================================================================== */
+
+/* --- 4.1 Bandeau pro (module ttcmsheader, texte du back-office) ----------- */
+
+#header .nav1 {
+  --sl-focus: var(--sl-blanc);
+  background: var(--sl-teal-profond);
+}
+#header .nav1 .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#ttcmsheader,
+#ttcmsheader p {
+  color: var(--sl-blanc);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  padding: 7px 0;
+  text-align: center;
+}
+#ttcmsheader p {
+  padding: 0;
+}
+#ttcmsheader b,
+#ttcmsheader strong {
+  font-weight: 400;
+}
+#ttcmsheader a {
+  color: var(--sl-blanc);
+  text-decoration: underline;
+}
+
+/* --- 4.2 Ligne logo, recherche et actions --------------------------------- */
+
+#header .nav2 {
+  background: var(--sl-blanc);
+  box-shadow: none;
+}
+#header .nav2 > .container {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  max-width: var(--sl-contenu);
+  padding: 20px var(--sl-marge);
+  text-align: left;
+  width: 100%;
+}
+#header .nav2 > .container::before,
+#header .nav2 > .container::after {
+  display: none; /* clearfix du thème, inutile en flex */
+}
+
+/* Logo : 178 × 38 px, jamais déformé */
+#header #_desktop_logo {
+  flex: none;
+  float: none;
+  margin: 0 16px 0 0; /* 24 + 16 = 40 px avant la recherche */
+  order: 1;
+}
+#header #_desktop_logo a {
+  display: block;
+}
+#header #_desktop_logo img.logo {
+  display: block;
+  height: 38px;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
+  width: 178px;
+}
+
+/* Les conteneurs mobiles restent vides sur ordinateur : on les retire du flux */
+#header .nav2 #_mobile_logo,
+#header .nav2 .mobile,
+#header .nav2 #_mobile_cart,
+#header .nav2 #_mobile_user_info {
+  display: none;
+}
+
+/* Recherche : champ de 48 px, loupe à gauche, bouton « Rechercher » à droite */
+#header #search_block_top {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  display: block;
+  flex: 1 1 auto;
+  float: none;
+  margin: 0 16px 0 0; /* 24 + 16 = 40 px avant les actions */
+  max-width: none;
+  min-width: 0;
+  order: 2;
+  padding: 0;
+  position: relative;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+  width: auto;
+}
+#header #search_block_top:hover {
+  border-color: var(--sl-encre);
+}
+#header #search_block_top:has(input.search_query:focus) {
+  border-color: var(--sl-teal-profond);
+  outline: 2px solid var(--sl-focus);
+  outline-offset: 2px;
+}
+#search_block_top #searchbox {
+  --sl-icone: url("../img/icons/magnifying-glass.svg");
+  align-items: center;
+  background: transparent;
+  color: var(--sl-gris);
+  display: flex;
+  float: none;
+  gap: 12px;
+  height: 46px;
+  padding: 0 3px 0 16px;
+  width: 100%;
+}
+#search_block_top #searchbox input.search_query {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--sl-encre);
+  flex: 1 1 auto;
+  font-size: 14px;
+  height: 44px;
+  line-height: 22px;
+  min-height: 0;
+  min-width: 0;
+  outline: none; /* l'anneau de focus est porté par le cadre du champ */
+  padding: 0;
+  width: auto;
+}
+#search_block_top #searchbox input.search_query:focus-visible {
+  outline: none !important; /* !important : annule l'anneau global, déjà affiché sur le cadre */
+}
+#header #search_block_top .btn.button-search {
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-blanc);
+  flex: none;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  left: auto;
+  line-height: 20px;
+  margin: 0;
+  padding: 10px 20px;
+  position: static;
+  right: auto;
+  transition: background-color var(--sl-duree) var(--sl-courbe),
+              transform 120ms var(--sl-courbe);
+}
+#header #search_block_top .btn.button-search:hover {
+  background: var(--sl-action-survol);
+}
+#header #search_block_top .btn.button-search:active {
+  transform: translateY(1px);
+}
+#header #search_block_top .btn.button-search span {
+  color: var(--sl-blanc);
+}
+#header #search_block_top .btn.button-search .material-icons {
+  display: none; /* la loupe est à gauche du champ, comme sur la maquette */
+}
+/* Résultats de la recherche instantanée sous le champ */
+#header #search_block_top #ttsearch_content_result {
+  top: calc(100% + 4px);
+}
+
+/* Actions : Favoris, Mon compte, Mon panier (24 px entre chacune) */
+#header .nav2 .top-wishlist {
+  flex: none;
+  float: none;
+  margin: 0;
+  order: 3;
+  padding: 0;
+}
+#header .nav2 .top-wishlist .wishtlist_top {
+  --sl-icone: url("../img/icons/heart.svg");
+  --sl-icone-taille: 22px;
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  gap: 8px;
+}
+#header .nav2 .top-wishlist .wishtlist_top > i.material-icons {
+  display: none; /* remplacé par le cœur Phosphor */
+}
+#header .nav2 .top-wishlist .wishlist-title {
+  color: inherit;
+  display: inline;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+#header .nav2 .top-wishlist .wishlist-number {
+  background: var(--sl-teal-100);
+  color: var(--sl-teal-profond);
+}
+#header .nav2 .top-wishlist .wishtlist_top:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* Mon compte : lien texte avec pictogramme (le thème en fait un bouton noir) */
+#header #_desktop_user_info {
+  flex: none;
+  float: none;
+  order: 4;
+  position: relative;
+  width: auto;
+}
+#header .ttuserheading {
+  padding: 0;
+}
+#header .ttuserheading > .btn {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--sl-encre);
+  height: auto;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  width: auto; /* le thème fixe 160 px */
+}
+#header .ttuserheading > .btn > a {
+  --sl-icone: url("../img/icons/user.svg");
+  --sl-icone-taille: 22px;
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 8px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+#header .ttuserheading > .btn > a > i.material-icons {
+  display: none; /* remplacé par l'utilisateur Phosphor */
+}
+#header .ttuserheading > .btn:hover > a,
+#header .ttuserheading > .btn > a:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* Menu déroulant du compte (Se connecter / Créer un compte) */
+#header .ttuserheading .toggle-userbutton {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  box-shadow: none;
+  padding: 16px;
+}
+#header .ttuserheading .toggle-userbutton {
+  min-width: 200px;
+  right: 0;
+  top: calc(100% + 12px);
+}
+#header .ttuserheading .toggle-userbutton button {
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+#header .ttuserheading .toggle-userbutton button + button {
+  margin-top: 8px;
+}
+/* !important : le thème force le texte de ces boutons en noir puis en blanc
+   au survol avec !important, ce qui le rendrait illisible sur fond clair */
+#header .ttuserheading .toggle-userbutton button a,
+#header .ttuserheading .toggle-userbutton button:hover a {
+  color: var(--sl-teal-profond) !important;
+  display: block;
+}
+
+/* Mon panier : bouton principal avec compteur */
+#header #_desktop_cart {
+  flex: none;
+  float: none;
+  margin: 0;
+  order: 5;
+  padding: 0;
+  position: relative;
+}
+#header .blockcart {
+  margin: 0;
+}
+/* Mini-panier : aligné sur le bord droit du bouton pour ne pas déborder */
+#header .blockcart .cart_block {
+  left: auto;
+  right: 0;
+}
+#header .blockcart .header {
+  --sl-icone: url("../img/icons/shopping-cart-simple.svg");
+  align-items: center;
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-blanc);
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  min-height: 44px;
+  padding: 12px 16px;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+}
+#header .blockcart .header:hover {
+  background: var(--sl-action-survol);
+}
+/* Panier non vide : le thème entoure le contenu d'un lien, qui devient le bouton */
+#header .blockcart .header:has(> a) {
+  padding: 0;
+}
+#header .blockcart .header > a {
+  align-items: center;
+  color: var(--sl-blanc);
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+}
+#header .blockcart .header i.shopping-cart {
+  display: none; /* remplacé par le chariot Phosphor */
+}
+#header .blockcart .header .hidden-sm-down {
+  color: var(--sl-blanc);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  order: 2;
+  white-space: nowrap;
+}
+#header .blockcart .cart-products-count {
+  background: var(--sl-blanc);
+  color: var(--sl-teal-profond);
+  order: 3;
+  padding: 0 7px;
+}
+
+
+/* ==========================================================================
+   5. Menu
+   « Tous nos produits » (module ttmegamenu) puis les univers (module
+   tttoplink). Le contenu reste celui des modules ; seul l'habillage change.
+   ========================================================================== */
+
+#header .header-top {
+  background: var(--sl-blanc);
+  border-bottom: 1px solid var(--sl-filet);
+  border-top: 1px solid var(--sl-filet);
+}
+#header .header-top > .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#header .header-top .position-static {
+  align-items: center;
+  display: flex;
+  gap: 32px;
+  min-height: 54px;
+}
+
+/* Tous nos produits */
+#header .tt-menu-horizontal {
+  flex: none;
+  float: none;
+  order: 1; /* le module place les univers avant « Tous nos produits » dans le code */
+  padding: 0;
+  position: relative;
+  width: auto;
+}
+#header .tt-menu-horizontal .title-menu-mobile {
+  --sl-icone: url("../img/icons/list.svg");
+  align-items: center;
+  color: var(--sl-teal-profond);
+  display: flex;
+  float: none;
+  gap: 8px;
+  padding: 17px 32px 17px 0; /* 32 px jusqu'au séparateur */
+  position: relative;
+  width: auto;
+}
+#header .tt-menu-horizontal .title-menu-mobile::after {
+  background: var(--sl-filet);
+  bottom: auto;
+  height: 24px;
+  margin: 0;
+  top: calc(50% - 12px);
+  width: 1px;
+}
+#header .tt-menu-horizontal .title-menu-mobile > span {
+  color: inherit;
+  float: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+#header .tt-menu-horizontal .title-menu-mobile > i.material-icons,
+#header .tt-menu-horizontal .title-menu-mobile .menu-icons {
+  display: none; /* pictogramme liste à gauche, comme sur la maquette */
+}
+#header .tt-menu-horizontal .title-menu-mobile:hover,
+#header .tt-menu-horizontal.open .title-menu-mobile {
+  color: var(--sl-action-survol);
+}
+
+/* Univers (liens du module tttoplink) */
+#header #tttop-link-block {
+  flex: 1 1 auto;
+  order: 2;
+  float: none;
+  margin: 0;
+  max-width: none;
+  min-width: 0;
+  padding: 0;
+  width: auto;
+}
+#header #tttop-link-block #tttoplink {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 32px;
+  margin: 0;
+  padding: 0;
+}
+#header #tttop-link-block li.tttoplink {
+  float: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+#header #tttop-link-block li.tttoplink > a {
+  color: var(--sl-encre);
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 17px 0;
+  white-space: nowrap;
+}
+#header #tttop-link-block li.tttoplink > a:hover {
+  color: var(--sl-teal-profond);
+}
+#header .header-top .more {
+  order: 3;
+  color: var(--sl-teal-profond);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* Méga-menu (non maquetté) : liste des univers et panneaux de sous-catégories */
+@media (min-width: 992px) {
+  #header .tt-menu-horizontal .ttmenu-content {
+    border: 1px solid var(--sl-filet) !important; /* !important : le module force sa bordure avec !important */
+    border-radius: 0 0 var(--sl-rayon-md) var(--sl-rayon-md);
+    box-shadow: none;
+    min-width: 280px;
+    top: calc(100% + 1px);
+  }
+  #header .tt-menu-horizontal .menu-dropdown {
+    border: 1px solid var(--sl-filet);
+    border-radius: var(--sl-rayon-md);
+    box-shadow: none;
+    padding: 24px;
+  }
+}
+#header .tt-menu-horizontal ul.menu-content > li > a {
+  align-items: center;
+  border-radius: 0;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 12px;
+  line-height: 20px;
+  padding: 10px 16px;
+}
+#header .tt-menu-horizontal ul.menu-content > li > a > img {
+  float: none;
+  margin: 0;
+}
+#header .tt-menu-horizontal ul.menu-content > li:hover > a {
+  background: var(--sl-neutre-100);
+  color: var(--sl-teal-profond);
+}
+#header #tt-menu-horizontal.tt-menu-horizontal ul li.item-header > a {
+  border-bottom: 1px solid var(--sl-filet);
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0 0 8px;
+  padding: 12px 0 8px;
+}
+#header #tt-menu-horizontal.tt-menu-horizontal ul li ul li > a {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+}
+#header #tt-menu-horizontal.tt-menu-horizontal ul li ul li > a:hover,
+#header #tt-menu-horizontal.tt-menu-horizontal ul li.item-header > a:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* En-tête collant : au défilement, le script du thème fixe la ligne logo /
+   recherche / actions en haut de l'écran et y déplace « Tous nos produits » */
+#header .header-nav.fixed {
+  box-shadow: 0 1px 0 var(--sl-filet);
+}
+#header .header-nav.fixed .nav2 > .container {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal {
+  margin-right: 0;
+  order: 0;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal .title-menu-mobile {
+  padding: 10px 0;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal .title-menu-mobile > span {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+#header .header-nav.fixed .nav2 #tt-menu-horizontal .title-menu-mobile::after {
+  display: none;
+}
+
+
+/* ==========================================================================
+   6. Engagements (module ttcmsfooterservice, haut du pied de page)
+   Encadré à bordure grise, 4 engagements centrés (retouche validée n° 4).
+   ========================================================================== */
+
+#footer .footer-top {
+  background: var(--sl-blanc);
+  padding: var(--sl-section) 0 0;
+}
+#ttcmsfooterservice > .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#ttcmsfooterservice .ttcmsfooterservices {
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  margin: 0;
+  padding: 32px;
+}
+/* Le module affiche les engagements dans un carrousel Owl : chaque
+   engagement occupe une case calculée par le script ; on centre son contenu */
+#ttcmsfooterservice .owl-item {
+  display: flex;
+  justify-content: center;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice {
+  align-items: center;
+  border: 0;
+  display: flex;
+  float: none;
+  gap: 16px;
+  margin: 0;
+  max-width: 301px;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice::before,
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice::after {
+  display: none; /* séparateurs verticaux du thème */
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .icon {
+  --sl-icone-taille: 24px;
+  align-items: center;
+  background: var(--sl-teal-100);
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  display: flex;
+  flex: none;
+  float: none;
+  height: 48px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 48px;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .icon .service-icon {
+  display: none; /* images du thème, remplacées par les pictogrammes Phosphor */
+}
+/* Un pictogramme par engagement, repéré par la classe d'image du module */
+#ttcmsfooterservice .icon:has(.ttsupport_img) { --sl-icone: url("../img/icons/medal.svg"); }
+#ttcmsfooterservice .icon:has(.ttshipping_img) { --sl-icone: url("../img/icons/package.svg"); }
+#ttcmsfooterservice .icon:has(.ttgift_img) { --sl-icone: url("../img/icons/truck.svg"); }
+#ttcmsfooterservice .icon:has(.ttdisc_img) { --sl-icone: url("../img/icons/tag.svg"); }
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .service-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  float: none;
+  gap: 2px;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  width: auto;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .service-title {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+}
+#ttcmsfooterservice .ttcmsfooterservices .ttfooterservice .service-desc {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   7. Newsletter (module ps_emailsubscription)
+   Bloc teal clair sur fond blanc, juste au-dessus du pied de page teal.
+   ========================================================================== */
+
+#footer .footer-container #newsletter {
+  float: none;
+  grid-column: 1 / -1;
+  isolation: isolate;
+  margin: 0 0 var(--sl-section);
+  max-width: none;
+  padding: var(--sl-section) 0;
+  position: relative;
+  width: auto;
+}
+/* Bande blanche pleine largeur derrière le bloc : le pied de page est teal */
+#footer .footer-container #newsletter::before {
+  background: var(--sl-blanc);
+  bottom: 0;
+  content: "";
+  left: 50%;
+  margin-left: -50vw;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+}
+#footer .footer-container {
+  overflow-x: clip; /* la bande de 100vw ne crée pas de défilement horizontal */
+}
+#footer #newsletter .newsletter {
+  float: none;
+  width: auto;
+  align-items: center;
+  background: var(--sl-teal-100);
+  border-radius: var(--sl-rayon-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  margin: 0;
+  padding: 32px 40px;
+  box-shadow: none;
+}
+#footer #newsletter .newsletter > .container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+#footer #newsletter .newsletter > .container::before,
+#footer #newsletter .newsletter > .container::after {
+  display: none;
+}
+#footer #newsletter .tt-content {
+  align-items: center;
+  column-gap: 20px;
+  display: grid;
+  flex: 0 1 auto;
+  float: none;
+  grid-template-columns: 56px auto;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  row-gap: 4px;
+  width: auto;
+}
+#footer #newsletter .title-icon {
+  display: contents; /* le pictogramme, le titre et l'accroche partagent la grille */
+}
+#footer #newsletter .title-icon > i.material-icons {
+  /* pastille blanche de 56 px ; la ligature Material est masquée (taille 0) */
+  --sl-icone: url("../img/icons/envelope-simple.svg");
+  --sl-icone-taille: 28px;
+  align-items: center;
+  background: var(--sl-blanc);
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  display: flex;
+  float: none;
+  font-size: 0;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 56px;
+  justify-content: center;
+  margin: 0;
+  width: 56px;
+}
+#footer #newsletter .tt-title {
+  text-align: left;
+  color: var(--sl-encre);
+  font-size: 28px;
+  font-weight: 600;
+  grid-column: 2;
+  line-height: 36px;
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+}
+#footer #newsletter .tt-content > p {
+  text-align: left;
+  color: var(--sl-encre);
+  float: none;
+  font-size: 16px;
+  grid-column: 2;
+  line-height: 26px;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#footer #newsletter .block_content {
+  flex: 0 1 520px;
+  float: none;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  width: auto;
+}
+#footer #newsletter .block_content form {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+#footer #newsletter .block_content .input-wrapper {
+  flex: 1 1 280px;
+  margin: 0;
+  order: 1;
+  padding: 0;
+}
+#footer #newsletter .block_content .input-wrapper input[type="email"] {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-encre);
+  font-size: 14px;
+  height: 48px;
+  line-height: 22px;
+  padding: 0 16px;
+  width: 100%;
+}
+#footer #newsletter .block_content input.btn-primary {
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-blanc);
+  float: none;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  line-height: 20px;
+  margin: 0;
+  order: 2;
+  padding: 0 20px;
+  position: static;
+}
+#footer #newsletter .block_content input.btn-primary:hover {
+  background: var(--sl-action-survol);
+}
+#footer #newsletter .block_content .msg {
+  color: var(--sl-gris);
+  flex: 1 1 100%;
+  font-size: 12px;
+  line-height: 16px;
+  order: 3;
+  padding: 0;
+}
+#footer #newsletter .block_content .msg .news_desc {
+  color: var(--sl-gris);
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   8. Pied de page
+   Fond teal profond, 5 colonnes, ligne Avis Garantis, bas de page avec
+   copyright et moyens de paiement. Les liens restent ceux des modules.
+   ========================================================================== */
+
+#footer {
+  --sl-focus: var(--sl-blanc);
+  background: var(--sl-teal-profond);
+  margin-top: 0; /* les 64 px au-dessus des engagements suffisent */
+}
+#footer .footer-top,
+#footer #newsletter {
+  --sl-focus: var(--sl-teal-profond);
+}
+#footer .footer-container {
+  background: var(--sl-teal-profond);
+  margin: 0;
+  padding: 0;
+}
+#footer .footer-container > .container,
+#footer .bottom-footer > .container {
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+  width: 100%;
+}
+#footer .footer-container > .container > .row {
+  column-gap: 48px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  row-gap: 0;
+}
+#footer .footer-container > .container > .row::before,
+#footer .footer-container > .container > .row::after {
+  display: none;
+}
+/* Les 4 colonnes de liens sont dans un même bloc : elles rejoignent la grille */
+#footer .footer-container .links.link-list {
+  display: contents;
+}
+#footer .footer-container .links {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#footer .footer-container .links .wrapper,
+#footer .footer-container .block-contact {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+
+/* Titres de colonnes */
+#footer .footer-container .links h3,
+#footer .footer-container .block-contact h3,
+#footer .footer-container .links .title .h3,
+#footer .footer-container .block-contact .block-contact-title {
+  color: var(--sl-blanc);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 26px;
+  margin: 0 0 16px;
+  padding: 0;
+  text-transform: none;
+}
+#footer .footer-container .links h3::after,
+#footer .footer-container .links h3::before {
+  display: none; /* filets décoratifs du thème */
+}
+
+/* Liens */
+#footer .footer-container .links ul {
+  margin: 0;
+  padding: 0;
+}
+#footer .footer-container .links ul > li {
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 8px;
+  padding: 0;
+}
+#footer .footer-container .links ul > li:last-child {
+  margin-bottom: 0;
+}
+#footer .footer-container li a,
+#footer .footer-container .links li a {
+  color: var(--sl-logo-clair);
+  display: inline;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+#footer .footer-container li a:hover,
+#footer .footer-container .links li a:hover {
+  color: var(--sl-blanc);
+  padding: 0;
+  text-decoration-color: currentColor;
+}
+#footer .footer-container li a::before {
+  display: none; /* puces animées du thème */
+}
+
+/* Nos informations : adresse, téléphone, e-mail
+   (le bloc porte aussi la classe .links : sélecteurs renforcés) */
+#footer .footer-container .block-contact ul > li.block {
+  align-items: center; /* lignes d'une seule ligne : pictogramme centré (retouche n° 5) */
+  color: var(--sl-logo-clair);
+  display: flex;
+  font-size: 14px;
+  gap: 10px;
+  line-height: 22px;
+  margin: 0 0 16px;
+  padding: 0;
+}
+#footer .footer-container .block-contact ul > li.block:last-child {
+  margin-bottom: 0;
+}
+#footer .footer-container .block-contact ul > li.block:first-child {
+  align-items: flex-start; /* l'adresse reste alignée en haut (retouche n° 5) */
+}
+#footer .block-contact .block:first-child .icon {
+  margin-top: 2px;
+}
+#footer .block-contact .block .data,
+#footer .block-contact .block .data a {
+  align-items: center;
+  color: var(--sl-logo-clair);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  gap: 0 10px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+#footer .block-contact .block:first-child .data {
+  display: block;
+}
+#footer .block-contact .block .data a:hover {
+  color: var(--sl-blanc);
+}
+#footer .block-contact .block .icon {
+  --sl-icone: url("../img/icons/map-pin.svg");
+  --sl-icone-taille: 18px;
+  color: var(--sl-logo-clair);
+  flex: none;
+  float: none;
+  height: auto;
+  margin: 0;
+  width: auto;
+}
+#footer .block-contact .block .icon > i.material-icons {
+  display: none; /* remplacé par les pictogrammes Phosphor */
+}
+#footer .block-contact .block:has(a[href^="tel:"]) .icon {
+  --sl-icone: url("../img/icons/phone.svg");
+}
+#footer .block-contact .block:has(script, a[href^="mailto:"]) .icon {
+  --sl-icone: url("../img/icons/envelope-simple.svg");
+}
+/* Les mentions « Appelez-nous : » et « Email : » restent lues par les
+   lecteurs d'écran mais ne s'affichent pas, comme sur la maquette */
+#footer .block-contact .block .title {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Ligne Avis Garantis (module steavisgarantis) */
+#footer #steavisgarantisFooterVerif {
+  align-items: center;
+  color: var(--sl-logo-clair);
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  line-height: 22px;
+  margin: 48px 0;
+  padding: 0;
+  text-align: left;
+}
+#footer #steavisgarantisFooterVerif img {
+  height: 20px;
+  margin: 0;
+  width: 20px;
+}
+#footer #steavisgarantisFooterText,
+#footer #steavisgarantisFooterText a {
+  color: var(--sl-logo-clair);
+  font-size: 14px;
+  line-height: 22px;
+}
+#footer #steavisgarantisFooterText a:hover {
+  color: var(--sl-blanc);
+}
+
+/* Bas de page : copyright, réseaux sociaux, moyens de paiement */
+#footer .bottom-footer {
+  background: var(--sl-teal-profond);
+  margin: 0;
+  padding: 0;
+}
+#footer .bottom-footer > .container > .row {
+  align-items: center;
+  border-top: 1px solid var(--sl-logo-clair);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  justify-content: space-between;
+  margin: 0;
+  padding: 20px 0;
+}
+#footer .bottom-footer > .container > .row::before,
+#footer .bottom-footer > .container > .row::after {
+  display: none;
+}
+#footer .bottom-footer .ttcontent,
+#footer .bottom-footer .block-social,
+#footer .bottom-footer #ttcmspaymentlogo {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#footer .bottom-footer .ttcontent p,
+#footer .bottom-footer .ttcontent a {
+  color: var(--sl-logo-clair);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  text-align: left;
+}
+#footer .bottom-footer .ttcontent a:hover {
+  color: var(--sl-blanc);
+}
+
+/* Réseaux sociaux (absents de la maquette, conservés) */
+#footer .block-social ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+#footer .block-social li {
+  background: none;
+  height: auto;
+  margin: 0;
+  width: auto;
+}
+#footer .block-social li a {
+  --sl-icone-taille: 20px;
+  align-items: center;
+  background: none;
+  color: var(--sl-logo-clair);
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+#footer .block-social li a:hover {
+  color: var(--sl-blanc);
+}
+#footer .block-social li a p {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+#footer .block-social li.facebook a { --sl-icone: url("../img/icons/facebook-logo.svg"); }
+#footer .block-social li.youtube a { --sl-icone: url("../img/icons/youtube-logo.svg"); }
+#footer .block-social li.linkedin a { --sl-icone: url("../img/icons/linkedin-logo.svg"); }
+
+/* Moyens de paiement : logos sur pastilles blanches */
+#ttcmspaymentlogo .payment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+#ttcmspaymentlogo .payment-list li {
+  align-items: center;
+  background: var(--sl-blanc);
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  float: none;
+  height: 30px;
+  justify-content: center;
+  margin: 0;
+  padding: 4px 6px;
+  width: 60px;
+}
+#ttcmspaymentlogo .payment-list li img {
+  height: 22px;
+  max-width: 48px;
+  object-fit: contain;
+  width: 48px;
+}
+
+/* Bouton « retour en haut » */
+#goToTop {
+  --sl-icone: url("../img/icons/caret-up.svg");
+  align-items: center;
+  background: var(--sl-teal-profond);
+  border: 0;
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-blanc);
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+  width: 40px;
+}
+#goToTop:hover {
+  background: var(--sl-action-survol);
+  color: var(--sl-blanc);
+}
+#goToTop > i.material-icons {
+  display: none; /* remplacé par la flèche Phosphor */
+}
+
+
+/* ==========================================================================
+   9. Responsive de l'en-tête et du pied de page
+   Aucune version mobile n'est maquettée. Points de rupture du thème
+   parent : le script du thème passe en mode mobile sous 992 px (il déplace
+   alors logo, compte et panier dans les conteneurs _mobile_).
+   Grilles du pied de page : 5 → 3 → 2 → 1 colonnes.
+   ========================================================================== */
+
+/* Texte réservé aux lecteurs d'écran (libellés masqués à l'écran) */
+@media (max-width: 1199px) {
+  #header .tt-menu-horizontal .title-menu-mobile > span {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+/* 992 à 1199 px : la recherche passe sur sa propre ligne,
+   « Tous nos produits » devient un pictogramme pour garder les univers sur une ligne */
+@media (min-width: 992px) and (max-width: 1199px) {
+  #header .nav2 > .container {
+    flex-wrap: wrap;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    row-gap: 16px;
+  }
+  #header #_desktop_logo {
+    margin-right: auto;
+  }
+  #header #search_block_top {
+    flex: 1 1 100%;
+    margin: 0;
+    order: 6;
+  }
+  /* !important : le thème enfant actuel fixe ici la largeur (157 px), supprime
+     la marge et le séparateur avec !important */
+  #header .tt-menu-horizontal {
+    width: auto !important;
+  }
+  #header .tt-menu-horizontal .title-menu-mobile {
+    padding-right: 24px !important;
+  }
+  #header .tt-menu-horizontal .title-menu-mobile::after {
+    display: block !important;
+  }
+  #header .header-top .position-static {
+    gap: 24px;
+  }
+  #header #tttop-link-block #tttoplink {
+    gap: 0 24px;
+  }
+}
+
+/* À partir de 992 px : libellé « Mon panier » toujours affiché */
+@media (min-width: 992px) {
+  #header .blockcart .header .hidden-sm-down {
+    display: inline;
+  }
+}
+
+/* Moins de 992 px : en-tête compact
+   ligne 1 : menu, logo, favoris, compte, panier ; ligne 2 : recherche */
+@media (max-width: 991px) {
+  #header .nav2 > .container {
+    column-gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px var(--sl-marge);
+    row-gap: 12px;
+  }
+  #header .nav2 #_desktop_logo,
+  #header .nav2 #_desktop_cart,
+  #header .nav2 #_desktop_user_info,
+  #header .nav2 .mobile {
+    display: none; /* vidés par le script du thème en mode mobile */
+  }
+
+  /* Bouton du menu (le thème déplace ici « Tous nos produits ») */
+  #header .nav2 #tt-menu-horizontal {
+    order: 1;
+  }
+  #header .nav2 #tt-menu-horizontal .title-menu-mobile {
+    --sl-icone-taille: 24px;
+    border-radius: var(--sl-rayon-sm);
+    color: var(--sl-encre);
+    margin: 0;
+    padding: 10px 10px 10px 0;
+  }
+  #header .nav2 #tt-menu-horizontal .title-menu-mobile::after {
+    display: none;
+  }
+
+  /* Logo */
+  #header .nav2 #_mobile_logo {
+    display: block;
+    flex: 1 1 0;
+    float: none;
+    margin: 0;
+    min-width: 0; /* le logo rétrécit plutôt que de pousser les actions à la ligne */
+    order: 2;
+  }
+  #header .nav2 #_mobile_logo a {
+    display: block;
+  }
+  #header .nav2 #_mobile_logo img.logo {
+    display: block;
+    height: 32px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+    width: 150px;
+  }
+
+  /* Favoris, compte : pictogrammes seuls (libellés lus par les lecteurs d'écran) */
+  #header .nav2 .top-wishlist {
+    display: block;
+    float: none;
+    order: 3;
+    width: auto;
+  }
+  #header .nav2 .top-wishlist .wishtlist_top {
+    gap: 4px;
+    padding: 10px 6px;
+  }
+  #header .nav2 .top-wishlist .wishlist-title,
+  #header .ttuserheading > .btn > a {
+    font-size: 0;
+  }
+  #header .nav2 .top-wishlist .wishlist-title {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+  #header .nav2 #_mobile_user_info {
+    display: block;
+    flex: none;
+    float: none;
+    margin: 0;
+    order: 4;
+    padding: 0;
+  }
+  #header .nav2 #_mobile_user_info .ttuserheading {
+    padding: 0 !important; /* !important : le thème force 5 px sous 544 px */
+  }
+  #header .ttuserheading > .btn > a {
+    padding: 10px 6px;
+    visibility: visible; /* le thème masque le lien et ne garde que l'icône Material */
+  }
+  #header .ttuserheading .toggle-userbutton {
+    right: -60px;
+  }
+
+  /* Panier : bouton principal compact */
+  /* !important : le thème enfant actuel force marges, fond #23adb0 et texte
+     blanc du panier mobile avec !important */
+  #header .nav2 #_mobile_cart {
+    display: block;
+    flex: none;
+    float: none;
+    margin: 0;
+    order: 5;
+    padding: 0 !important;
+  }
+  #header #_mobile_cart .blockcart .header {
+    background-color: var(--sl-teal-profond) !important;
+    gap: 8px;
+    min-height: 44px;
+    padding: 12px !important;
+  }
+  #header #_mobile_cart .blockcart .header:hover {
+    background-color: var(--sl-action-survol) !important;
+  }
+  #header #_mobile_cart .blockcart .header:has(> a) {
+    padding: 0 !important;
+  }
+  #header #_mobile_cart .blockcart .header > a {
+    gap: 8px;
+    padding: 12px;
+  }
+  #header #_mobile_cart .blockcart .header .cart-products-count {
+    color: var(--sl-teal-profond) !important;
+  }
+
+  /* Recherche sur toute la largeur */
+  #header #search_block_top {
+    flex: 1 1 100%;
+    margin: 0;
+    order: 6;
+  }
+
+  /* Pied de page : 2 colonnes */
+  #footer .footer-container > .container > .row {
+    column-gap: 32px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+  #footer #steavisgarantisFooterVerif {
+    margin: 0 0 40px;
+  }
+  #footer #newsletter .newsletter {
+    padding: 24px;
+  }
+  #footer #newsletter .block_content {
+    flex: 1 1 100%;
+  }
+}
+
+/* 992 à 1199 px : pied de page sur 3 colonnes */
+@media (min-width: 992px) and (max-width: 1199px) {
+  #footer .footer-container > .container > .row {
+    column-gap: 32px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+  #footer #steavisgarantisFooterVerif {
+    margin: 0 0 40px;
+  }
+}
+
+/* Moins de 768 px : téléphone */
+@media (max-width: 767px) {
+  #ttcmsheader,
+  #ttcmsheader p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  #ttcmsheader {
+    padding: 6px 0;
+  }
+  #header .nav2 #_mobile_logo img.logo {
+    height: 28px;
+    width: 120px;
+  }
+  #header .blockcart .header .hidden-sm-down {
+    display: none;
+  }
+  #search_block_top #searchbox {
+    gap: 8px;
+    padding-left: 12px;
+  }
+  #header #search_block_top .btn.button-search {
+    padding: 10px 14px;
+  }
+  #ttcmsfooterservice .ttcmsfooterservices {
+    padding: 24px 16px;
+  }
+  /* Les 4 engagements sont empilés au lieu de défiler un par un.
+     !important : le script du carrousel Owl écrit largeurs et décalage en
+     style en ligne */
+  #ttcmsfooterservice .owl-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transform: none !important;
+    width: auto !important;
+  }
+  #ttcmsfooterservice .owl-item {
+    justify-content: flex-start;
+    width: auto !important;
+  }
+  #ttcmsfooterservice .owl-item.cloned {
+    display: none;
+  }
+  #footer #newsletter .tt-title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  #footer #newsletter .tt-content > p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  /* Pied de page : une colonne, titres en accordéon (fonctionnement du thème) */
+  #footer .footer-container > .container > .row {
+    display: block;
+  }
+  #footer .footer-container .links .wrapper,
+  #footer .footer-container .block-contact {
+    border-bottom: 1px solid var(--sl-teal);
+    padding: 16px 0;
+  }
+  #footer .footer-container .links .title {
+    align-items: center;
+    color: var(--sl-blanc);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+  #footer .footer-container .links .title .h3,
+  #footer .footer-container .block-contact .block-contact-title {
+    margin: 0;
+  }
+  #footer .footer-container .links .title .material-icons {
+    color: var(--sl-blanc);
+  }
+  #footer .footer-container .links ul.collapse.in,
+  #footer .footer-container .links ul.collapse.show {
+    padding-top: 16px;
+  }
+  #footer #steavisgarantisFooterVerif {
+    margin: 24px 0;
+  }
+  #footer .bottom-footer > .container > .row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/* ==========================================================================
+   10. Mise en page commune des pages
+   Contenu de 1344 px avec 48 px de marge (maquette à 1440 px).
+   ========================================================================== */
+
+:root {
+  --sl-gap-carrousel: 24px; /* gouttière entre les éléments des carrousels */
+}
+@media (max-width: 767px) {
+  :root { --sl-gap-carrousel: 16px; }
+}
+
+#wrapper {
+  background: var(--sl-blanc);
+  padding: 0;
+}
+#wrapper .container,
+#wrapper .full-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--sl-contenu);
+  padding-left: var(--sl-marge);
+  padding-right: var(--sl-marge);
+  width: 100%;
+}
+#wrapper .full-container {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+}
+/* Conteneurs imbriqués : la marge n'est appliquée qu'une fois */
+#wrapper .container .container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+#wrapper .content_wrap {
+  background: var(--sl-blanc);
+  margin: 0;
+  padding: 0;
+}
+
+/* Les cartes et blocs du thème perdent leur fond, leur ombre et leur cadre :
+   chaque bloc est redessiné plus bas */
+#wrapper .card,
+#wrapper .card-block,
+#wrapper .block-category {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+
+/* ==========================================================================
+   11. Composants partagés
+   ========================================================================== */
+
+/* --- 11.1 Fil d'Ariane : aligné à gauche, chevrons Phosphor --------------- */
+
+#wrapper > .breadcrumb {
+  background: transparent;
+  border: 0; /* le filet sous le menu est déjà porté par l'en-tête */
+  margin: 0 auto;
+  max-width: var(--sl-contenu);
+  padding: 24px var(--sl-marge) 0;
+  text-align: left;
+  width: 100%;
+}
+#wrapper > .breadcrumb ol {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  height: auto; /* le thème fixe 32 px : la maquette fait 22 px */
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+#wrapper > .breadcrumb li {
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+#wrapper > .breadcrumb li::after {
+  background-color: var(--sl-gris);
+  content: "";
+  display: block;
+  height: 12px;
+  margin: 0;
+  -webkit-mask: url("../img/icons/caret-right.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-right.svg") center / contain no-repeat;
+  width: 12px;
+}
+#wrapper > .breadcrumb li:last-child {
+  margin: 0; /* le thème ajoute 5 px autour du dernier élément */
+}
+#wrapper > .breadcrumb li:last-child::after {
+  display: none;
+}
+#wrapper > .breadcrumb li a,
+#wrapper > .breadcrumb li a span {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+}
+#wrapper > .breadcrumb li a:hover,
+#wrapper > .breadcrumb li a:hover span {
+  color: var(--sl-teal-profond);
+}
+#wrapper > .breadcrumb li > span {
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* --- 11.2 Titres de section : titre seul en Titre 2 (retouche n° 2) ------- */
+
+#wrapper .tt-title,
+#wrapper .products-section-title {
+  color: var(--sl-encre);
+  display: block;
+  float: none;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 36px;
+  margin: 0 0 32px;
+  padding: 0;
+  text-align: left;
+  text-transform: none;
+}
+#wrapper .tt-title::before,
+#wrapper .tt-title::after {
+  display: none; /* filets et décors du thème */
+}
+#wrapper .sub-title {
+  display: none; /* sous-titres gris absents de la maquette */
+}
+
+/* --- 11.3 Carrousels Owl : gouttière de 24 px et flèches rondes ----------
+   Le script Owl calcule la largeur des éléments d'après la largeur du
+   carrousel. En élargissant le carrousel d'une gouttière et en réservant
+   cette gouttière à droite de chaque élément, on obtient exactement les
+   largeurs de la maquette (5 cartes de 249,6 px, 3 cartes de 432 px…). */
+
+/* Les conteneurs sont visés avant que le script n'ajoute la classe
+   owl-carousel, pour que la largeur soit juste au moment du calcul */
+#wrapper .owl-carousel,
+#index #content .ttnew-content,
+#index #content .ttspecial-products .products,
+#index #content #ttbrandlogo-carousel,
+#index #content #smartblog-carousel,
+#index #tt_cat_featured .product-list,
+#index #ttcmstopbanner .cmstopbanner,
+#product .product-accessories .products {
+  display: block;
+  float: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: calc(100% + var(--sl-gap-carrousel)); /* le thème met ces blocs en float, avec une marge intérieure */
+}
+#wrapper .owl-carousel .owl-item {
+  padding-right: var(--sl-gap-carrousel);
+}
+#wrapper .owl-carousel .owl-stage-outer {
+  float: none; /* le thème le met en float : le carrousel n'aurait plus de hauteur */
+  margin: 0;
+  padding: 0;
+}
+#wrapper .owl-carousel .owl-nav {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  position: absolute;
+  right: var(--sl-gap-carrousel);
+  top: -72px; /* à droite du titre de section : 40 px + 32 px d'écart */
+}
+#wrapper .owl-carousel .owl-nav.disabled {
+  display: none;
+}
+#wrapper .owl-carousel .owl-nav button.owl-prev,
+#wrapper .owl-carousel .owl-nav button.owl-next {
+  align-items: center;
+  background: var(--sl-blanc) !important; /* !important : le thème force un fond transparent avec !important */
+  border: 1px solid var(--sl-filet) !important;
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-encre);
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  left: auto;
+  margin: 0;
+  opacity: 1;
+  padding: 0;
+  position: static;
+  right: auto;
+  top: auto;
+  transform: none;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+  width: 40px;
+}
+#wrapper .owl-carousel .owl-nav button.owl-prev:hover,
+#wrapper .owl-carousel .owl-nav button.owl-next:hover {
+  background: var(--sl-teal-100) !important; /* même raison */
+}
+#wrapper .owl-carousel .owl-nav button.disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+#wrapper .owl-carousel .owl-nav button.disabled:hover {
+  background: var(--sl-blanc) !important; /* même raison */
+}
+#wrapper .owl-carousel .owl-nav button > i,
+#wrapper .owl-carousel .owl-nav button > span {
+  display: none; /* flèches Material remplacées par les chevrons Phosphor */
+}
+#wrapper .owl-carousel .owl-nav button::before {
+  background-color: currentColor;
+  content: "";
+  display: block;
+  height: 18px;
+  width: 18px;
+}
+#wrapper .owl-carousel .owl-nav button.owl-prev::before {
+  -webkit-mask: url("../img/icons/caret-left.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-left.svg") center / contain no-repeat;
+}
+#wrapper .owl-carousel .owl-nav button.owl-next::before {
+  -webkit-mask: url("../img/icons/caret-right.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-right.svg") center / contain no-repeat;
+}
+#wrapper .owl-carousel .owl-dots {
+  display: none; /* points absents de la maquette, les flèches suffisent */
+}
+
+/* --- 11.4 Carte produit ---------------------------------------------------
+   Fond blanc, bordure 1 px #d6d6d6, rayon 8 px, padding 16 px. Nom en encre
+   sur deux lignes, prix en 20 px SemiBold, remise en pastille, ancien prix
+   barré, quantité et bouton plein « Ajouter ». Aucun rouge. */
+
+#wrapper .product-miniature {
+  border: 0;
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+/* !important : le module ttcolumn impose 33,33 % de largeur aux cartes avec !important */
+#wrapper #js-product-list .products .product-miniature.product-grid,
+#wrapper .featured-products .product-miniature.product-grid {
+  margin: 0;
+  width: auto !important;
+}
+#wrapper .product-miniature .thumbnail-container {
+  float: none;
+  overflow: visible;
+  text-align: left;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  margin: 0;
+  padding: 16px;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+}
+#wrapper .product-miniature .thumbnail-container:hover {
+  border-color: var(--sl-teal);
+  box-shadow: none;
+}
+#wrapper .product-miniature .thumbnail-container::before,
+#wrapper .product-miniature .thumbnail-container::after {
+  display: none; /* séparateurs et halos du thème */
+}
+
+/* Photo : cadre de 240 px, zoom léger au survol */
+#wrapper .product-miniature .ttproduct-image {
+  border-radius: var(--sl-rayon-md);
+  height: 240px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+#wrapper .product-miniature .ttproduct-image .thumbnail {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+#wrapper .product-miniature .ttproduct-image img {
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--sl-duree) var(--sl-courbe);
+  width: 100%;
+}
+#wrapper .product-miniature .thumbnail-container:hover .ttproduct-image img {
+  transform: scale(1.03);
+}
+/* Décors du thème absents de la maquette : pastilles, œil et cœur au survol,
+   seconde image au survol, description courte */
+#wrapper .product-miniature .product-flags,
+#wrapper .product-miniature .ttproducthover,
+#wrapper .product-miniature .product_style2,
+#wrapper .product-miniature .highlighted-informations,
+#wrapper .product-miniature .product-desc-short,
+#wrapper .product-miniature .ttproduct-img2 {
+  display: none;
+}
+
+#wrapper .product-miniature .ttproduct-desc {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+#wrapper .product-miniature .product-description {
+  margin: 0;
+  padding: 0;
+}
+#wrapper .product-miniature .product-title {
+  height: 40px;
+  margin: 0;
+  overflow: hidden;
+  text-align: left;
+}
+#wrapper .product-miniature .product-title a {
+  -webkit-box-orient: vertical;
+  color: var(--sl-encre);
+  display: -webkit-box;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 20px;
+  overflow: hidden;
+  text-transform: none;
+  white-space: normal;
+}
+#wrapper .product-miniature .product-title a:hover {
+  color: var(--sl-teal-profond);
+}
+
+/* Prix : prix seul sur la première ligne, puis remise et ancien prix */
+#wrapper .product-miniature .product-price-and-shipping {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0 0 10px; /* retouche n° 6 : 10 px sous la ligne remise */
+  text-align: left;
+}
+#wrapper .product-miniature .product-price-and-shipping .price {
+  color: var(--sl-encre);
+  flex: 0 0 100%;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  order: 1;
+}
+#wrapper .product-miniature .product-price-and-shipping .discount-percentage,
+#wrapper .product-miniature .product-price-and-shipping .discount-amount {
+  background: var(--sl-teal-100);
+  border: 0;
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  margin: 0;
+  order: 2;
+  padding: 2px 8px;
+  text-transform: uppercase;
+}
+#wrapper .product-miniature .product-price-and-shipping .regular-price {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  order: 3;
+  text-decoration: line-through;
+}
+/* Sans remise : pas de marge sous le prix */
+#wrapper .product-miniature .product-price-and-shipping:not(:has(.regular-price)) {
+  padding-bottom: 0;
+}
+
+/* Actions : quantité (− 1 +) et bouton plein « Ajouter » */
+#wrapper .product-miniature .tt-button-container {
+  margin: auto 0 0;
+  padding: 0;
+  position: static;
+  width: 100%;
+}
+#wrapper .product-miniature .tt-button-container form {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+#wrapper .product-miniature .tt-button-container .product-quantity {
+  align-items: center;
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  flex: 0 0 96px;
+  height: 40px;
+  justify-content: space-between;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 96px;
+}
+#wrapper .product-miniature .tt-button-container .product-quantity input.atc_qty {
+  -moz-appearance: textfield;
+  background: transparent;
+  border: 0;
+  color: var(--sl-encre);
+  flex: 1 1 auto;
+  font-size: 14px;
+  font-weight: 500;
+  height: 38px;
+  line-height: 20px;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: center;
+  width: 30px;
+}
+#wrapper .product-miniature .tt-button-container .product-quantity input.atc_qty::-webkit-inner-spin-button,
+#wrapper .product-miniature .tt-button-container .product-quantity input.atc_qty::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#wrapper .product-miniature .tt-button-container .quantity-nav {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--sl-encre);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 32px;
+  height: 38px;
+  justify-content: center;
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+  position: static;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+  width: 32px;
+}
+#wrapper .product-miniature .tt-button-container .quantity-nav:hover {
+  background: var(--sl-teal-100);
+}
+#wrapper .product-miniature .tt-button-container .quantity-nav::after {
+  background-color: currentColor;
+  content: ""; /* le thème y écrit une icône Material */
+  display: block;
+  font-size: 0;
+  height: 14px;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+  position: static;
+  width: 14px;
+}
+#wrapper .product-miniature .tt-button-container .btnminus { --sl-icone: url("../img/icons/minus.svg"); order: -1; }
+#wrapper .product-miniature .tt-button-container .btnplus { --sl-icone: url("../img/icons/plus.svg"); order: 1; }
+
+#wrapper .product-miniature .tt-button-container .btn {
+  align-items: center;
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  flex: 1 1 auto;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  justify-content: center;
+  line-height: 20px;
+  margin: 0;
+  min-width: 0;
+  padding: 0 12px;
+  white-space: nowrap;
+  width: auto;
+}
+#wrapper .product-miniature .tt-button-container .btn.add-to-cart:not(.add-to-cart-disable),
+#wrapper .product-miniature .tt-button-container .btn.select-btn {
+  background: var(--sl-teal-profond);
+  border: 0;
+  color: var(--sl-blanc);
+}
+#wrapper .product-miniature .tt-button-container .btn.add-to-cart:not(.add-to-cart-disable):hover,
+#wrapper .product-miniature .tt-button-container .btn.select-btn:hover {
+  background: var(--sl-action-survol);
+}
+#wrapper .product-miniature .tt-button-container .btn .material-icons,
+#wrapper .product-miniature .tt-button-container .btn .loading {
+  display: none; /* le bouton porte seulement son libellé, sans « + » */
+}
+#wrapper .product-miniature .tt-button-container .btn span {
+  color: inherit;
+  display: inline; /* le thème masque le libellé sous 544 px */
+  font-size: 14px;
+  font-weight: 500;
+}
+#wrapper .product-miniature .tt-button-container .btn span::before,
+#wrapper .product-miniature .tt-button-container .btn span::after {
+  display: none; /* flèche et « + » ajoutés par le thème */
+}
+/* En rupture : bouton gris pleine largeur, sans sélecteur de quantité */
+#wrapper .product-miniature .tt-button-container .add-to-cart-disable {
+  background: var(--sl-neutre-100);
+  border: 0;
+  color: var(--sl-gris);
+  cursor: not-allowed;
+  flex: 1 1 100%;
+}
+#wrapper .product-miniature .tt-button-container .add-to-cart-disable span,
+#wrapper .product-miniature .tt-button-container .add-to-cart-disable:hover {
+  background: var(--sl-neutre-100);
+  color: var(--sl-gris);
+}
+#wrapper .product-miniature .tt-button-container form:has(.add-to-cart-disable) .product-quantity,
+#wrapper .product-miniature .tt-button-container form:has(.select-btn) .product-quantity {
+  display: none; /* en rupture ou à déclinaisons : la quantité se choisit sur la fiche */
+}
+
+/* --- 11.5 Vignette catégorie : 120 × 168 px, fond gris clair -------------- */
+
+#wrapper .category-sub,
+#wrapper #subcategories .subcategories-list > li {
+  align-items: center;
+  background: var(--sl-neutre-100);
+  border: 0;
+  border-radius: var(--sl-rayon-md);
+  box-shadow: none;
+  display: flex;
+  flex: 0 0 120px;
+  flex-direction: column;
+  gap: 8px;
+  height: 168px;
+  margin: 0;
+  padding: 12px 8px;
+  transition: background-color var(--sl-duree) var(--sl-courbe), box-shadow var(--sl-duree) var(--sl-courbe);
+  width: 120px;
+}
+#wrapper .category-sub:hover,
+#wrapper #subcategories .subcategories-list > li:hover {
+  box-shadow: inset 0 0 0 1px var(--sl-teal);
+}
+#wrapper .category-sub .subcat-img {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#wrapper .category-sub .subcat-img > a:first-child,
+#wrapper #subcategories .subcategory-image,
+#wrapper #subcategories .subcategory-image a {
+  background: transparent;
+  border: 0;
+  display: block;
+  height: 96px;
+  margin: 0 auto;
+  padding: 0;
+  width: 96px;
+}
+#wrapper .category-sub img,
+#wrapper #subcategories .subcategory-image img {
+  height: 96px;
+  mix-blend-mode: multiply;
+  object-fit: contain;
+  width: 96px;
+}
+#wrapper .category-sub .title,
+#wrapper #subcategories .subcategories-list > li h3 {
+  display: block;
+  height: 40px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+#wrapper .category-sub .title a,
+#wrapper #subcategories .subcategory-name {
+  -webkit-box-orient: vertical;
+  color: var(--sl-encre);
+  display: -webkit-box;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 20px;
+  overflow: hidden;
+  text-align: center;
+  text-transform: none;
+}
+
+/* --- 11.6 Pastilles et liens d'action ------------------------------------- */
+
+.sl-lien-action {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: var(--sl-teal-profond);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  line-height: 20px;
+  padding: 0;
+}
+.sl-lien-action::after {
+  background-color: currentColor;
+  content: "";
+  height: 14px;
+  -webkit-mask: url("../img/icons/caret-down.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-down.svg") center / contain no-repeat;
+  transition: transform var(--sl-duree) var(--sl-courbe);
+  width: 14px;
+}
+.sl-lien-action[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+.sl-lien-action:hover {
+  color: var(--sl-action-survol);
+}
+
+
+/* ==========================================================================
+   12. Accueil (maquette 416:80)
+   Chaque bloc reste celui de son module ; seul l'habillage change.
+   ========================================================================== */
+
+/* Sections : 64 px au-dessus de chaque bloc, titre puis contenu */
+#index #content .ttnew-products > .container,
+#index #content .ttspecial-products > .container,
+#index #content .brands > .container,
+#index #content #smartblog_block > .container {
+  padding-top: var(--sl-section);
+}
+#index #content .ttnew-products,
+#index #content .ttspecial-products,
+#index #content .brands,
+#index #content #smartblog_block,
+#index #content #ttcmssubbanner,
+#index #content #ttcmstopbanner {
+  background: transparent;
+  float: none; /* le thème met les marques en float : la section suivante passait dessous */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#index #content .ttnew-products .ttnew-products {
+  margin: 0;
+}
+
+/* --- 12.1 Slider : largeur du contenu, rayon 8 px --------------------------
+   Le menu vertical ouvert par-dessus (« Shop Categories ») est un décor du
+   thème absent de la maquette : il est masqué, le menu « Tous nos produits »
+   de l'en-tête reste disponible. */
+#index .tt-serviceslider {
+  margin: 0 auto;
+  max-width: var(--sl-contenu);
+  padding: 24px var(--sl-marge) 0;
+  position: relative;
+}
+#index .tt-serviceslider #tt-menu-vertical {
+  display: none;
+}
+#index #homeslider {
+  border-radius: var(--sl-rayon-md);
+  float: none;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+}
+#index #homeslider .slide-item,
+#index #homeslider .item-inner,
+#index #homeslider .item-inner a {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+#index #homeslider img {
+  border-radius: var(--sl-rayon-md);
+  display: block;
+  height: auto;
+  width: 100%;
+}
+#index #homeslider .slick-dots {
+  bottom: 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+}
+#index #homeslider .slick-dots li {
+  height: 10px;
+  margin: 0;
+  width: 10px;
+}
+#index #homeslider .slick-dots li button {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-teal-profond);
+  border-radius: var(--sl-rayon-pill);
+  font-size: 0;
+  height: 10px;
+  padding: 0;
+  width: 10px;
+}
+#index #homeslider .slick-dots li.slick-active button {
+  background: var(--sl-teal-profond);
+}
+#index #homeslider .slick-dots li button::before {
+  display: none;
+}
+
+/* --- 12.2 Trois petites bannières (texte enrichi du back-office) --------- */
+#index #ttcmstopbanner > .container {
+  padding-top: 24px;
+}
+#index #ttcmstopbanner .row,
+#index #ttcmstopbanner .cmstopbanner {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+#index #ttcmstopbanner .topbanner {
+  border-radius: var(--sl-rayon-md);
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+/* !important : la taille et le rayon des médias sont écrits en style en ligne
+   dans le contenu du back-office (largeur 98 %, 600 px au plus) */
+#index #ttcmstopbanner .topbanner video,
+#index #ttcmstopbanner .topbanner img {
+  border-radius: var(--sl-rayon-md) !important;
+  display: block;
+  height: auto;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* --- 12.3 Nos catégories : fond gris, trois cartes blanches bordées ------- */
+#index #tt_category_feature {
+  background: var(--sl-neutre-100);
+  margin: 20px 0 0; /* les petites bannières ont 20 px de marge basse dans la maquette */
+  padding: var(--sl-section) 0;
+}
+#index #tt_category_feature .title {
+  margin: 0;
+  padding: 0;
+}
+#index #tt_category_feature .category_feature,
+#index #tt_category_feature #tt_cat_featured {
+  float: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+#index #tt_category_feature .ttfeatureright {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#index #tt_category_feature .ttfeature-inner {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 442px;
+  margin: 0;
+  overflow: hidden;
+  padding: 24px 20px 20px;
+}
+/* Titre de la carte : l'image de la catégorie et « Voir tout » sont masqués */
+#index #tt_category_feature .ttfeature-inner > .subcat-img {
+  margin: 0;
+  padding: 0;
+}
+#index #tt_category_feature .ttfeature-inner > .subcat-img > a,
+#index #tt_category_feature .ttfeature-inner > .subcat-img .view-more {
+  display: none;
+}
+#index #tt_category_feature .ttfeature-inner > .subcat-img .title-view {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+#index #tt_category_feature .ttfeature-inner > .subcat-img .title-view .title,
+#index #tt_category_feature .ttfeature-inner > .subcat-img .title-view .title a {
+  color: var(--sl-encre);
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0;
+  text-align: left;
+  text-transform: none;
+}
+#index #tt_category_feature .sub-cat {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* retouche n° 3 */
+  margin: 0;
+  padding: 0;
+}
+
+/* --- 12.4 Nouveaux produits et promotions : cartes de la maquette -------- */
+#index #content .ttnew-content.owl-loaded .owl-stage,
+#index #content .ttspecial-products .products.owl-loaded .owl-stage {
+  display: flex;
+}
+#index #content .ttnew-content .owl-item,
+#index #content .ttspecial-products .products .owl-item {
+  display: flex;
+}
+#index #content .ttnew-content .owl-item .product-miniature,
+#index #content .ttspecial-products .products .owl-item .product-miniature {
+  width: 100%;
+}
+#index #content .allproduct {
+  display: none; /* lien « Tous les produits » du thème, absent de la maquette */
+}
+
+/* --- 12.5 Nos marques : chaque logo dans sa carte bordée ----------------- */
+#index #content .brands .brand-image {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  display: flex;
+  height: 96px;
+  justify-content: center;
+  margin: 0;
+  padding: 0 16px;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+}
+#index #content .brands .brand-image:hover {
+  border-color: var(--sl-teal);
+}
+#index #content .brands .brand-image a {
+  display: block;
+}
+#index #content .brands .brand-image img {
+  filter: none;
+  height: 38px;
+  max-width: 150px;
+  object-fit: contain;
+  opacity: 1;
+  width: 100%;
+}
+
+/* --- 12.6 Bannières univers --------------------------------------------- */
+#index #ttcmssubbanner > .container {
+  padding-top: var(--sl-section);
+}
+#index #ttcmssubbanner .row,
+#index #ttcmssubbanner .cmssubbanner {
+  margin: 0;
+  padding: 0;
+}
+#index #ttcmssubbanner .row {
+  display: block; /* la grille ci-dessous a besoin de toute la largeur */
+}
+#index #ttcmssubbanner .cmssubbanner {
+  width: 100%;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#index #ttcmssubbanner .cmssubbanner > * {
+  border-radius: var(--sl-rayon-md);
+  float: none;
+  margin: 0;
+  max-width: none;
+  overflow: hidden;
+  padding: 0;
+  width: auto;
+}
+#index #ttcmssubbanner img {
+  border-radius: var(--sl-rayon-md);
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+/* --- 12.7 Nos conseils : carte article ----------------------------------- */
+#index #smartblog_block .blog_style1 {
+  display: none;
+}
+#index #smartblog_block .item.blog_post {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+#index #smartblog_block .news_module_image_holder {
+  background: var(--sl-blanc);
+  border-radius: var(--sl-rayon-md);
+  height: 200px;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+#index #smartblog_block .news_module_image_holder .image-inner,
+#index #smartblog_block .news_module_image_holder .image-inner > a {
+  background: transparent;
+  border: 0;
+  display: block;
+  height: 100%;
+}
+#index #smartblog_block .news_module_image_holder *::before,
+#index #smartblog_block .news_module_image_holder *::after,
+#index #smartblog_block .news_module_image_holder::before,
+#index #smartblog_block .news_module_image_holder::after {
+  display: none; /* cadres et halos du thème autour des images */
+}
+#index #smartblog_block .news_module_image_holder img {
+  border-radius: 0;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+/* Date en pastille teal profond (« 23 NOV. ») */
+#index #smartblog_block .blog_date {
+  align-items: baseline;
+  background: var(--sl-teal-profond);
+  border-radius: var(--sl-rayon-sm);
+  bottom: 12px;
+  color: var(--sl-blanc);
+  display: flex;
+  gap: 4px;
+  height: auto;
+  left: 12px;
+  margin: 0;
+  padding: 4px 10px;
+  position: absolute;
+  right: auto;
+  top: auto;
+  width: auto;
+}
+#index #smartblog_block .blog_date span {
+  color: var(--sl-blanc);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+#index #smartblog_block .blog_content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+#index #smartblog_block .sds_post_title,
+#index #smartblog_block .sds_post_title a {
+  color: var(--sl-encre);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0;
+  text-align: left;
+  text-transform: none;
+}
+#index #smartblog_block .sds_post_title a:hover {
+  color: var(--sl-teal-profond);
+}
+#index #smartblog_block .blog_content .desc {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+}
+#index #smartblog_block .blog_content .read_more {
+  align-items: center;
+  color: var(--sl-teal-profond);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 8px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+#index #smartblog_block .blog_content .read_more::before {
+  display: none;
+}
+#index #smartblog_block .blog_content .read_more::after {
+  background-color: currentColor;
+  content: "";
+  display: block;
+  height: 16px;
+  -webkit-mask: url("../img/icons/arrow-right.svg") center / contain no-repeat;
+  mask: url("../img/icons/arrow-right.svg") center / contain no-repeat;
+  position: static;
+  transition: transform var(--sl-duree) var(--sl-courbe);
+  width: 16px;
+}
+#index #smartblog_block .blog_content .read_more:hover::after {
+  transform: translateX(4px);
+}
+
+/* --- 12.8 Avis Garantis : widget du module, entre les conseils et les engagements */
+#index #steavisgarantis,
+#index .da_sa_global_container {
+  margin: 0 auto;
+  max-width: var(--sl-contenu);
+  padding: var(--sl-section) var(--sl-marge) 0;
+}
+
+
+/* ==========================================================================
+   13. Catégorie (maquette 425:362)
+   Même modèle pour les promotions, les nouveautés, les résultats de
+   recherche et les pages marque.
+   Grille : en-tête et sous-catégories sur toute la largeur, puis filtres
+   (288 px) et produits. Les conteneurs intermédiaires du thème sont
+   « transparents » (display: contents) pour que leurs blocs rejoignent
+   la grille.
+   ========================================================================== */
+
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #wrapper > .content_wrap > .container {
+  align-items: start;
+  column-gap: 32px;
+  display: grid;
+  grid-template-areas:
+    "entete entete"
+    "souscat souscat"
+    "filtres produits";
+  grid-template-columns: 288px minmax(0, 1fr);
+}
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer).layout-full-width #wrapper > .content_wrap > .container {
+  grid-template-areas: "entete" "souscat" "produits";
+  grid-template-columns: minmax(0, 1fr);
+}
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #wrapper > .content_wrap > .container::before,
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #wrapper > .content_wrap > .container::after {
+  display: none;
+}
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #content-wrapper,
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #content-wrapper > #main {
+  display: contents;
+}
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #js-product-list-header { grid-area: entete; min-width: 0; }
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #subcategories { grid-area: souscat; min-width: 0; }
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #left-column { grid-area: filtres; }
+:is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #products { grid-area: produits; min-width: 0; }
+
+/* --- 13.1 En-tête : bannière, H1 en Titre 1, introduction ---------------- */
+#js-product-list-header {
+  padding-top: 24px;
+}
+#wrapper #js-product-list-header .block-category {
+  background: transparent;
+  border: 0;
+  display: flex !important; /* !important : le thème force display: block !important */
+  flex-direction: column;
+  float: none;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+/* Le clearfix du thème deviendrait un élément de la colonne et ajouterait
+   un écart de 24 px sous l'introduction */
+#wrapper #js-product-list-header .block-category::before,
+#wrapper #js-product-list-header .block-category::after {
+  display: none;
+}
+#wrapper #js-product-list-header .category-cover {
+  border-radius: var(--sl-rayon-md);
+  margin: 0;
+  overflow: hidden;
+}
+#js-product-list-header .category-cover img {
+  border-radius: var(--sl-rayon-md);
+  display: block;
+  height: auto;
+  width: 100%;
+}
+/* Ordinateur : format de la maquette, 1344 × 220, image recadrée au centre */
+@media (min-width: 992px) {
+  #js-product-list-header .category-cover img {
+    aspect-ratio: 1344 / 220;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+}
+#js-product-list-header .h1,
+#js-product-list-header h1,
+#main > h1,
+#main .page-header h1 {
+  color: var(--sl-encre);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-transform: none;
+}
+/* Introduction : premier paragraphe de la description, placé sous le titre
+   par le script du module, sur deux lignes avec « Lire la suite » */
+.sl-intro {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: -12px; /* 12 px sous le titre (le bloc a 24 px d'écart) */
+  max-width: 880px;
+}
+.sl-intro .sl-intro-texte,
+.sl-intro .sl-intro-texte * {
+  color: var(--sl-gris);
+  font-size: 16px;
+  line-height: 26px;
+}
+.sl-intro .sl-intro-texte p,
+.sl-intro .sl-intro-texte h2 {
+  font-weight: 400;
+  margin: 0;
+}
+.sl-intro .sl-intro-texte a {
+  color: var(--sl-teal-profond);
+}
+.sl-intro.sl-replie .sl-intro-texte {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* --- 13.2 Sous-catégories : une ligne de vignettes avec flèches ---------- */
+#wrapper #subcategories {
+  padding-top: 48px; /* #wrapper : le thème remet à 0 le bloc .card-block */
+  position: relative;
+}
+#subcategories .subcategory-heading {
+  color: var(--sl-encre);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+  margin: 0 0 24px;
+  padding: 4px 0 0;
+  text-align: left;
+  text-transform: none;
+}
+#subcategories .subcategories-list {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  overflow-x: auto;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+#subcategories .subcategories-list::-webkit-scrollbar {
+  display: none;
+}
+#subcategories .subcategories-list > li {
+  scroll-snap-align: start;
+}
+/* Flèches ajoutées par le script quand la ligne dépasse la largeur */
+.sl-fleches {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  right: 0;
+  top: 48px;
+}
+.sl-fleche {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-encre);
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  padding: 0;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+  width: 40px;
+}
+.sl-fleche:hover {
+  background: var(--sl-teal-100);
+}
+.sl-fleche:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+.sl-fleche:disabled:hover {
+  background: var(--sl-blanc);
+}
+.sl-fleche::before {
+  background-color: currentColor;
+  content: "";
+  height: 18px;
+  -webkit-mask: url("../img/icons/caret-left.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-left.svg") center / contain no-repeat;
+  width: 18px;
+}
+.sl-fleche.sl-suivant::before {
+  -webkit-mask-image: url("../img/icons/caret-right.svg");
+  mask-image: url("../img/icons/caret-right.svg");
+}
+
+/* --- 13.3 Colonne des filtres -------------------------------------------- */
+#left-column {
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 48px 0 0;
+  width: auto;
+}
+#left-column .block-categories {
+  display: none; /* arborescence absente de la maquette : seuls les filtres restent */
+}
+#left-column .left-right-inner,
+#left-column #search_filters_wrapper,
+#left-column #search_filters {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+#search_filters > p.h6 {
+  --sl-icone: url("../img/icons/sliders-horizontal.svg");
+  --sl-icone-taille: 22px;
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  gap: 10px;
+  line-height: 28px;
+  background: transparent;
+  margin: 0;
+  padding: 0 0 16px;
+  text-transform: none !important; /* !important : le thème impose capitalize !important */
+}
+#search_filters > p.h6::before {
+  background-color: currentColor;
+  content: "";
+  flex: none;
+  height: 22px;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+  width: 22px;
+}
+#search_filters .facet {
+  border-top: 1px solid var(--sl-filet);
+  margin: 0;
+  padding: 20px 0;
+}
+#search_filters .facet:last-of-type {
+  border-bottom: 1px solid var(--sl-filet);
+}
+#search_filters .facet .facet-title {
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  justify-content: space-between;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+}
+#search_filters .facet > .facet-title {
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+#search_filters .facet > .facet-title::after {
+  background-color: currentColor;
+  content: "";
+  flex: none;
+  height: 16px;
+  -webkit-mask: url("../img/icons/caret-up.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-up.svg") center / contain no-repeat;
+  transition: transform var(--sl-duree) var(--sl-courbe);
+  width: 16px;
+}
+/* Groupe replié par le script : chevron vers le bas, liste masquée */
+#search_filters .facet.sl-replie > .facet-title {
+  margin-bottom: 0;
+}
+#search_filters .facet.sl-replie > .facet-title::after {
+  transform: rotate(180deg);
+}
+@media (min-width: 768px) {
+  #search_filters .facet.sl-replie > ul,
+  #search_filters .facet.sl-replie > ul.collapse {
+    display: none;
+  }
+}
+#search_filters .facet ul,
+#search_filters .facet ul.collapse {
+  display: flex; /* ul.collapse : le thème force display: block */
+  flex-direction: column;
+  float: none; /* en float, la marge du lien « Voir les N autres » disparaît */
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+#search_filters .facet ul li {
+  margin: 0;
+  padding: 0;
+}
+#search_filters .facet li.sl-en-trop {
+  display: none; /* au-delà de 6 valeurs, jusqu'au clic sur « Voir les N autres » */
+}
+#search_filters_wrapper #search_filters .facet .facet-label {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin: 0; /* le thème ajoute 10 px sous chaque valeur */
+  text-align: left;
+  width: 100%;
+}
+#search_filters .facet .facet-label a,
+#search_filters .facet .facet-label .search-link {
+  align-items: center;
+  color: var(--sl-encre);
+  display: flex;
+  flex: 1 1 auto;
+  font-size: 14px;
+  font-weight: 400;
+  gap: 8px;
+  justify-content: space-between;
+  line-height: 22px;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-decoration: none;
+}
+#search_filters .facet .facet-label a:hover {
+  color: var(--sl-teal-profond);
+}
+#search_filters .facet .magnitude {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+  margin-left: auto;
+}
+/* Case à cocher du design system : 18 px, contour 1,5 px, cochée en teal profond */
+#search_filters_wrapper #search_filters .facet .custom-checkbox {
+  flex: none;
+  height: 18px;
+  margin: 0;
+  position: relative;
+  top: 0;
+  width: 18px;
+}
+#search_filters_wrapper #search_filters .facet .custom-checkbox input[type="checkbox"] {
+  cursor: pointer;
+  height: 18px;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 18px;
+  z-index: 1;
+}
+#search_filters_wrapper #search_filters .facet .custom-checkbox input[type="checkbox"] + span {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1.5px solid var(--sl-gris);
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  height: 18px;
+  justify-content: center;
+  margin: 0;
+  transition: background-color var(--sl-duree) var(--sl-courbe), border-color var(--sl-duree) var(--sl-courbe);
+  width: 18px;
+}
+#search_filters_wrapper #search_filters .facet .custom-checkbox input[type="checkbox"]:checked + span {
+  background: var(--sl-teal-profond);
+  border-color: var(--sl-teal-profond);
+}
+#search_filters_wrapper #search_filters .facet .custom-checkbox input[type="checkbox"]:checked + span::after {
+  background-color: var(--sl-blanc);
+  content: "";
+  height: 12px;
+  -webkit-mask: url("../img/icons/check.svg") center / contain no-repeat;
+  mask: url("../img/icons/check.svg") center / contain no-repeat;
+  width: 12px;
+}
+#search_filters_wrapper #search_filters .facet .custom-checkbox input[type="checkbox"]:focus-visible + span {
+  outline: 2px solid var(--sl-teal-profond);
+  outline-offset: 2px;
+}
+#search_filters_wrapper #search_filters .facet .custom-checkbox .checkbox-checked {
+  display: none; /* coche Material remplacée par l'icône Phosphor */
+}
+/* Pastilles de couleur des filtres « Couleur » : la couleur reste celle du produit */
+#search_filters_wrapper #search_filters .facet .custom-checkbox span.color {
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-sm);
+  height: 18px;
+  margin: 0;
+  width: 18px;
+}
+/* Curseur de prix */
+#search_filters .facet .faceted-slider li p {
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0 0 16px;
+}
+#search_filters .ui-slider-horizontal {
+  background: var(--sl-filet);
+  border: 0;
+  border-radius: var(--sl-rayon-pill);
+  height: 4px;
+  margin: 8px 10px;
+}
+#search_filters .ui-slider-horizontal .ui-slider-range {
+  background: var(--sl-teal);
+  border: 0;
+  border-radius: var(--sl-rayon-pill);
+}
+#search_filters .ui-slider-horizontal .ui-slider-handle {
+  background: var(--sl-blanc);
+  border: 2px solid var(--sl-teal-profond);
+  border-radius: var(--sl-rayon-pill);
+  cursor: pointer;
+  height: 20px;
+  margin-left: -10px;
+  top: -8px;
+  width: 20px;
+}
+/* Lien « Voir les N autres » ajouté par le script */
+#search_filters .facet .sl-voir-plus {
+  display: flex; /* pas de ligne de texte autour : 20 px de haut */
+  margin-top: 12px;
+  width: fit-content;
+}
+/* Filtres actifs (pastilles) */
+#js-active-search-filters .filter-block {
+  align-items: center;
+  background: var(--sl-teal-100);
+  border: 0;
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  line-height: 20px;
+  margin: 0 8px 8px 0;
+  padding: 6px 12px;
+}
+#js-active-search-filters .filter-block .close {
+  color: var(--sl-teal-profond);
+  font-size: 16px;
+  opacity: 1;
+}
+
+/* --- 13.4 Barre au-dessus des produits ------------------------------------ */
+#products {
+  padding-top: 48px;
+}
+#js-product-list-top {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+  margin: 0 0 24px;
+  padding: 0;
+}
+#js-product-list-top::before,
+#js-product-list-top::after,
+#js-product-list-top .filter-toggle,
+#js-product-list-top .grid_list {
+  display: none; /* boutons d'affichage grille / liste absents de la maquette */
+}
+#js-product-list-top .total-products {
+  flex: 1 1 auto;
+  float: none;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#js-product-list-top .total-products p {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+}
+#js-product-list-top .borderright {
+  border: 0;
+  flex: 0 0 auto;
+  float: none;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#js-product-list-top .sort-by-row {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+}
+#js-product-list-top .sort-by {
+  color: var(--sl-gris);
+  float: none;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  white-space: nowrap;
+  width: auto;
+}
+#js-product-list-top .products-sort-order {
+  float: none;
+  max-width: none;
+  padding: 0;
+  position: relative;
+  width: 200px;
+}
+#js-product-list-top .products-sort-order .select-title {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  height: 40px;
+  justify-content: space-between;
+  line-height: 22px;
+  margin: 0;
+  padding: 0 12px 0 16px;
+  text-align: left;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+  width: 100%;
+}
+#js-product-list-top .products-sort-order .select-title:hover {
+  border-color: var(--sl-encre);
+}
+#js-product-list-top .products-sort-order .select-title .material-icons {
+  display: none;
+}
+#js-product-list-top .products-sort-order .select-title::after {
+  background-color: var(--sl-encre);
+  content: "";
+  flex: none;
+  height: 16px;
+  -webkit-mask: url("../img/icons/caret-down.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-down.svg") center / contain no-repeat;
+  width: 16px;
+}
+#js-product-list-top .products-sort-order .dropdown-menu {
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  box-shadow: none;
+  margin-top: 4px;
+  padding: 8px 0;
+  width: 100%;
+}
+#js-product-list-top .products-sort-order .select-list {
+  color: var(--sl-encre);
+  display: block;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 8px 16px;
+}
+#js-product-list-top .products-sort-order .select-list:hover {
+  background: var(--sl-neutre-100);
+  color: var(--sl-teal-profond);
+}
+#js-product-list-top .products-sort-order .select-list.current {
+  color: var(--sl-teal-profond);
+  font-weight: 500;
+}
+
+/* --- 13.5 Grille de produits : 4 cartes par ligne à côté des filtres ------ */
+#js-product-list .products.row {
+  display: block;
+  margin: 0;
+}
+#js-product-list .tab-content .tab-pane {
+  display: none;
+}
+#js-product-list .tab-content .tab-pane.active {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  opacity: 1;
+}
+.layout-full-width #js-product-list .tab-content .tab-pane.active {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+#js-product-list .tab-content .tab-pane.active::before,
+#js-product-list .tab-content .tab-pane.active::after {
+  display: none;
+}
+#js-product-list .product-column:empty,
+#js-product-list .product-filter:empty {
+  display: none;
+}
+
+/* --- 13.6 Pagination : texte à gauche, numéros carrés à droite ------------ */
+#js-product-list .pagination {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  margin: 24px 0 10px; /* retouche n° 7 : 10 px de marge basse */
+  padding: 16px 0 0;
+  width: 100%;
+}
+#js-product-list .pagination::before,
+#js-product-list .pagination::after {
+  display: none;
+}
+#js-product-list .pagination > div {
+  float: none;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#js-product-list .pagination .pagination-left {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+}
+#js-product-list .pagination .page-list {
+  display: flex;
+  float: none;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+#js-product-list .pagination .page-list::before,
+#js-product-list .pagination .page-list::after {
+  display: none;
+}
+#js-product-list .pagination .page-list li {
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+#js-product-list .pagination .page-list li a,
+#js-product-list .pagination .page-list li .spacer {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  justify-content: center;
+  line-height: 20px;
+  min-width: 40px;
+  padding: 0 4px;
+  transition: background-color var(--sl-duree) var(--sl-courbe);
+}
+#js-product-list .pagination .page-list li a:hover {
+  background: var(--sl-teal-100);
+  color: var(--sl-encre);
+}
+#js-product-list .pagination .page-list li.current a {
+  background: var(--sl-teal-profond);
+  border-color: var(--sl-teal-profond);
+  color: var(--sl-blanc);
+  opacity: 1;
+}
+/* Précédent / Suivant : flèche seule, le libellé reste lu par les lecteurs d'écran */
+#js-product-list .pagination .page-list a.previous,
+#js-product-list .pagination .page-list a.next {
+  font-size: 0;
+  width: 40px;
+}
+#js-product-list .pagination .page-list a.previous .material-icons,
+#js-product-list .pagination .page-list a.next .material-icons {
+  display: none;
+}
+#js-product-list .pagination .page-list a.previous::before,
+#js-product-list .pagination .page-list a.next::before {
+  background-color: currentColor;
+  content: "";
+  height: 16px;
+  -webkit-mask: url("../img/icons/caret-left.svg") center / contain no-repeat;
+  mask: url("../img/icons/caret-left.svg") center / contain no-repeat;
+  width: 16px;
+}
+#js-product-list .pagination .page-list a.next::before {
+  -webkit-mask-image: url("../img/icons/caret-right.svg");
+  mask-image: url("../img/icons/caret-right.svg");
+}
+
+/* --- 13.7 Texte SEO de la catégorie : bas de page sur fond gris ----------
+   Le script du module place la description de la catégorie dans une
+   section pleine largeur sous la liste ; sans script, elle reste à sa
+   place d'origine, avec le même habillage. */
+.sl-texte-categorie {
+  background: var(--sl-neutre-100);
+  padding: var(--sl-section) 0;
+}
+.sl-texte-categorie > .sl-texte-interieur {
+  margin: 0 auto;
+  max-width: var(--sl-contenu);
+  padding: 0 var(--sl-marge);
+}
+#category-description {
+  color: var(--sl-encre);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 880px;
+}
+.sl-texte-categorie.sl-replie #category-description {
+  max-height: 1000px;
+  overflow: hidden;
+}
+#category-description,
+#category-description span,
+#category-description p {
+  color: var(--sl-encre);
+  font-size: 16px;
+  line-height: 26px;
+}
+#category-description p {
+  margin: 0;
+}
+#category-description h2,
+#category-description h2 span {
+  color: var(--sl-encre);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+  margin: 20px 0 0; /* 32 px entre deux blocs (12 + 20) */
+}
+#category-description h2:first-child {
+  margin-top: 0;
+}
+#category-description h2 br:first-child {
+  display: none;
+}
+#category-description h3,
+#category-description h3 span {
+  color: var(--sl-encre);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0;
+}
+#category-description a {
+  color: var(--sl-teal-profond);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+#category-description a:hover {
+  text-decoration-color: currentColor;
+}
+.sl-texte-categorie .sl-lien-action {
+  display: flex; /* hors ligne de texte : 20 px de haut, 64 px dessous */
+  margin-top: 32px;
+  width: fit-content;
+}
+
+
+/* ==========================================================================
+   14. Fiche produit (maquette 431:654)
+   ========================================================================== */
+
+/* --- 14.1 Galerie (640 px) et informations (656 px), 48 px d'écart -------- */
+#product #main .product-container {
+  margin: 0;
+  padding: 24px 0 0;
+}
+#product #main .product-container > .row {
+  align-items: start;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
+  margin: 0;
+}
+#product #main .product-container > .row::before,
+#product #main .product-container > .row::after {
+  display: none;
+}
+#product .pb-left-column,
+#product .pb-right-column {
+  border: 0;
+  box-shadow: none;
+  float: none;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#product .pb-left-column .page-content,
+#product .pb-left-column .images-container {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+/* Photo principale : carte bordée de 560 px de haut, image contenue */
+#product .product-cover {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  display: flex;
+  height: 560px;
+  justify-content: center;
+  margin: 0 0 16px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+#product .product-cover img.js-qv-product-cover {
+  border: 0;
+  height: 480px;
+  max-width: 520px;
+  object-fit: contain;
+  width: 100%;
+}
+#product .product-cover .layer {
+  background: transparent;
+  inset: 0;
+  opacity: 1;
+  position: absolute;
+}
+#product .product-cover .layer .zoom-in {
+  display: none; /* la photo reste cliquable pour l'agrandir */
+}
+/* Pastilles « NOUVEAU » et remise en haut à gauche */
+#product .product-cover .product-flags {
+  display: flex;
+  gap: 8px;
+  left: 16px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 16px;
+  width: auto;
+}
+#product .product-cover .product-flags li {
+  background: var(--sl-teal-profond);
+  border-radius: var(--sl-rayon-pill);
+  box-shadow: none;
+  color: var(--sl-blanc);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  margin: 0;
+  min-height: 0;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  width: auto;
+}
+#product .product-cover .product-flags li.discount,
+#product .product-cover .product-flags li.discount-percentage,
+#product .product-cover .product-flags li.on-sale {
+  background: var(--sl-teal-100);
+  color: var(--sl-teal-profond);
+}
+/* Miniatures : 96 px, rayon 8 px, la miniature active bordée en teal profond.
+   Le carrousel Owl calcule 3 miniatures par ligne d'après sa largeur. */
+/* !important : le thème impose width: 340px !important et centre le bloc */
+#product .images-container .js-qv-mask.mask {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 312px !important; /* 3 miniatures de 96 px et 2 écarts de 12 px */
+}
+#product #tt-jqzoom {
+  margin: 0;
+  width: calc(100% + 12px);
+}
+#product #tt-jqzoom .owl-item {
+  padding-right: 12px;
+}
+#product #tt-jqzoom .thumb-container {
+  margin: 0;
+  position: relative;
+}
+#product #tt-jqzoom .thumb {
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  cursor: pointer;
+  height: 96px;
+  margin: 0;
+  object-fit: contain;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+  width: 96px;
+}
+#product #tt-jqzoom .thumb:hover {
+  border-color: var(--sl-teal);
+}
+#product #tt-jqzoom .thumb.selected {
+  border: 2px solid var(--sl-teal-profond);
+}
+#product #tt-jqzoom .thumb-container > a {
+  display: none; /* loupe Material sur chaque miniature */
+}
+#product #tt-jqzoom .owl-nav {
+  right: auto;
+  top: auto;
+}
+#product .scroll-box-arrows {
+  display: none;
+}
+
+/* --- 14.2 Colonne d'informations ------------------------------------------
+   Les blocs du formulaire d'achat restent dans le formulaire : leurs
+   conteneurs sont rendus transparents (display: contents) et chaque bloc
+   est placé dans une grille. Un pseudo-élément dessine le fond gris du
+   bloc d'achat derrière les lignes 4 à 8. */
+#product .product-information-main,
+#product .product-information-inner {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+#product .product-information-inner {
+  align-items: center;
+  column-gap: 20px;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  position: relative;
+}
+#product .product-information-inner::before {
+  background: var(--sl-neutre-100);
+  border-radius: var(--sl-rayon-md);
+  content: "";
+  grid-column: 1 / -1;
+  grid-row: 4 / 10; /* lignes 4 à 9 : prix, déclinaisons, quantité, quantité minimale, paiement, devis */
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+#product .product-information-inner > *,
+#product .product-information-inner .product-add-to-cart > *,
+#product .product-information-inner .btn-content > * {
+  position: relative;
+  z-index: 1;
+}
+#product .product-information-inner .product-information,
+#product .product-information-inner .product-actions,
+#product .product-information-inner #add-to-cart-or-refresh,
+#product .product-information-inner .product-add-to-cart,
+#product .product-information-inner .btn-content {
+  display: contents;
+}
+
+/* Ligne 1 : titre */
+#product .tt-producttitle {
+  border: 0; /* filet du thème sous le titre */
+  color: var(--sl-encre);
+  font-size: 40px;
+  font-weight: 600;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  line-height: 48px;
+  margin: 0 0 12px;
+  padding: 0;
+  text-transform: none;
+}
+/* Ligne 2 : référence (et marque), puis disponibilité */
+#product .product-labels {
+  align-items: center;
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0 0 24px;
+  padding: 0;
+}
+#product .product-labels,
+#product .product-labels .label,
+#product .product-labels span,
+#product .product-labels a {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+#product .product-labels .label {
+  margin: 0 4px 0 0;
+}
+#product .product-labels a:hover {
+  color: var(--sl-teal-profond);
+}
+#product #product-availability {
+  align-items: center;
+  color: var(--sl-teal-profond);
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  line-height: 20px;
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0; /* filet du thème sous la disponibilité */
+}
+/* !important : le nombre en stock a une couleur verte écrite en style en ligne */
+#product #product-availability span {
+  color: inherit !important;
+}
+#product #product-availability .material-icons {
+  font-size: 0;
+  height: 18px;
+  width: 18px;
+}
+#product #product-availability .material-icons::before {
+  background-color: currentColor;
+  content: "";
+  display: block;
+  height: 18px;
+  -webkit-mask: url("../img/icons/check-circle.svg") center / contain no-repeat;
+  mask: url("../img/icons/check-circle.svg") center / contain no-repeat;
+  width: 18px;
+}
+#product #product-availability .product-unavailable,
+#product #product-availability .product-last-items {
+  color: var(--sl-gris);
+}
+#product #product-availability .product-unavailable::before {
+  -webkit-mask-image: url("../img/icons/x.svg");
+  mask-image: url("../img/icons/x.svg");
+}
+/* Ligne 3 : points clés avec puces teal */
+#product .product-description-short {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin: 0 0 24px;
+}
+#product .product-description-short ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#product .product-description-short li {
+  align-items: baseline;
+  color: var(--sl-encre);
+  display: flex;
+  font-size: 14px;
+  gap: 10px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+#product .product-description-short li::before {
+  background: var(--sl-teal);
+  border-radius: var(--sl-rayon-pill);
+  content: "";
+  flex: none;
+  height: 6px;
+  transform: translateY(-2px);
+  width: 6px;
+}
+#product .product-description-short li span,
+#product .product-description-short p,
+#product .product-description-short p span {
+  color: var(--sl-encre);
+  font-size: 14px;
+  line-height: 22px;
+}
+#product .product-description-short strong {
+  font-weight: 500;
+}
+
+/* Lignes 4 à 8 : bloc d'achat sur fond gris, padding 24 px */
+#product .product-prices {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  float: none;
+  gap: 12px;
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin: 0;
+  max-width: none;
+  padding: 24px 24px 16px;
+  width: auto;
+}
+#product .product-prices .product-price,
+#product .product-prices .current-price {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin: 0;
+}
+#product .product-prices .current-price-value,
+#product .product-prices .current-price .price {
+  color: var(--sl-encre);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+}
+#product .product-prices .tax-shipping-delivery-label,
+#product .product-prices .tax-label {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+}
+#product .product-prices .discount,
+#product .product-prices .discount-percentage,
+#product .product-prices .discount-amount {
+  background: var(--sl-teal-100);
+  border-radius: var(--sl-rayon-pill);
+  color: var(--sl-teal-profond);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  margin: 0;
+  padding: 4px 10px;
+  text-transform: uppercase;
+}
+#product .product-prices .product-discount,
+#product .product-prices .product-discount .regular-price {
+  color: var(--sl-gris);
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  text-decoration: line-through;
+}
+/* « Économisez 30 % » en rouge : supprimé, la pastille suffit */
+#product .product-prices .discount-percentage.discount-percentage-economy,
+#product .product-prices .has-discount .discount-text {
+  display: none;
+}
+#product .product-variants {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  margin: 0;
+  padding: 0 24px;
+}
+#product .product-variants:has(> *:not(script)) {
+  padding-bottom: 16px;
+}
+#product .product-variants .control-label {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+/* Ligne 6 : quantité, « Ajouter au panier », favori */
+#product .product-quantity {
+  align-items: center;
+  display: flex;
+  float: none;
+  gap: 12px;
+  grid-column: 1 / -1;
+  grid-row: 6;
+  margin: 0;
+  padding: 0 84px 16px 24px; /* 84 px : place du bouton favori (48 + 12 + 24) */
+}
+#product .product-quantity .control-label {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+#product .product-quantity .qty {
+  flex: 0 0 120px;
+  margin: 0;
+  width: 120px;
+}
+#product .product-quantity .bootstrap-touchspin {
+  align-items: stretch;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  width: 120px;
+}
+#product .product-quantity #quantity_wanted {
+  -moz-appearance: textfield;
+  background: transparent;
+  border: 0;
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  height: 46px;
+  min-height: 0;
+  order: 2;
+  padding: 0;
+  text-align: center;
+  width: 40px;
+}
+#product .product-quantity .input-group-btn-vertical {
+  display: contents;
+}
+#product .product-quantity .input-group-btn-vertical .btn {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--sl-encre);
+  display: flex;
+  height: 46px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: static;
+  width: 40px;
+}
+#product .product-quantity .input-group-btn-vertical .btn:hover {
+  background: var(--sl-teal-100);
+}
+#product .product-quantity .bootstrap-touchspin-down { order: 1; }
+#product .product-quantity .bootstrap-touchspin-up { order: 3; }
+#product .product-quantity .input-group-btn-vertical .btn i {
+  display: none;
+}
+#product .product-quantity .input-group-btn-vertical .btn::before {
+  background-color: currentColor;
+  content: "";
+  height: 16px;
+  -webkit-mask: url("../img/icons/minus.svg") center / contain no-repeat;
+  mask: url("../img/icons/minus.svg") center / contain no-repeat;
+  width: 16px;
+}
+#product .product-quantity .bootstrap-touchspin-up::before {
+  -webkit-mask-image: url("../img/icons/plus.svg") !important; /* !important : surcharge du raccourci mask ci-dessus */
+  mask-image: url("../img/icons/plus.svg") !important;
+}
+#product .product-quantity .input-group-addon {
+  display: none;
+}
+#product .product-quantity .add {
+  flex: 1 1 auto;
+  margin: 0;
+}
+#product .product-quantity .add .add-to-cart {
+  --sl-icone: url("../img/icons/shopping-cart-simple.svg");
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  gap: 10px;
+  height: 48px;
+  justify-content: center;
+  padding: 0 20px;
+  width: 100%;
+}
+#product .product-quantity .add .add-to-cart .material-icons {
+  display: none;
+}
+#product .product-quantity .add .add-to-cart::before {
+  background-color: currentColor;
+  content: "";
+  display: block;
+  height: 20px;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+  width: 20px;
+}
+/* Bouton favori : carré de 48 px en contour */
+#product .product-information-inner a[class*="wishlistProd_"] {
+  --sl-icone: url("../img/icons/heart.svg");
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1.5px solid var(--sl-teal-profond);
+  border-radius: var(--sl-rayon-sm);
+  color: var(--sl-teal-profond);
+  display: flex;
+  font-size: 0;
+  grid-column: 1 / -1;
+  grid-row: 6;
+  height: 48px;
+  justify-content: center;
+  justify-self: end;
+  margin: 0 24px 16px 0;
+  padding: 0;
+  width: 48px;
+}
+#product .product-information-inner a[class*="wishlistProd_"]:hover {
+  background: var(--sl-teal-100);
+}
+#product .product-information-inner a[class*="wishlistProd_"] > * {
+  display: none;
+}
+#product .product-information-inner a[class*="wishlistProd_"]::before {
+  background-color: currentColor;
+  content: "";
+  height: 22px;
+  -webkit-mask: var(--sl-icone) center / contain no-repeat;
+  mask: var(--sl-icone) center / contain no-repeat;
+  width: 22px;
+}
+/* Ligne 9 : « Comment demander un devis ? → » */
+#product #ttsizeguide {
+  grid-column: 1 / -1;
+  grid-row: 9;
+  margin: 0;
+  padding: 0 24px 24px;
+}
+#product #ttsizeguide .chart-btn {
+  align-items: center;
+  color: var(--sl-teal-profond);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  line-height: 20px;
+}
+#product #ttsizeguide .chart-btn > svg {
+  display: none;
+}
+#product #ttsizeguide .chart-btn::after {
+  background-color: currentColor;
+  content: "";
+  height: 16px;
+  -webkit-mask: url("../img/icons/arrow-right.svg") center / contain no-repeat;
+  mask: url("../img/icons/arrow-right.svg") center / contain no-repeat;
+  transition: transform var(--sl-duree) var(--sl-courbe);
+  width: 16px;
+}
+#product #ttsizeguide .chart-btn:hover::after {
+  transform: translateX(4px);
+}
+/* Ligne 7 : quantité minimale (le texte n'apparaît que si elle dépasse 1) */
+#product .product-minimal-quantity,
+#product .wk_ajax-error {
+  color: var(--sl-gris);
+  font-size: 14px;
+  grid-column: 1 / -1;
+  grid-row: 7;
+  line-height: 22px;
+  margin: 0;
+  padding: 0 24px;
+}
+/* Ligne 8 : bannière Virement Maîtrisé, placée sous le bouton par le script
+   du module (dans le thème, elle est dans le bloc des prix) */
+#product .sl-paiement {
+  grid-column: 1 / -1;
+  grid-row: 8;
+  margin: 0;
+  padding: 0 24px 16px;
+  position: relative;
+  z-index: 1;
+}
+#product .sl-paiement img.fintecture-banner-generic {
+  display: block;
+  height: 22px;
+  margin: 0; /* le module ajoute 10 px au-dessus et au-dessous */
+  max-width: 100%;
+  width: auto;
+}
+#product .product-additional-info {
+  float: none;
+  grid-column: 1 / -1;
+  grid-row: 10;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+/* Bannière Virement Maîtrisé (module Fintecture) dans le bloc d'achat */
+#product .product-prices .fintecture-banner-generic {
+  flex: 0 0 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* --- 14.3 Réassurance sous le bloc d'achat : lignes avec icône ------------ */
+#product .payment-content {
+  border: 0;
+  margin: 24px 0 0;
+  padding: 0;
+}
+#product .blockreassurance_product {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+#product .blockreassurance_product .item-inner {
+  align-items: center;
+  display: flex;
+  float: none;
+  gap: 10px;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+#product .blockreassurance_product .item-product {
+  background-color: var(--sl-encre);
+  flex: none;
+  height: 20px;
+  margin: 0;
+  -webkit-mask: var(--sl-icone, url("../img/icons/truck.svg")) center / contain no-repeat;
+  mask: var(--sl-icone, url("../img/icons/truck.svg")) center / contain no-repeat;
+  padding: 0;
+  width: 20px;
+}
+#product .blockreassurance_product .item-product > * {
+  display: none; /* pictogrammes du module remplacés par Phosphor */
+}
+#product .blockreassurance_product .item-inner:nth-child(1) { --sl-icone: url("../img/icons/file-text.svg"); }
+#product .blockreassurance_product .item-inner:nth-child(2) { --sl-icone: url("../img/icons/tag.svg"); }
+#product .blockreassurance_product .item-inner:nth-child(3) { --sl-icone: url("../img/icons/truck.svg"); }
+#product .blockreassurance_product .item-desc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 6px;
+  margin: 0;
+  padding: 0;
+}
+#product .blockreassurance_product .block-title,
+#product .blockreassurance_product .item-desc p {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  text-transform: none;
+}
+#product .blockreassurance_product .block-title {
+  font-weight: 500;
+}
+#product .blockreassurance_product .block-title::after {
+  content: " :";
+}
+#product .payment-content picture {
+  display: block;
+  margin-top: 16px;
+}
+
+/* --- 14.4 Description, caractéristiques et documents côte à côte --------- */
+#product .ttproductpagetab {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: var(--sl-section) 0 0;
+}
+#product .ttproductpagetab .tabs {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+#product .ttproductpagetab .nav-tabs {
+  display: none; /* les trois contenus sont affichés ensemble */
+}
+#product .ttproductpagetab .tab-content {
+  align-items: start;
+  column-gap: 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 800px) minmax(0, 480px);
+  /* 1fr : la hauteur de la description va à la seconde ligne, les documents
+     suivent directement les caractéristiques */
+  grid-template-rows: auto 1fr;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  row-gap: 24px;
+}
+#product .ttproductpagetab .tab-content > .tab-pane {
+  display: block;
+  opacity: 1;
+}
+#product .ttproductpagetab #description {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+#product .ttproductpagetab #product-details {
+  grid-column: 2;
+  grid-row: 1;
+}
+#product .ttproductpagetab #attachments {
+  grid-column: 2;
+  grid-row: 2;
+}
+/* Description du back-office avec ses H2 */
+/* Marges plutôt qu'un écart de colonne : les paragraphes vides saisis
+   dans le back-office n'ajoutent alors aucun espace (marges fusionnées) */
+#product .product-description {
+  color: var(--sl-encre);
+  display: block;
+}
+#product .product-description > * {
+  margin: 0 0 12px;
+}
+#product .product-description > :first-child {
+  margin-top: 0;
+}
+#product .product-description > :last-child {
+  margin-bottom: 0;
+}
+#product .product-description h2,
+#product .product-description h2 span {
+  color: var(--sl-encre);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+}
+#product .product-description h2:not(:first-child) {
+  margin-top: 32px;
+}
+#product .product-description h3:not(:first-child) {
+  margin-top: 12px;
+}
+#product .product-description h3,
+#product .product-description h3 span {
+  color: var(--sl-encre);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+#product .product-description p,
+#product .product-description p span,
+#product .product-description li {
+  color: var(--sl-encre);
+  font-size: 16px;
+  line-height: 26px;
+}
+#product .product-description strong {
+  font-weight: 600;
+}
+/* Caractéristiques : titre, référence puis tableau à lignes alternées */
+#product #product-details {
+  display: flex;
+  flex-direction: column;
+}
+#product #product-details .product-manufacturer {
+  display: none; /* logo de la marque, absent de la maquette */
+}
+#product #product-details .product-features {
+  display: contents;
+}
+#product #product-details .product-features > .h6 {
+  color: var(--sl-encre);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0 0 24px;
+  order: 1;
+  text-transform: none;
+}
+#product #product-details .product-reference {
+  background: var(--sl-neutre-100);
+  border: 1px solid var(--sl-filet);
+  border-bottom: 0;
+  border-radius: var(--sl-rayon-md) var(--sl-rayon-md) 0 0;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 160px minmax(0, 1fr);
+  margin: 0;
+  order: 2;
+  padding: 12px 16px;
+}
+#product #product-details .product-reference .label {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  text-align: left;
+}
+#product #product-details .product-reference span {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+#product #product-details .product-features:first-of-type > .data-sheet {
+  border-radius: 0 0 var(--sl-rayon-md) var(--sl-rayon-md);
+  border-top: 0;
+  order: 3;
+}
+#product #product-details .product-features:not(:first-of-type) > .h6 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 24px 0 12px;
+  order: 4;
+}
+#product #product-details .product-features:not(:first-of-type) > .data-sheet {
+  order: 5;
+}
+#product #product-details .data-sheet {
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  margin: 0;
+  overflow: hidden;
+}
+#product #product-details .data-sheet dt,
+#product #product-details .data-sheet dd {
+  background: var(--sl-blanc);
+  border: 0;
+  flex: none;
+  margin: 0;
+  min-height: 0;
+  padding: 12px 16px;
+  text-transform: none;
+  width: auto;
+}
+#product #product-details .data-sheet dt {
+  color: var(--sl-gris);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  padding-right: 0;
+}
+#product #product-details .data-sheet dd {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  padding-top: 13px;
+}
+#product #product-details .data-sheet dt:nth-of-type(even),
+#product #product-details .data-sheet dd:nth-of-type(even) {
+  background: var(--sl-neutre-100);
+}
+/* Documents à télécharger : carte avec icône PDF */
+#product .product-attachments > h3 {
+  color: var(--sl-encre);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0 0 24px;
+  text-transform: none;
+}
+#product .product-attachments .attachment {
+  align-items: center;
+  background: var(--sl-blanc);
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  column-gap: 12px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  margin: 0 0 12px;
+  padding: 16px;
+  transition: border-color var(--sl-duree) var(--sl-courbe);
+}
+#product .product-attachments .attachment:hover {
+  border-color: var(--sl-teal);
+}
+#product .product-attachments .attachment::before {
+  background-color: var(--sl-teal-profond);
+  content: "";
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 28px;
+  -webkit-mask: url("../img/icons/file-pdf.svg") center / contain no-repeat;
+  mask: url("../img/icons/file-pdf.svg") center / contain no-repeat;
+  width: 28px;
+}
+#product .product-attachments .attachment h4 {
+  grid-column: 2;
+  margin: 0;
+  min-width: 0;
+}
+#product .product-attachments .attachment h4 a {
+  color: var(--sl-encre);
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#product .product-attachments .attachment p {
+  color: var(--sl-gris);
+  font-size: 14px;
+  grid-column: 2;
+  line-height: 22px;
+  margin: 0;
+}
+#product .product-attachments .attachment p:empty {
+  display: none;
+}
+#product .product-attachments .attachment > a {
+  align-items: center;
+  color: var(--sl-teal-profond);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  line-height: 20px;
+}
+#product .product-attachments .attachment > a::before {
+  background-color: currentColor;
+  content: "";
+  height: 16px;
+  -webkit-mask: url("../img/icons/download-simple.svg") center / contain no-repeat;
+  mask: url("../img/icons/download-simple.svg") center / contain no-repeat;
+  width: 16px;
+}
+
+/* --- 14.5 Vous pourriez aussi aimer : titre seul, flèches, cartes --------- */
+#product .product-accessories {
+  margin: 0;
+  padding: var(--sl-section) 0 0;
+}
+#product .product-accessories .products {
+  margin: 0;
+}
+
+/* --- 14.6 Barre d'ajout collante (apparaît au défilement) ---------------- */
+.add_to_cart_sticky {
+  background: var(--sl-blanc);
+  border-top: 1px solid var(--sl-filet);
+  box-shadow: none;
+}
+.add_to_cart_sticky .container {
+  max-width: var(--sl-contenu);
+  padding: 12px var(--sl-marge);
+}
+.add_to_cart_sticky .sticky-product {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+}
+.add_to_cart_sticky .sticky-product > div {
+  float: none;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+.add_to_cart_sticky .sticky-image img {
+  border: 1px solid var(--sl-filet);
+  border-radius: var(--sl-rayon-md);
+  height: 56px;
+  object-fit: contain;
+  width: 56px;
+}
+.add_to_cart_sticky .ttstickyAddToCart-price {
+  flex: 1 1 auto;
+}
+.add_to_cart_sticky .product-title {
+  color: var(--sl-encre);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0 0 4px;
+}
+.add_to_cart_sticky .price {
+  color: var(--sl-encre);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+.add_to_cart_sticky .ttstickyAddToCart-qty-add {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+.add_to_cart_sticky .ttstickyAddToCart-qty {
+  border: 1px solid var(--sl-bordure);
+  border-radius: var(--sl-rayon-sm);
+  height: 44px;
+  min-height: 0;
+  text-align: center;
+  width: 72px;
+}
+.add_to_cart_sticky .add-to-cart {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  height: 44px;
+  padding: 0 20px;
+}
+.add_to_cart_sticky .add-to-cart .material-icons,
+.add_to_cart_sticky .add-to-cart .loading {
+  display: none;
+}
+
+
+/* ==========================================================================
+   15. Ajustements après comparaison avec la maquette
+   ========================================================================== */
+
+/* Vignettes de l'accueil : fonds et marges intérieures du thème retirés */
+#index #tt_category_feature .category-sub .subcat-img,
+#index #tt_category_feature .category-sub .subcat-img > a,
+#index #tt_category_feature .category-sub .title {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+#index #tt_category_feature .category-sub .title {
+  height: 40px;
+}
+
+/* Blocs de l'accueil : ni fond, ni ombre, ni cadre autour des carrousels */
+#index #content .products,
+#index #content .owl-carousel,
+#index #content .brands .container,
+#index #content #smartblog_block .owl-item,
+#index #content #smartblog_block .item {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+#index #content #smartblog_block .owl-item::before,
+#index #content #smartblog_block .owl-item::after,
+#index #content #smartblog_block .item::before,
+#index #content #smartblog_block .item::after {
+  display: none; /* filets verticaux du thème entre les articles */
+}
+
+/* Flèches de carrousel : pas de séparateur entre les deux boutons */
+#wrapper .owl-carousel .owl-nav::before,
+#wrapper .owl-carousel .owl-nav::after {
+  display: none;
+}
+
+/* Catégorie : la grille de produits occupe toute la colonne, sans cadre */
+#products,
+#products > div,
+#js-product-list,
+#js-product-list .grid-default,
+#js-product-list .products,
+#js-product-list .tab-content,
+#js-product-list .tab-pane,
+#js-product-list-top,
+#js-product-list .pagination {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+#wrapper #js-product-list .products,
+#js-product-list .tab-content,
+#js-product-list .tab-pane,
+#products .grid-default {
+  border: 0;
+  margin: 0;
+  padding: 0; /* #wrapper : le thème met 30 px 15 px et un cadre autour de la liste */
+}
+
+/* Textes du back-office : les couleurs saisies en ligne sont ramenées à la
+   charte (titres en encre, introduction en gris).
+   !important : ces couleurs sont écrites en style en ligne dans le contenu */
+/* Retour à la ligne saisi en tête de certains titres : sans effet visuel */
+#category-description :is(h2, h3, h4) > br:first-child {
+  display: none;
+}
+#category-description h2,
+#category-description h2 *,
+#category-description h3,
+#category-description h3 *,
+#category-description p,
+#category-description p span {
+  color: var(--sl-encre) !important;
+}
+#category-description a,
+#category-description a * {
+  color: var(--sl-teal-profond) !important;
+}
+.sl-intro .sl-intro-texte,
+.sl-intro .sl-intro-texte * {
+  color: var(--sl-gris) !important;
+}
+.sl-intro .sl-intro-texte a,
+.sl-intro .sl-intro-texte a * {
+  color: var(--sl-teal-profond) !important;
+}
+#product .product-description h2,
+#product .product-description h2 *,
+#product .product-description h3,
+#product .product-description h3 * {
+  color: var(--sl-encre) !important;
+}
+
+/* Fiche produit : filets du thème retirés dans la colonne d'achat */
+#product .product-description-short,
+#product .product-prices,
+#product .product-add-to-cart,
+#product .btn-content,
+#product #ttsizeguide,
+#product .product-quantity,
+#product .payment-content,
+#product .blockreassurance_product {
+  border: 0;
+  box-shadow: none;
+}
+/* « Télécharger » : la classe utilitaire du thème force les capitales.
+   !important : .text-uppercase est déclarée avec !important */
+#product .product-attachments > h3 {
+  text-transform: none !important;
+}
+/* Miniatures alignées à gauche, flèches masquées quand tout est visible */
+#product .images-container .js-qv-mask {
+  margin: 0;
+}
+#product #tt-jqzoom .owl-nav:has(.owl-prev.disabled):has(.owl-next.disabled) {
+  display: none;
+}
+
+/* Barre d'ajout collante : mêmes marges que la page, bouton sans « + » */
+#product .add_to_cart_sticky .container {
+  max-width: var(--sl-contenu);
+  padding: 12px var(--sl-marge);
+}
+#product .add_to_cart_sticky .add-to-cart .material-icons,
+#product .add_to_cart_sticky .add-to-cart .loading {
+  display: none;
+}
+
+/* Libellé des vignettes de l'accueil : le thème lui donne un fond blanc et
+   une marge intérieure avec un sélecteur plus précis */
+#index #tt_category_feature .category-sub .title a {
+  -webkit-box-orient: vertical;
+  background: transparent;
+  color: var(--sl-encre);
+  display: -webkit-box;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 20px;
+  overflow: hidden;
+  padding: 0;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   16. Tablette et mobile
+   Mêmes composants qu'à 1440, réorganisés : cartes 4 → 3 → 2 par ligne,
+   colonnes empilées sous 992 px (seuil du thème).
+   ========================================================================== */
+
+/* --- 16.1 Cartes produit étroites : le bouton passe sous la quantité ------ */
+#wrapper .product-miniature .tt-button-container form {
+  flex-wrap: wrap;
+}
+#wrapper .product-miniature .tt-button-container .btn {
+  flex: 1 1 96px; /* sous 96 px de place, le bouton prend la ligne suivante */
+}
+
+/* Liste de la catégorie : le thème ajoute sous 544 px une marge intérieure,
+   un filet et une largeur de 49,4 % à chaque carte */
+#wrapper #js-product-list .products .product-miniature.product-grid {
+  border: 0;
+  padding: 0;
+}
+@media (max-width: 767px) {
+  #js-product-list-top .showing {
+    display: none; /* doublon du nombre de produits, repris par la pagination */
+  }
+  #js-product-list-top .total-products,
+  #js-product-list-top .total-products p {
+    text-align: left;
+  }
+  /* Filtres repliés derrière le bouton « Filtre » : pas d'espace réservé */
+  :is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #left-column {
+    margin: 0;
+  }
+  :is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #products {
+    padding-top: 32px;
+  }
+}
+
+/* --- 16.2 Titres de section --------------------------------------------- */
+@media (max-width: 767px) {
+  #wrapper .tt-title,
+  #wrapper .products-section-title,
+  #subcategories .subcategory-heading {
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
+  #wrapper .owl-carousel .owl-nav {
+    top: -64px; /* à droite du titre de 32 px, 24 px au-dessus du contenu */
+  }
+  #js-product-list-header .h1,
+  #js-product-list-header h1,
+  #product .product-information-inner h1 {
+    border: 0;
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #product .product-description h2,
+  #product .product-description h2 span {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  /* Place des flèches du carrousel à droite du titre */
+  #wrapper .tt-title {
+    padding-right: 96px;
+  }
+  #product #product-details .data-sheet dt,
+  #product #product-details .data-sheet dd {
+    text-align: left;
+  }
+}
+
+/* --- 16.3 Accueil --------------------------------------------------------- */
+@media (max-width: 767px) {
+  #index #ttcmssubbanner .cmssubbanner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+/* --- 16.4 Catégorie -------------------------------------------------------
+   1200 px et plus : filtres 288 px + 4 cartes ; 992 à 1199 px : filtres
+   240 px + 3 cartes ; sous 992 px : une colonne, filtres au-dessus, 3 puis
+   2 cartes par ligne. Sous 768 px, les filtres s'ouvrent avec le bouton
+   « Filtre » du thème. */
+@media (max-width: 1199px) {
+  :is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #wrapper > .content_wrap > .container {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+  #js-product-list .tab-content .tab-pane.active {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 991px) {
+  :is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #wrapper > .content_wrap > .container {
+    grid-template-areas: "entete" "souscat" "filtres" "produits";
+    grid-template-columns: minmax(0, 1fr);
+  }
+  :is(#category, #prices-drop, #new-products, #best-sales, #search, #manufacturer) #left-column {
+    float: none;
+    margin: 0 0 24px;
+    padding: 0;
+    width: auto;
+  }
+  #js-product-list-header .category-cover img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+}
+/* 768 px et plus : groupes de filtres repliables par le script du module.
+   Le thème replie tous les groupes sous 992 px avec un sélecteur plus fort. */
+@media (min-width: 768px) {
+  #wrapper #left-column #search_filters .facet > ul.collapse {
+    display: flex;
+  }
+  #wrapper #left-column #search_filters .facet.sl-replie > ul.collapse {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  #js-product-list .tab-content .tab-pane.active {
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Bouton « Filtre » du thème en bouton secondaire, avec l'icône des filtres */
+  #js-product-list-top .filter-button {
+    float: none;
+    max-width: none;
+    padding: 0;
+    width: auto;
+  }
+  #js-product-list-top #search_filter_toggler {
+    --sl-icone: url("../img/icons/sliders-horizontal.svg");
+    align-items: center;
+    background: var(--sl-blanc);
+    border: 1.5px solid var(--sl-teal-profond);
+    border-radius: var(--sl-rayon-sm);
+    color: var(--sl-teal-profond);
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 500;
+    gap: 8px;
+    height: 40px;
+    line-height: 20px;
+    padding: 0 16px;
+    text-transform: none;
+    width: auto;
+  }
+  #js-product-list-top #search_filter_toggler::before {
+    background-color: currentColor;
+    content: "";
+    flex: none;
+    height: 18px;
+    -webkit-mask: var(--sl-icone) center / contain no-repeat;
+    mask: var(--sl-icone) center / contain no-repeat;
+    width: 18px;
+  }
+  #js-product-list-top #search_filter_toggler:hover {
+    background: var(--sl-teal-100);
+  }
+  #js-product-list-top .sort-by-row {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  #js-product-list-top .borderright {
+    flex: 1 1 100%;
+  }
+  #js-product-list-top .products-sort-order {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  #js-product-list-top .showing {
+    color: var(--sl-gris);
+    flex: 1 1 100%;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 0;
+    text-align: left;
+  }
+  #js-product-list .pagination {
+    justify-content: center;
+  }
+  #js-product-list .pagination > div:first-child {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+/* --- 16.5 Fiche produit ------------------------------------------------- */
+#product .product-cover {
+  overflow: hidden; /* image de zoom positionnée par le thème */
+}
+@media (max-width: 991px) {
+  #product #main .product-container > .row {
+    gap: 32px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #product #main .product-container > .row > * {
+    max-width: none;
+    width: auto;
+  }
+  #product .ttproductpagetab .tab-content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: 40px;
+  }
+  #product .ttproductpagetab #description,
+  #product .ttproductpagetab #product-details,
+  #product .ttproductpagetab #attachments {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+@media (max-width: 575px) {
+  /* Quantité et favori sur la première ligne, bouton d'ajout pleine largeur
+     dessous */
+  #product .product-quantity {
+    flex-wrap: wrap;
+    padding-right: 24px;
+  }
+  #product .product-quantity .add {
+    flex: 1 1 100%;
+  }
+  #product .product-information-inner a[class*="wishlistProd_"] {
+    align-self: start;
+  }
+  #product .product-cover {
+    height: auto;
+  }
+  /* Une seule colonne : la disponibilité passe sous la référence et les
+     lignes suivantes descendent d'un cran */
+  #product .product-information-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #product .product-information-inner::before { grid-row: 5 / 11; }
+  #product .product-labels {
+    flex-wrap: wrap;
+    grid-column: 1;
+    margin-bottom: 8px;
+  }
+  #product #product-availability { grid-column: 1; grid-row: 3; }
+  #product .product-description-short { grid-row: 4; }
+  #product .product-prices { grid-row: 5; }
+  #product .product-variants { grid-row: 6; }
+  #product .product-quantity,
+  #product .product-information-inner a[class*="wishlistProd_"] { grid-row: 7; }
+  #product .product-minimal-quantity,
+  #product .wk_ajax-error { grid-row: 8; }
+  #product .sl-paiement { grid-row: 9; }
+  #product #ttsizeguide { grid-row: 10; }
+  #product .product-additional-info { grid-row: 11; }
+}

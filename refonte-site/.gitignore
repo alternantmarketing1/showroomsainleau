@@ -1,3 +1,5 @@
 outils/captures/node_modules/
+node_modules/
+__pycache__/
 *.ESSAI.zip
 *_ESSAI.zip
